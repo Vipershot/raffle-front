@@ -6,6 +6,9 @@ interface Props {
     className?: string
     placeholder: string
     maxLength?: number
+    value: string
+    type?: "search" | "text" | "email" | "password"
+    name?:string
 }
 
 export const AppInput = ({
@@ -15,6 +18,9 @@ export const AppInput = ({
   onChange,
   placeholder,
   maxLength,
+  value,
+  name,
+  type = "text"
 }: Props) => {
   return (
     <>
@@ -32,12 +38,13 @@ export const AppInput = ({
           maxLength={maxLength}
           placeholder={placeholder}
            onChange={(e)=>onChange(e)}
-           type="text"
+           type={type}
            disabled={disabled}
            id={label}
+            value={value}
            className={`${className} block w-full rounded-md  py-2 pl-3  text-gray-900 ring-1  ring-gray-300 placeholder:text-gray-400 focus:ring-2 border-none focus:border-none focus:ring-gray-300 sm:text-sm/6`}
            style={{border:"none", outline:"none"}}
-          
+          name={name}
           />
         </div>
       </div>

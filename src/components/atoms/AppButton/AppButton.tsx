@@ -11,6 +11,6 @@ export const AppButton =({
 
 }:Props)=>{
     return <>
-    <button  className="bg-primary p-3 rounded-md " disabled={disabled} onClick={onClick}>{title}</button>
+    <button  className="bg-info p-3 rounded-md " disabled={disabled} onClick={onClick}>{title}</button>
     </>
 }
