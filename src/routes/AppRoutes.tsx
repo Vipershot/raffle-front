@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { ViewLogin, ViewRegister, ViewDashboard } from "../views";
+import { Payment } from "../components/organims/Payment/Payment";
+
 
 const AppRoutes = () => {
 
@@ -9,6 +11,7 @@ const AppRoutes = () => {
         <Route index element={<ViewDashboard/>} />
         <Route path="/register" element={<ViewRegister />} />
         <Route path="/login" element={<ViewLogin/>} />
+        <Route path="/payment" element={<Payment/>} />
       </Route>
     </Routes>
   );
