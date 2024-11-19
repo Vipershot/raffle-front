@@ -1,7 +1,14 @@
 import { IItemCarousel } from "../../../interface/ICarousel"
 import { AppButton } from "../../atoms/AppButton/AppButton"
+import { useNavigate } from 'react-router-dom';
 
-const ItemCarousel = ({title, description, date, imgUrl}:IItemCarousel) => {
+const ItemCarousel = ({title, description, date, imgUrl, id, price}:IItemCarousel) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+      navigate(`/carusel/${id}`);
+      console.log(id)
+    };
     return (<>
         <section className="flex justify-center">
             <div className="flex relative flex-col bg-center w-[500px]  h-[500px]" style={{backgroundImage:`url(${imgUrl})`, backgroundSize:'100%', backgroundRepeat:'no-repeat'}}>
@@ -12,8 +19,8 @@ const ItemCarousel = ({title, description, date, imgUrl}:IItemCarousel) => {
                
                 </div>
                 <div className="flex flex-col  justify-center absolute bottom-10 right-0 p-3 rounded"  style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', backgroundBlendMode:'color'}}>
-                    <h1>Precio 15$</h1>
-                    <AppButton size='lg' title="Comprar" onClick={()=>{}}/>
+                    <h1>Precio REF. {price}</h1>
+                    <AppButton size='lg' title="Comprar" onClick={handleClick}/>
                   </div>
             </div>
            

@@ -22,8 +22,8 @@ export const Dashboard = () => {
     
   return (
     <div>
-        <AppCarousel data={dataTest}/>
-        <ContentDashboard/>
+      <AppCarousel data={dataTest}/>
+      <ContentDashboard/>
     </div>
   )
 }

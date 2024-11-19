@@ -5,4 +5,5 @@ export interface IItemCarousel {
     imgUrl:string
     tickets?: number
     price?: number
+    id:string
 }
