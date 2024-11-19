@@ -43,13 +43,15 @@ const AppCarousel = ({data}:Props) => {
         dotListClass="custom-dot-list-style bg-white "
         className=""
       >
-        {data.map(({title,date,description,imgUrl}, index:number)=> (
+        {data.map(({title,date,description,imgUrl,id,price}, index:number)=> (
             <ItemCarousel 
                 title={title} 
                 description={description} 
                 date={date}
                 imgUrl={imgUrl}
                 key={index}
+                id={id}
+                price={price}
             />
         )
         )}
