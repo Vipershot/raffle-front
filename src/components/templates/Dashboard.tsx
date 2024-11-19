@@ -1,15 +1,28 @@
-import { IItemCarousel } from "../../interface/ICarousel"
-import dataTest from "../../utils/items"
 import AppCarousel from "../organims/AppCarousel/AppCarousel"
 import { ContentDashboard } from "../organims/ContentDashboard/ContentDashboard"
+import banner1 from '../../assets/banner1.png'
+import banner2 from '../../assets/banner2.png'
+import banner3 from '../../assets/banner3.png'
+import banner4 from '../../assets/banner4.png'
+
 
 export const Dashboard = () => {
-  // Asigna el valor de dataTest a una nueva variable con el tipo correcto
-  const typedDataTest: IItemCarousel[] = dataTest;
-
+    const dataTest: {imgUrl:string}[] =[{
+        imgUrl: banner1
+      },
+      {
+        imgUrl: banner2
+      },
+      {
+        imgUrl: banner3
+      },
+      {
+        imgUrl: banner4
+      }] 
+    
   return (
     <div>
-      <AppCarousel data={typedDataTest}/>
+      <AppCarousel data={dataTest}/>
       <ContentDashboard/>
     </div>
   )

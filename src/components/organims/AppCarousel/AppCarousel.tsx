@@ -1,11 +1,8 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { IItemCarousel } from "../../../interface/ICarousel";
-import ItemCarousel from "../../molecules/ItemCarousel/ItemCarousel";
-
 
 interface Props {
-    data: IItemCarousel[]
+    data: {imgUrl:string}[]
 }
 const AppCarousel = ({data}:Props) => {
     const responsive = {
@@ -38,21 +35,15 @@ const AppCarousel = ({data}:Props) => {
         keyBoardControl={true}
         customTransition="all .5"
         transitionDuration={500}
-        containerClass="carousel-container bg-primary max-h-[500px] h-[500px]"
+        containerClass="carousel-container h-[30%]"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style bg-white "
         className=""
       >
-        {data.map(({title,date,description,imgUrl,id,price}, index:number)=> (
-            <ItemCarousel 
-                title={title} 
-                description={description} 
-                date={date}
-                imgUrl={imgUrl}
-                key={index}
-                id={id}
-                price={price}
-            />
+        {data.map(({imgUrl}, index:number)=> (
+           <div key={index} className="w-full h-[500px] object-cover bg-bottom aspect-[64/27] overflow-hidden">
+              <img src={imgUrl} alt="" className="w-full bg-bottom h-[500px] object-cover"/>
+            </div>
         )
         )}
       </Carousel>

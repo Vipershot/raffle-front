@@ -3,6 +3,7 @@ export interface IItemCarousel {
     description:string 
     date:string 
     imgUrl:string
+    tickets?: number
+    price?: number
     id:string
-    price:number
 }
