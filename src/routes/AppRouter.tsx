@@ -9,7 +9,7 @@ const AppRouter = () => {
     return (
         <Routes>
             <Route path="/*" element={<AppRoutes />} />
-            <Route path="/carusel/:id" element={<CarouselDetails dataTest={dataTest} />} />
+            <Route path="/carousel/:id" element={<CarouselDetails dataTest={dataTest} />} />
         </Routes>
     )
 }

@@ -1,59 +1,52 @@
 
-import { IItemCarousel } from '../../../interface/ICarousel'
+import { useEffect, useState } from 'react'
 import { AppSection } from '../../atoms/AppSection/AppSection'
 import { CardProduct } from '../../molecules/CardProduct/CardProduct'
+import { getLowestPrice, getMostRecent } from '../../../services/awards'
+import { IAward } from '../../../interface/awards'
 export const ContentDashboard = () => {
-  const dataTest: IItemCarousel[] =[{
-    tickets:10,
-    title:'test 1',
-    description: 'description 1',
-    date: 'date 1',
-    imgUrl: 'https://static.vecteezy.com/system/resources/thumbnails/036/268/357/small/ai-generated-car-white-car-suv-car-sport-utility-vehicle-white-suv-car-white-sport-utility-vehicle-suv-car-transparent-background-png.png',
-    price:20
-  },
-  {
-    tickets:10,
-    title:'test 2',
-    description: 'description 2',
-    date: 'date 2',
-    imgUrl: 'https://static.vecteezy.com/system/resources/previews/027/232/228/non_2x/sports-motorbike-sports-bike-sports-motorbike-transparent-background-ai-generated-free-png.png',
-    price:20
-  },
-  {
-    tickets:10,
-    title:'test 3',
-    description: 'description 3',
-    date: 'date 3',
-    imgUrl: 'https://koodoo.co.za/cdn/shop/files/PS5-Slim-Digital-Mega-Bundle.png?v=1712732337',
-    price:20
-  },
-  {
-    tickets:10,
-    title:'test 4',
-    description: 'description 4',
-    date: 'date 4',
-    imgUrl: 'https://png.pngtree.com/png-vector/20240203/ourmid/pngtree-smart-home-air-fryer-3d-illustration-png-image_11596032.png',
-    price:20
-  }] 
+  const [loading, setLoading] = useState(false);
+  const [mostRecent, setMostRecent] = useState<IAward[]>([]);
+  const [lowestPrice, setLowestPrice] = useState<IAward[]>([]);
+
+  const loadAwards = async() => {
+    setLoading(true)
+    const mostRecent = await getMostRecent()
+    const lowestPrice = await getLowestPrice()
+    setMostRecent(mostRecent)
+    setLowestPrice(lowestPrice)
+    setLoading(false)
+  }
+  useEffect(() => {
+    loadAwards()
+  }, []);
+  
   return (
-    <div className='flex flex-col gap-y-10 my-10'>
-        <AppSection title="Mas Recientes" link="/register">
-                {dataTest.map(({title,tickets, price, description, date, imgUrl}) => <CardProduct 
-                    tickets={tickets} 
+    <div className='flex flex-col gap-y-10 py-10 px-52'>
+        <AppSection loading={loading} title="Mas Recientes" link="/register">
+                {mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
+                    totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 
-                    price={price} 
-                    dateEnd={date} 
-                    imgUrl={imgUrl}
+                    ticketPrice={ticketPrice} 
+                    endDate={endDate} 
+                    createdAt={createdAt}
+                    cover={cover}
+                    id={id}
+                    key={id}
                 />)}
             
         </AppSection>
-        <AppSection title="Por terminar" link="/register">
-        {dataTest.map(({title,tickets, price, description, date, imgUrl}) => <CardProduct 
-                    tickets={tickets} 
+        <AppSection loading={loading} title="Mejores precios" link="/register">
+        {lowestPrice.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
+                    totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 
-                    price={price} 
-                    dateEnd={date} 
-                    imgUrl={imgUrl}
+                    ticketPrice={ticketPrice} 
+                    endDate={endDate} 
+                    createdAt={createdAt}
+                    cover={cover}
+                    id={id}
+                    key={id}
+
                 />)}
             
         </AppSection>
