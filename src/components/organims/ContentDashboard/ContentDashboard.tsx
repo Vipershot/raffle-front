@@ -23,7 +23,7 @@ export const ContentDashboard = () => {
   
   return (
     <div className='flex flex-col gap-y-10 py-10 px-52'>
-        <AppSection loading={loading} title="Mas Recientes" link="/register">
+        <AppSection loading={loading} title="Mas Recientes" link="/most-recent">
                 {mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 

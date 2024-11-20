@@ -1,5 +1,5 @@
 
-import { axiosRaffle } from '../axios/axios'
+import { axiosRaffle } from '../config/axios'
 
 export const getMostRecent = async() =>{
     try {
