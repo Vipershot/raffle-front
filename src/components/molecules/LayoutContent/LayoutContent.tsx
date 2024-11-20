@@ -1,15 +1,16 @@
 import { ReactNode } from 'react'
 import { TitleText } from '../../atoms/TitleText/TitleText'
-import { AppSection } from '../../atoms/AppSection/AppSection'
-import { CardProduct } from '../CardProduct/CardProduct'
 import { IAward } from '../../../interface/awards'
+import { AppSectionFooter } from '../../atoms/AppSectionFooter/AppSectionFooter'
+import { Link } from 'react-router-dom'
 interface Props {
     title:string
+    titleFooter?:string
     dataFooter: IAward[]
     loading:boolean
     children:ReactNode
 }
-export const LayoutContent = ({title,dataFooter,loading,children}:Props) => {
+export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter,loading,children}:Props) => {
   return (
     <div>
         <main className='px-60 py-20 mt-5 bg-dark'>
@@ -18,19 +19,10 @@ export const LayoutContent = ({title,dataFooter,loading,children}:Props) => {
                 {children}
             </main>
         </main>
-        <footer className='py-10 mt-5'>
-            <AppSection loading={loading} title="Otros productos" link="/most-recent">
-                    {dataFooter.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
-                        totalTickets={totalTickets} 
-                        description={`${title} - ${description}`} 
-                        ticketPrice={ticketPrice} 
-                        endDate={endDate} 
-                        createdAt={createdAt}
-                        cover={cover}
-                        id={id}
-                        key={id}
-                    />)}
-            </AppSection>
+        <footer className='p-10'>
+            <AppSectionFooter loading={loading} title={titleFooter} link="/most-recent">
+                    {dataFooter.map(({title, cover, id}) => <Link to={`/award/${id}`}><img src={cover} alt={title} width={'100%'}/></Link>)}
+            </AppSectionFooter>
         </footer>
     </div>
   )
