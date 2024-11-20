@@ -17,7 +17,7 @@ const Tickets = () => {
   };
   return (
     <div className="flex flex-wrap gap-2" >
-      {numberss.map((data, i) => (
+      {numberss.map((data) => (
      <label htmlFor={`ticket-${data.number}`} style={{ position: "relative", display: "inline-block", width: "40px", height: "40px" }}>
      <input 
 checked={data.state}

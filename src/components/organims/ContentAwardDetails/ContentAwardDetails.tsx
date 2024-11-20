@@ -1,9 +1,9 @@
 import dataTest from "../../../utils/items"
-import CarouselDetails from "../../molecules/AwardDetails/AwardDetails"
+import AwardDetailsO from "../../molecules/AwardDetails/AwardDetails"
 
 
 export const AwardDetails = () => {
   return (
-    <CarouselDetails dataTest={dataTest}/>
+    <AwardDetailsO dataTest={dataTest}/>
   )
 }
