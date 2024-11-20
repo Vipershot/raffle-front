@@ -26,7 +26,7 @@ export const CardProduct = ({
   };
 
   return (
-    <div className="bg-light ">
+    <div className="bg-light">
      
         <img src={cover} alt={description} />
         <div className="flex flex-col p-3">
