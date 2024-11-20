@@ -7,7 +7,7 @@ interface CarouselDetailsProps {
   dataTest: IItemCarousel[];
 }
 
-const CarouselDetails: React.FC<CarouselDetailsProps> = ({ dataTest }) => {
+const AwardDetails: React.FC<CarouselDetailsProps> = ({ dataTest }) => {
   const { id } = useParams<{ id: string }>();
 
   const carouselItem = dataTest.find((item) => item.id === id);
@@ -34,4 +34,4 @@ const CarouselDetails: React.FC<CarouselDetailsProps> = ({ dataTest }) => {
   );
 };
 
-export default CarouselDetails;
+export default AwardDetails;
