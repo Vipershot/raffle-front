@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { TitleText } from "../TitleText/TitleText";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -9,7 +8,7 @@ interface Props {
   link: string;
   loading: boolean;
 }
-export const AppSectionFooter = ({ children, title, link, loading }: Props) => {
+export const AppSectionFooter = ({ children, title,  loading }: Props) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
