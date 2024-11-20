@@ -3,12 +3,15 @@ import { IItemCarousel } from "../../../interface/ICarousel";
 import Tickets from "../Tickets/Tickets";
 import { LayoutContent } from "../LayoutContent/LayoutContent";
 import { getLowestPrice } from "../../../services/awards";
+import { AppButton } from "../../atoms/AppButton/AppButton";
+import { useNavigate } from "react-router-dom";
 
 interface CarouselDetailsProps {
   dataTest: IItemCarousel[];
 }
 
 const AwardDetails: React.FC<CarouselDetailsProps> = () => {
+  const navigate = useNavigate();
   const [dataFooter, setDataFooter] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -50,6 +53,7 @@ const AwardDetails: React.FC<CarouselDetailsProps> = () => {
         <div className="max-h-[500px] overflow-y-auto custom-scrollbar ">
           <Tickets />
         </div>
+          <AppButton size="lg" title="Comprar" onClick={()=>navigate("/payment")}/>
       </LayoutContent>
     </>
   );
