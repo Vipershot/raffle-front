@@ -1,6 +1,6 @@
 import {  Route, Routes } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
-import CarouselDetails from '../components/molecules/Details/Details'
+import CarouselDetails from '../components/molecules/AwardDetails/AwardDetails'
 import dataTest from '../utils/items'
 import { Layout } from '../components/Layout/Layout'
 
