@@ -30,7 +30,7 @@ export const CardProduct = ({
      
         <img src={cover} alt={description} />
         <div className="flex flex-col p-3">
-        <Link to={`/carousel/${id}`} >
+        <Link to={`/award/${id}`} >
         <h2 className="text-sm text-primary">{description}</h2>
       </Link>
 

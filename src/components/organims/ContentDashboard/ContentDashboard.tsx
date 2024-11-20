@@ -36,7 +36,7 @@ export const ContentDashboard = () => {
                 />)}
             
         </AppSection>
-        <AppSection loading={loading} title="Mejores precios" link="/register">
+        <AppSection loading={loading} title="Mejores precios" link="/best-prices">
         {lowestPrice.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 

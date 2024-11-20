@@ -13,7 +13,7 @@ interface Props {
 export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter,loading,children}:Props) => {
   return (
     <div>
-        <main className='px-60 py-20 mt-5 bg-dark'>
+        <main className='px-60 py-20 mt-5 bg-light'>
             <TitleText text={title} />
             <main className='flex flex-wrap gap-2 gap-y-10'>
                 {children}

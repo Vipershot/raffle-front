@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
-import { FaCreditCard, FaPaypal, FaApple } from "react-icons/fa";
+import { FcIphone, FcLibrary, FcMoneyTransfer   } from "react-icons/fc";
 import {
   IMethodBinance,
   IMethodPagoMovil,
@@ -35,9 +35,9 @@ export const FormPayment = ({handleDataPayment}:Props) => {
     useState<IMethodBinance>(initialStateBinance);
 
   const paymentMethods = [
-    { id: "0", name: "Pago Móvil", icon: FaCreditCard },
-    { id: "1", name: "Binance", icon: FaPaypal },
-    { id: "2", name: "Divisa", icon: FaApple },
+    { id: "0", name: "Pago Móvil", icon: FcIphone },
+    { id: "1", name: "Binance", icon: FcLibrary },
+    { id: "2", name: "Divisa", icon: FcMoneyTransfer },
   ];
 
   const handleSubmit = () => {
