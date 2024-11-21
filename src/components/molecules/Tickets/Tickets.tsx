@@ -18,7 +18,7 @@ const Tickets = () => {
   return (
     <div className="flex flex-wrap gap-2" >
       {numberss.map((data) => (
-     <label htmlFor={`ticket-${data.number}`} style={{ position: "relative", display: "inline-block", width: "40px", height: "40px" }}>
+     <label htmlFor={`ticket-${data.number}`} style={{ position: "relative", display: "inline-block", width: "50px", height: "50px" }}>
      <input 
 checked={data.state}
 onChange={()=> handleChecked(data.number)}

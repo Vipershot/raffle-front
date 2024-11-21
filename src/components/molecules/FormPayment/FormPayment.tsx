@@ -180,7 +180,7 @@ export const FormPayment = ({handleDataPayment}:Props) => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto p-6 bg-white shadow-md rounded-md">
+    <div className="w-full md:max-w-xl mx-auto p-6 bg-white rounded-md">
       <div className="mb-6">
         <TitleText text="Seleccione método de pago" />
         <h2 className="text-sm text-gray-600">

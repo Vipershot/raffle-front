@@ -32,8 +32,8 @@ export const AppSection = ({ children, title, link, loading }: Props) => {
       {loading ? (
         <h1>Cargando...</h1>
       ) : (
-        <div className="px-[10%]">
-          <div className="flex justify-between align-center">
+        <div className="md:px-[10%] px-[10px]">
+          <div className="flex justify-between align-center mb-2">
             <TitleText text={title} />
             <Link to={link}>Ver mas...</Link>
           </div>

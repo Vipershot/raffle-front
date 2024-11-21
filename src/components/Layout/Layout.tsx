@@ -8,7 +8,9 @@ export const Layout = ({children}:Props) => {
   return (
     <div>
         <AppNavbar/>
-        {children}
+        <main className='min-h-screen'>
+          {children}
+        </main>
         <AppFooter/>
     </div>
   )

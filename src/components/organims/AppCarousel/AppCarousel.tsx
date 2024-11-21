@@ -35,14 +35,13 @@ const AppCarousel = ({data}:Props) => {
         keyBoardControl={true}
         customTransition="all .5"
         transitionDuration={500}
-        containerClass="carousel-container h-[30%]"
+        containerClass="carousel-container md:h-[30%] sm:h-[10%]"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style bg-white "
-        className=""
       >
         {data.map(({imgUrl}, index:number)=> (
-           <div key={index} className="w-full h-[500px] object-cover bg-bottom aspect-[64/27] overflow-hidden">
-              <img src={imgUrl} alt="" className="w-full bg-bottom h-[500px] object-cover"/>
+           <div key={index} className="w-full md:h-[500px] object-cover bg-bottom aspect-[64/27] overflow-hidden">
+              <img src={imgUrl} alt="" className="w-full bg-bottom md:h-[500px] object-cover"/>
             </div>
         )
         )}

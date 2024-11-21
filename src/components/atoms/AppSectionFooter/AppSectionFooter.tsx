@@ -22,7 +22,7 @@ export const AppSectionFooter = ({ children, title,  loading }: Props) => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2,
+      items: 3,
       slidesToSlide: 1, // optional, default to 1.
     },
   };
@@ -32,7 +32,7 @@ export const AppSectionFooter = ({ children, title,  loading }: Props) => {
         <h1>Cargando...</h1>
       ) : (
         <div >
-          <div className="flex justify-between align-center">
+          <div className="flex px-5 md:px-10 justify-between align-center">
             <TitleText text={title} />
           </div>
           <Carousel
@@ -46,7 +46,8 @@ export const AppSectionFooter = ({ children, title,  loading }: Props) => {
             customTransition="all .5"
             transitionDuration={500}
             removeArrowOnDeviceType={[]}
-            itemClass="px-1"        
+            itemClass="px-1"       
+            className="mt-5" 
           >
             {children}
           </Carousel>
