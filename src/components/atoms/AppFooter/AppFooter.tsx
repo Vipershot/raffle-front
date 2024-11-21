@@ -4,8 +4,8 @@ import { TitleText } from "../TitleText/TitleText"
 export const AppFooter = () => {
   return (
     <Link to='/'>
-        <div className='h-60 bg-primary flex justify-center items-center'> 
-            <TitleText text={"Raffle"} />
+        <div className='h-60 bg-info flex  items-start p-10 '> 
+            <TitleText text={"Raffle"} color="light"/>
         </div>
     </Link>
   )

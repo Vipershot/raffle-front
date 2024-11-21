@@ -27,7 +27,7 @@ const AwardDetails: React.FC<CarouselDetailsProps> = () => {
 
   return (
     <>
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center mt-5 gap-2">
         <div className="w-[50%] h-[200px]">
           <img
             src={""}
