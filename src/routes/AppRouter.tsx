@@ -12,7 +12,7 @@ const AppRouter = () => {
             <Route path="/*" element={<Layout>
                 <AppRoutes />
             </Layout>} />
-            <Route path="/carousel/:id" element={<CarouselDetails dataTest={dataTest} />} />
+            <Route path="/awards/:id" element={<CarouselDetails dataTest={dataTest} />} />
         </Routes>
     )
 }
