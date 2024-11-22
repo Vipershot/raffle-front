@@ -8,6 +8,7 @@ import { TitleText } from "../../atoms/TitleText/TitleText";
 import { addCommaIfNotLast } from "../../../utils/ticktes";
 
 const AwardDetails = () => {
+  const ticketsBuy = [2,4]
   const [ticketsSelected, setTicketsSelected] = useState<number[]>([]);
   const navigate = useNavigate();
   const [dataFooter, setDataFooter] = useState([]);
@@ -60,7 +61,7 @@ const AwardDetails = () => {
         titleFooter="Relacionados con tu busqueda"
       >
         <div className="max-h-[500px] overflow-y-auto custom-scrollbar ">
-          <Tickets onClick={handleTickets}/>
+          <Tickets onClick={handleTickets} ticketsBuy={ticketsBuy}/>
         </div>
     {ticketsSelected.length > 0  && <div className="w-full bg-white border flex flex-col  p-10" style={{position:'sticky', bottom:0}}>
           <TitleText text="Detalle de tickets" />
