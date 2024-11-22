@@ -5,12 +5,14 @@ import { LayoutContent } from "../LayoutContent/LayoutContent";
 import { getLowestPrice } from "../../../services/awards";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { useNavigate } from "react-router-dom";
+import { TitleText } from "../../atoms/TitleText/TitleText";
 
 interface CarouselDetailsProps {
   dataTest: IItemCarousel[];
 }
 
 const AwardDetails: React.FC<CarouselDetailsProps> = () => {
+  const [ticketsSelected, setTicketsSelected] = useState<number[]>([]);
   const navigate = useNavigate();
   const [dataFooter, setDataFooter] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,6 +23,18 @@ const AwardDetails: React.FC<CarouselDetailsProps> = () => {
     setDataFooter(mostRecent);
     setLoading(false);
   };
+
+  const handleTickets = (newTicket:number) => {
+    if (!ticketsSelected.includes(newTicket)) {
+      setTicketsSelected([...ticketsSelected, newTicket])
+    }else{
+      const popTicket = ticketsSelected.filter(item => item !== newTicket)
+      setTicketsSelected(popTicket)
+    }
+  }
+  const addCommaIfNotLast = (  item: unknown,index: number,array: unknown[]) => 
+    index !== array.length - 1 ? `${item}, ` : `${item}`;
+  
   useEffect(() => {
     loadAwards();
   }, []);
@@ -51,9 +65,32 @@ const AwardDetails: React.FC<CarouselDetailsProps> = () => {
         titleFooter="Relacionados con tu busqueda"
       >
         <div className="max-h-[500px] overflow-y-auto custom-scrollbar ">
-          <Tickets />
+          <Tickets onClick={handleTickets}/>
         </div>
-          <AppButton size="lg" title="Comprar" onClick={()=>navigate("/payment")}/>
+    {ticketsSelected.length > 0  && <div className="w-full bg-white border flex flex-col  p-10" style={{position:'sticky', bottom:0}}>
+          <TitleText text="Detalle de tickets" />
+        
+          <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+          <div className="w-[200px] h-[200px]">
+            <img
+              src={""}
+              alt={""}
+              className="w-full h-full object-cover sm:object-contain"
+            />
+          </div>
+            <div className="flex flex-col justify-between md:h-full">
+              <div>
+                <p className="text-dark max-w-xs">Precio de ticket: ${10}</p>
+                <p className="text-dark max-w-xs">Total de tickets seleccionados: {ticketsSelected.length}</p>
+                <p className="text-dark max-w-xs">Numero de Tickets seleccionados: {ticketsSelected.map(addCommaIfNotLast)}</p>
+              </div>
+              <div>
+               {ticketsSelected.length > 0 && <p className="text-end my-1"><span className="bg-primary text-white p-1 rounded">Precio: ${10 * ticketsSelected.length}</span></p>}
+                <AppButton size="full" title="Comprar" onClick={()=>navigate("/payment")} disabled={ticketsSelected.length === 0}/>
+              </div>
+            </div>
+          </div>
+        </div>}
       </LayoutContent>
     </>
   );

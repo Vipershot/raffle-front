@@ -1,7 +1,11 @@
 import { useState } from "react";
 import createNumbersArray from "../../../utils/testTickets";
 
-const Tickets = () => {
+interface Props {
+  onClick: (number:number)=> void
+}
+
+const Tickets = ({onClick}: Props) => {
   const numbers = createNumbersArray();
   const numbersState = numbers.map(item=> ({state:false,number:item}))
   const [numberss, setNumberss] = useState(numbersState)
@@ -13,26 +17,30 @@ const Tickets = () => {
         ? { ...item, state: !item.state } // Cambiar el estado del checkbox
         : item
     );
+   
+    onClick(selectedNumber)
+
     setNumberss(updatedNumbers); // Actualizar el estado
   };
   return (
     <div className="flex flex-wrap gap-2" >
-      {numberss.map((data) => (
-     <label htmlFor={`ticket-${data.number}`} style={{ position: "relative", display: "inline-block", width: "50px", height: "50px" }}>
+      {numberss.map((data, i) => (
+     <label key={i} htmlFor={`ticket-${data.number}`} className={`${data.state ? 'text-white' : 'bg-dark'} hover:bg-black`} style={{ position: "relative", display: "inline-block", width: "50px", height: "50px",   borderRadius: "5px", }}>
      <input 
 checked={data.state}
 onChange={()=> handleChecked(data.number)}
+className={`${data.state ? 'bg-info' : 'bg-white'} `}
      id={`ticket-${data}`}    
      style={{
         appearance:"none",
-        backgroundColor: data.state ? "#007bff" : "#fff",
+        // backgroundColor: data.state ? "#007bff" : "#fff",
           width: "100%",
           height: "100%",
-          border: "2px solid #000",
-          borderRadius: "4px",
+          border: "2px solid #ccc",
+          borderRadius: "5px",
           cursor: "pointer",
         }} type="checkbox" value={data.number} />
-     <span     style={{
+     <span   style={{
           position: "absolute",
           top: "50%",
           left: "50%",

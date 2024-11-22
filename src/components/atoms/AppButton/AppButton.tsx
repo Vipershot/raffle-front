@@ -3,7 +3,7 @@ interface Props {
     title: string
     disabled?: boolean
     appearance?: "outline" | "primary" | "text",
-    size?: 'sm' | 'md'| 'lg'
+    size?: 'sm' | 'md'| 'lg' | 'full'
 }
 
 export const AppButton =({
@@ -11,20 +11,25 @@ export const AppButton =({
     title,
     disabled,
     appearance,
-    size
-
+    size,
+    
 }:Props)=>{
     const getAppearance = () => {
-        switch (appearance) {
-            case 'primary':
-                return 'bg-info'
-               
-            case 'text':
-                return 'text-info'
+        if(!disabled){
+            switch (appearance) {
+                case 'primary':
+                    return 'bg-info'
                    
-            default: 
-                return 'bg-info'
+                case 'text':
+                    return 'text-info'
+                       
+                default: 
+                    return 'bg-info'
+            }
+        }else{
+            return 'bg-disabled'
         }
+      
     }
 
     const getSize = () => {
@@ -44,6 +49,6 @@ export const AppButton =({
     }
 
     return <>
-    <button  className={` rounded-md ${getAppearance()} ${getSize()}` } disabled={disabled} onClick={onClick}>{title}</button>
+    <button  className={` rounded-md ${getAppearance()} ${getSize()} ${size === 'full' && 'w-full'}` } disabled={disabled} onClick={onClick}>{title}</button>
     </>
 }

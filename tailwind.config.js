@@ -10,6 +10,7 @@ export default {
         secondary: "#e85e40",
         info: "#f07151",
         dark: "gray",
+        disabled: "#eee",
         light:'#f2f2f2'
       },
     },
