@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { IItemCarousel } from "../../../interface/ICarousel";
+import  { useEffect, useState } from "react";
 import Tickets from "../Tickets/Tickets";
 import { LayoutContent } from "../LayoutContent/LayoutContent";
 import { getLowestPrice } from "../../../services/awards";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { useNavigate } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
+import { addCommaIfNotLast } from "../../../utils/ticktes";
 
-interface CarouselDetailsProps {
-  dataTest: IItemCarousel[];
-}
-
-const AwardDetails: React.FC<CarouselDetailsProps> = () => {
+const AwardDetails = () => {
   const [ticketsSelected, setTicketsSelected] = useState<number[]>([]);
   const navigate = useNavigate();
   const [dataFooter, setDataFooter] = useState([]);
@@ -32,8 +28,7 @@ const AwardDetails: React.FC<CarouselDetailsProps> = () => {
       setTicketsSelected(popTicket)
     }
   }
-  const addCommaIfNotLast = (  item: unknown,index: number,array: unknown[]) => 
-    index !== array.length - 1 ? `${item}, ` : `${item}`;
+
   
   useEffect(() => {
     loadAwards();
@@ -86,7 +81,7 @@ const AwardDetails: React.FC<CarouselDetailsProps> = () => {
               </div>
               <div>
                {ticketsSelected.length > 0 && <p className="text-end my-1"><span className="bg-primary text-white p-1 rounded">Precio: ${10 * ticketsSelected.length}</span></p>}
-                <AppButton size="full" title="Comprar" onClick={()=>navigate("/payment")} disabled={ticketsSelected.length === 0}/>
+                <AppButton size="full" title="Comprar" onClick={()=>navigate(`/payment/123`,{state:{ticketsSelected}})} disabled={ticketsSelected.length === 0}/>
               </div>
             </div>
           </div>

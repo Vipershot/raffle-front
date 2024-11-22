@@ -2,34 +2,39 @@ import { useState } from "react";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
-import { FcIphone, FcLibrary, FcMoneyTransfer   } from "react-icons/fc";
+import { FcIphone, FcLibrary } from "react-icons/fc";
 import {
   IMethodBinance,
   IMethodPagoMovil,
   IFormPayment
 } from "../../../interface/metodsPayment";
 
-const initialStatePagoMovil: IMethodPagoMovil = {
-  dni: "",
-  idRef: "",
-  mount: "",
-  name: "",
-};
-
-const initialStateBinance: IMethodBinance = {
-  idRef: "",
-  mount: "",
-  email: "",
-};
 
 interface Props{
     handleDataPayment:(data:IFormPayment)=>void
+    mount: number
 }
 
-export const FormPayment = ({handleDataPayment}:Props) => {
+export const FormPayment = ({handleDataPayment, mount}:Props) => {
+  const mountBs = mount * 49
+  const mountUsd = mount * 10
+
+  const initialStatePagoMovil: IMethodPagoMovil = {
+    dni: "",
+    idRef: "",
+    mount: 0,
+    name: "",
+  };
+  
+  const initialStateBinance: IMethodBinance = {
+    idRef: "",
+    mount:0,
+    email: "",
+  };
+  
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [dataFormPagoMovil, setDataFormPagoMovil] = useState<IMethodPagoMovil>(
-    initialStatePagoMovil
+  initialStatePagoMovil
   );
   const [dataFormBinance, setDataFormBinance] =
     useState<IMethodBinance>(initialStateBinance);
@@ -37,7 +42,7 @@ export const FormPayment = ({handleDataPayment}:Props) => {
   const paymentMethods = [
     { id: "0", name: "Pago Móvil", icon: FcIphone },
     { id: "1", name: "Binance", icon: FcLibrary },
-    { id: "2", name: "Divisa", icon: FcMoneyTransfer },
+    // { id: "2", name: "Divisa", icon: FcMoneyTransfer },
   ];
 
   const handleSubmit = () => {
@@ -69,6 +74,8 @@ export const FormPayment = ({handleDataPayment}:Props) => {
             <p className="text-sm text-muted-foreground mb-4">
               Numero Celular: <strong>0323 456 45 45</strong>
             </p>
+       
+            <div className="flex space-x-4">
             <AppInput
               label="Nombre titular cuenta"
               type="text"
@@ -81,11 +88,10 @@ export const FormPayment = ({handleDataPayment}:Props) => {
                 })
               }
             />
-            <div className="flex space-x-4">
               <AppInput
                 label="Cedula de Identidad"
                 type="text"
-                placeholder="3.890.876"
+                placeholder="1.234.567"
                 value={dataFormPagoMovil.dni}
                 onChange={(e) =>
                   setDataFormPagoMovil({
@@ -94,10 +100,12 @@ export const FormPayment = ({handleDataPayment}:Props) => {
                   })
                 }
               />
-              <AppInput
+           
+            </div>
+            <AppInput
                 label="Numero de referencia"
                 type="text"
-                placeholder="3423456"
+                placeholder="Ingresar cedula de identidad"
                 value={dataFormPagoMovil.idRef}
                 onChange={(e) =>
                   setDataFormPagoMovil({
@@ -106,16 +114,14 @@ export const FormPayment = ({handleDataPayment}:Props) => {
                   })
                 }
               />
-            </div>
             <AppInput
-              label="Ingresa monto a pagar: 223"
+              label={`Ingresa monto a pagar: ${mountBs} Bs`}
               type="text"
-              placeholder="233"
-              value={dataFormPagoMovil.mount}
+              placeholder={`${mountBs}...`}
               onChange={(e) =>
                 setDataFormPagoMovil({
                   ...dataFormPagoMovil,
-                  mount: e.target.value,
+                  mount: Number(e.target.value),
                 })
               }
             />
@@ -140,11 +146,10 @@ export const FormPayment = ({handleDataPayment}:Props) => {
                 })
               }
             />
-            <div className="flex space-x-4">
-              <AppInput
+               <AppInput
                 label="Numero de referencia"
                 type="text"
-                placeholder="089876583"
+                placeholder="Ingresar numero de referencia"
                 value={dataFormBinance.idRef}
                 onChange={(e) =>
                   setDataFormBinance({
@@ -153,16 +158,14 @@ export const FormPayment = ({handleDataPayment}:Props) => {
                   })
                 }
               />
-            </div>
             <AppInput
-              label="Ingresa monto a pagar: 223"
+              label={`Ingresa monto a pagar: ${mountUsd} USDT`}
               type="text"
-              placeholder="089876583"
-              value={dataFormBinance.mount}
+              placeholder={`${mountUsd} USDT`}
               onChange={(e) =>
                 setDataFormBinance({
                   ...dataFormBinance,
-                  mount: e.target.value,
+                  mount: Number(e.target.value),
                 })
               }
             />
@@ -218,7 +221,7 @@ export const FormPayment = ({handleDataPayment}:Props) => {
         </div>
       )}
       <div className="mt-6">
-        <AppButton onClick={handleSubmit} title="Confirmar método de pago" />
+        <AppButton onClick={handleSubmit} title="Confirmar método de pago" size="full"/>
       </div>
     </div>
   );

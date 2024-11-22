@@ -13,7 +13,7 @@ const AppRoutes = () => {
         <Route index element={<ViewDashboard/>} />
         <Route path="/register" element={<ViewRegister />} />
         <Route path="/login" element={<ViewLogin/>} />
-        <Route path="/payment" element={<Payment/>} />
+        <Route path="/payment/:id" element={<Payment/>} />
         <Route path="/most-recent" element={<ViewMostRecent/>} />
         <Route path="/best-prices" element={<ViewBestPrices/>} />
         <Route path="/award/:id" element={<ViewAdward />} />

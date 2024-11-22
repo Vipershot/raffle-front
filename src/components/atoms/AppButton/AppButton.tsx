@@ -18,13 +18,13 @@ export const AppButton =({
         if(!disabled){
             switch (appearance) {
                 case 'primary':
-                    return 'bg-info'
+                    return 'bg-info text-white'
                    
                 case 'text':
-                    return 'text-info'
+                    return 'text-info '
                        
                 default: 
-                    return 'bg-info'
+                    return 'bg-info text-white'
             }
         }else{
             return 'bg-disabled'

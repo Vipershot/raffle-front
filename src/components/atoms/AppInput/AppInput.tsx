@@ -6,7 +6,7 @@ interface Props {
     className?: string
     placeholder: string
     maxLength?: number
-    value: string
+    value?: string
     type?: "search" | "text" | "email" | "password"
     name?:string
 }
