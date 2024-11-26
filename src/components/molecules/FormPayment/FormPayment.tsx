@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { FcIphone, FcLibrary } from "react-icons/fc";
+import { BiLoader } from "react-icons/bi";
 import {
   IMethodBinance,
   IMethodPagoMovil,
-  IFormPayment
+  IFormPayment,
 } from "../../../interface/metodsPayment";
+import AppModal from "../../atoms/AppModal/AppModal";
+import { useNavigate } from "react-router-dom";
 
-
-interface Props{
-    handleDataPayment:(data:IFormPayment)=>void
-    mount: number
+interface Props {
+  handleDataPayment: (data: IFormPayment) => void;
+  mount: number;
 }
 
-export const FormPayment = ({handleDataPayment, mount}:Props) => {
-  const mountBs = mount * 49
-  const mountUsd = mount * 10
+export const FormPayment = ({ handleDataPayment, mount }: Props) => {
+  const mountBs = mount * 49;
+  const mountUsd = mount * 10;
 
   const initialStatePagoMovil: IMethodPagoMovil = {
     dni: "",
@@ -25,38 +27,59 @@ export const FormPayment = ({handleDataPayment, mount}:Props) => {
     mount: 0,
     name: "",
   };
-  
+
   const initialStateBinance: IMethodBinance = {
     idRef: "",
-    mount:0,
+    mount: 0,
     email: "",
   };
-  
+
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [dataFormPagoMovil, setDataFormPagoMovil] = useState<IMethodPagoMovil>(
-  initialStatePagoMovil
+    initialStatePagoMovil
   );
   const [dataFormBinance, setDataFormBinance] =
     useState<IMethodBinance>(initialStateBinance);
-
+  const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
   const paymentMethods = [
     { id: "0", name: "Pago Móvil", icon: FcIphone },
     { id: "1", name: "Binance", icon: FcLibrary },
     // { id: "2", name: "Divisa", icon: FcMoneyTransfer },
   ];
 
-  const handleSubmit = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
     if (selectedMethod === "0") {
-        handleDataPayment(dataFormPagoMovil)
+      const { dni, idRef, name, mount } = dataFormPagoMovil;
+      setIsFormValid(
+        dni.trim() !== "" &&
+          idRef.trim() !== "" &&
+          name.trim() !== "" &&
+          mount > 0
+      );
+    } else if (selectedMethod === "1") {
+      const { email, idRef, mount } = dataFormBinance;
+      setIsFormValid(email.trim() !== "" && idRef.trim() !== "" && mount > 0);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [selectedMethod, dataFormPagoMovil, dataFormBinance]);
+
+  const handleSubmit = () => {
+    setIsModalOpen(true);
+    if (selectedMethod === "0") {
+      handleDataPayment(dataFormPagoMovil);
     }
     if (selectedMethod === "1") {
-        handleDataPayment(dataFormBinance)
+      handleDataPayment(dataFormBinance);
     }
     if (selectedMethod === "2") {
       console.log("All data:", "Divisa pagada");
     }
-    setDataFormBinance(initialStateBinance)
-    setDataFormPagoMovil(initialStatePagoMovil)
+    setDataFormBinance(initialStateBinance);
+    setDataFormPagoMovil(initialStatePagoMovil);
   };
   const renderPaymentInfo = () => {
     switch (selectedMethod) {
@@ -74,20 +97,20 @@ export const FormPayment = ({handleDataPayment, mount}:Props) => {
             <p className="text-sm text-muted-foreground mb-4">
               Numero Celular: <strong>0323 456 45 45</strong>
             </p>
-       
+
             <div className="flex space-x-4">
-            <AppInput
-              label="Nombre titular cuenta"
-              type="text"
-              placeholder="Genesita"
-              value={dataFormPagoMovil.name}
-              onChange={(e) =>
-                setDataFormPagoMovil({
-                  ...dataFormPagoMovil,
-                  name: e.target.value,
-                })
-              }
-            />
+              <AppInput
+                label="Nombre titular cuenta"
+                type="text"
+                placeholder="Genesita"
+                value={dataFormPagoMovil.name}
+                onChange={(e) =>
+                  setDataFormPagoMovil({
+                    ...dataFormPagoMovil,
+                    name: e.target.value,
+                  })
+                }
+              />
               <AppInput
                 label="Cedula de Identidad"
                 type="text"
@@ -100,28 +123,32 @@ export const FormPayment = ({handleDataPayment, mount}:Props) => {
                   })
                 }
               />
-           
             </div>
             <AppInput
-                label="Numero de referencia"
-                type="text"
-                placeholder="Ingresar cedula de identidad"
-                value={dataFormPagoMovil.idRef}
-                onChange={(e) =>
-                  setDataFormPagoMovil({
-                    ...dataFormPagoMovil,
-                    idRef: e.target.value,
-                  })
-                }
-              />
+              label="Numero de referencia"
+              type="text"
+              placeholder="Ingresar cedula de identidad"
+              value={dataFormPagoMovil.idRef}
+              onChange={(e) =>
+                setDataFormPagoMovil({
+                  ...dataFormPagoMovil,
+                  idRef: e.target.value,
+                })
+              }
+            />
             <AppInput
               label={`Ingresa monto a pagar: ${mountBs} Bs`}
               type="text"
               placeholder={`${mountBs}...`}
+              value={
+                dataFormPagoMovil.mount !== 0
+                  ? dataFormPagoMovil.mount.toString()
+                  : ""
+              }
               onChange={(e) =>
                 setDataFormPagoMovil({
                   ...dataFormPagoMovil,
-                  mount: Number(e.target.value),
+                  mount: Number(e.target.value) || 0,
                 })
               }
             />
@@ -146,26 +173,32 @@ export const FormPayment = ({handleDataPayment, mount}:Props) => {
                 })
               }
             />
-               <AppInput
-                label="Numero de referencia"
-                type="text"
-                placeholder="Ingresar numero de referencia"
-                value={dataFormBinance.idRef}
-                onChange={(e) =>
-                  setDataFormBinance({
-                    ...dataFormBinance,
-                    idRef: e.target.value,
-                  })
-                }
-              />
+            <AppInput
+              label="Numero de referencia"
+              type="text"
+              placeholder="Ingresar numero de referencia"
+              value={dataFormBinance.idRef}
+              onChange={(e) =>
+                setDataFormBinance({
+                  ...dataFormBinance,
+                  idRef: e.target.value,
+                })
+              }
+            />
+
             <AppInput
               label={`Ingresa monto a pagar: ${mountUsd} USDT`}
               type="text"
               placeholder={`${mountUsd} USDT`}
+              value={
+                dataFormBinance.mount !== 0
+                  ? dataFormBinance.mount.toString()
+                  : ""
+              }
               onChange={(e) =>
                 setDataFormBinance({
                   ...dataFormBinance,
-                  mount: Number(e.target.value),
+                  mount: Number(e.target.value) || 0,
                 })
               }
             />
@@ -199,10 +232,10 @@ export const FormPayment = ({handleDataPayment, mount}:Props) => {
               value={method.id}
               checked={selectedMethod === method.id}
               onChange={(e) => {
-                setSelectedMethod(e.target.value)
-                setDataFormBinance(initialStateBinance)
-                setDataFormPagoMovil(initialStatePagoMovil)
-            }}
+                setSelectedMethod(e.target.value);
+                setDataFormBinance(initialStateBinance);
+                setDataFormPagoMovil(initialStatePagoMovil);
+              }}
               className="form-radio text-blue-600"
             />
             <div className="flex items-center space-x-2">
@@ -221,7 +254,41 @@ export const FormPayment = ({handleDataPayment, mount}:Props) => {
         </div>
       )}
       <div className="mt-6">
-        <AppButton onClick={handleSubmit} title="Confirmar método de pago" size="full"/>
+        <AppButton
+          onClick={handleSubmit}
+          title="Confirmar método de pago"
+          size="full"
+          disabled={!isFormValid}
+        />
+      </div>
+      <div>
+        <AppModal
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={
+            <>
+            <BiLoader  className="inline-block ml-2" />  Procesando pago 
+            </>
+          }
+  
+        >
+          <div className="space-y-4">
+            <p className="text-dark">Su pago esta siendo procesado.</p>
+            <p className="text-dark">
+              La información sobre tu compra llegará en breve a tu correo
+              electrónico.
+            </p>
+            <p className="text-dark">
+              Por favor revise su bandeja de entrada y carpeta de spam si no lo
+              ve en los próximos minutos.
+            </p>
+            <AppButton
+              size="full"
+              onClick={() => navigate("/")}
+              title="Confirmar"
+            />
+          </div>
+        </AppModal>
       </div>
     </div>
   );
