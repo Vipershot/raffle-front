@@ -10,12 +10,12 @@ export const AppNavbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   return (
-    <nav className="p-10 bg-white shadow-md flex justify-between">
-      <Link to={"/"} onClick={modalOff}>
+    <nav className="p-10 bg-white shadow-md flex flex-wrap justify-between">
+      <Link to={"/"} onClick={modalOff} className="flex items-center">
         <TitleText text={"Raffle"} color="primary" />
       </Link>
       {pathname !== "/login" && pathname !== "/register" && (
-        <div className="w-[60%]">
+        <div className="w-[60%] hidden lg:block">
           <AppInput
             onChange={() => {}}
             onClick={handleModal}
@@ -32,7 +32,7 @@ export const AppNavbar = () => {
             navigate("/login");
           }}
           title="Inicia sesion"
-          size="md"
+          size="sm"
           appearance="text"
         />
         <AppButton
@@ -42,8 +42,19 @@ export const AppNavbar = () => {
           }}
           title="Registrar"
           appearance="text"
+          size="sm"
         />
       </div>
+      {pathname !== "/login" && pathname !== "/register" && (
+        <div className="w-[100%] block lg:hidden">
+          <AppInput
+            onChange={() => {}}
+            onClick={handleModal}
+            label={""}
+            placeholder={"Buscar..."}
+          />
+        </div>
+      )}
     </nav>
   );
 };

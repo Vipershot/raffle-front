@@ -1,9 +1,10 @@
 interface Props {
-    onClick: ()=> void
+    onClick?: ()=> void
     title: string
     disabled?: boolean
     appearance?: "outline" | "primary" | "text",
     size?: 'sm' | 'md'| 'lg' | 'full'
+    bold?: boolean
 }
 
 export const AppButton =({
@@ -12,7 +13,7 @@ export const AppButton =({
     disabled,
     appearance,
     size,
-    
+    bold
 }:Props)=>{
     const getAppearance = () => {
         if(!disabled){
@@ -21,7 +22,10 @@ export const AppButton =({
                     return 'bg-info text-white'
                    
                 case 'text':
-                    return 'text-info   hover:font-bold'
+                    return 'text-info   hover:text-primary'
+                
+                case 'outline':
+                    return 'border border-info text-info   hover:text-primary'
                        
                 default: 
                     return 'bg-info text-white'
@@ -49,6 +53,6 @@ export const AppButton =({
     }
 
     return <>
-    <button  className={` rounded-md ${getAppearance()} ${getSize()} ${size === 'full' && 'w-full'} ` } disabled={disabled} onClick={onClick}>{title}</button>
+    <button  className={` rounded-md ${getAppearance()} ${getSize()} ${size === 'full' && 'w-full'} ${bold && 'font-bold'}` } disabled={disabled} onClick={onClick}>{title}</button>
     </>
 }

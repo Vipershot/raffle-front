@@ -8,34 +8,28 @@ import { TitleText } from "../../atoms/TitleText/TitleText";
 import { addCommaIfNotLast } from "../../../utils/ticktes";
 import { IAward } from "../../../interface/awards";
 import { getDayComplete } from "../../../utils/date";
+import createNumbersArray from "../../../utils/numbersArray";
 
 
-const initialState =  {
-  cover:        '',
-  createdAt:    new Date(),
-  description: '',
-  endDate:     new Date(),
-  id:          '',
-  ticketPrice: '',
-  title:       '',
-  totalTickets: 0,
-  updatedAt:    new Date(),
-  userId:      '',
-  status: 'string',
-  tickets: []
- }
 const AwardDetails = () => {
   const {id} = useParams()
-  const [award, setAward] = useState<IAward>(initialState);
-  const [ticketsSelected, setTicketsSelected] = useState<number[]>([]);
   const navigate = useNavigate();
-  const [dataFooter, setDataFooter] = useState([]);
+
   const [loading, setLoading] = useState(false);
+  const [award, setAward] = useState<IAward | null>(null);
+  //TICKETS
+  const [totalTickets, setTotalTickets] = useState<{state:boolean; number:number}[] | null>(null)
+  const [ticketsSelected, setTicketsSelected] = useState<number[]>([]);
+  //DATA FOOTER
+  const [dataFooter, setDataFooter] = useState([]);
 
   const loadAwards = async () => {
     setLoading(true);
     const mostRecent = await getLowestPrice();
     const awardDetail: IAward = await getAward(id as string)
+    const numbers = createNumbersArray(awardDetail.totalTickets);
+    const numbersState = numbers.map((item) => ({ state: false, number: item }));
+    setTotalTickets(numbersState)
     setAward(awardDetail)
     setDataFooter(mostRecent);
     setLoading(false);
@@ -50,13 +44,16 @@ const AwardDetails = () => {
     }
   }
 
-  
   useEffect(() => {
+    setTotalTickets(null)
+    setTicketsSelected([])
     loadAwards();
+ 
   },[id]);
 
   return (
-    <>
+    <>{
+      award ?     <div>
       <div className="flex justify-center mt-5 gap-2">
         <div className="w-[50%] h-[200px]">
           <img
@@ -81,7 +78,7 @@ const AwardDetails = () => {
         titleFooter="Relacionados con tu búsqueda"
       >
         <div className="max-h-[500px] overflow-y-auto custom-scrollbar "> 
-          {award.tickets &&  <Tickets onClick={handleTickets} ticketsBuy={award?.tickets.map(item => Number(item.ticketNumber))}/>}
+          {award.tickets && totalTickets &&  <Tickets onClick={handleTickets} ticketsBuy={award?.tickets.map(item => Number(item.ticketNumber))} totalTickets={totalTickets} handleTickets={(data)=> setTotalTickets(data)}/>}
         </div>
     {ticketsSelected.length > 0  && <div className="w-full bg-white border flex flex-col  p-10" style={{position:'sticky', bottom:0}}>
           <TitleText text="Detalle de tickets" />
@@ -108,6 +105,9 @@ const AwardDetails = () => {
           </div>
         </div>}
       </LayoutContent>
+    </div> : <h1>Cargando...</h1>
+    }
+  
     </>
   );
 };

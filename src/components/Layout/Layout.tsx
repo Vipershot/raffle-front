@@ -17,7 +17,7 @@ export const Layout = ({ children }: Props) => {
         {modalState && (
           <>
             <div className="bg-light h-[300px] overflow-y-auto custom-scrollbar ">
-              <div className="px-52 pt-3">
+              <div className="md:px-52 md:pt-3">
               <Link to='/award/123'onClick={handleModal} className="p-3 bg-white block"><AppButton appearance="text" title="Link 1" onClick={()=> {}}/><hr className="my-1"/></Link>
               <Link to='/award/123'onClick={handleModal} className="p-3 bg-white block"><AppButton appearance="text" title="Link 2" onClick={()=> {}}/> <hr className="my-1"/></Link>
               <Link to='/award/123'onClick={handleModal} className="p-3 bg-white block"><AppButton appearance="text" title="Link 3" onClick={()=> {}}/> <hr className="my-1"/></Link>
