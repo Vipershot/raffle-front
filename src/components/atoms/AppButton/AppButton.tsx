@@ -21,7 +21,7 @@ export const AppButton =({
                     return 'bg-info text-white'
                    
                 case 'text':
-                    return 'text-info '
+                    return 'text-info   hover:font-bold'
                        
                 default: 
                     return 'bg-info text-white'
@@ -49,6 +49,6 @@ export const AppButton =({
     }
 
     return <>
-    <button  className={` rounded-md ${getAppearance()} ${getSize()} ${size === 'full' && 'w-full'}` } disabled={disabled} onClick={onClick}>{title}</button>
+    <button  className={` rounded-md ${getAppearance()} ${getSize()} ${size === 'full' && 'w-full'} ` } disabled={disabled} onClick={onClick}>{title}</button>
     </>
 }
