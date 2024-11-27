@@ -24,15 +24,15 @@ export const Payment = () => {
   return <>
     <div className="w-full md:max-w-xl mx-auto p-6 bg-white mt-5">
     <div className="mb-6">
-        <TitleText text="Detalle de seleccion" />
+        <TitleText text="Detalle de selección" />
         <h2 className="text-sm text-gray-600">
-          informacion de tickets seleccionados
+          información de tickets seleccionados
         </h2>
       </div>
     <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-2">
           <div className="w-[200px] h-[200px]">
             <img
-              src={""}
+              src={"https://via.placeholder.com/500x300?text=Raffle+1"}
               alt={""}
               className="w-full h-full object-cover sm:object-contain"
             />
@@ -41,7 +41,7 @@ export const Payment = () => {
               <div>
                 <p className="text-dark max-w-xs">Precio de ticket: <b className="text-primary">${10}</b></p>
                 <p className="text-dark max-w-xs">Total de tickets seleccionados: <b className="text-primary">{ticketsSelected.length}</b></p>
-                <p className="text-dark max-w-xs">Numero de Tickets seleccionados: <br/> <b className="text-primary">{ticketsSelected.map(addCommaIfNotLast)}</b></p>
+                <p className="text-dark max-w-xs">Número de Tickets seleccionados: <br/> <b className="text-primary">{ticketsSelected.map(addCommaIfNotLast)}</b></p>
               </div>
               <div>
                {ticketsSelected.length > 0 && <p className="text-end my-1"><span className="bg-primary text-white p-1 rounded">Total a pagar: ${10 * ticketsSelected.length}</span></p>}

@@ -44,7 +44,7 @@ const AwardDetails = () => {
       <div className="flex justify-center mt-5 gap-2">
         <div className="w-[50%] h-[200px]">
           <img
-            src={""}
+            src={"https://via.placeholder.com/500x300?text=Raffle+1"}
             alt={""}
             className="w-full h-full object-cover sm:object-contain"
           />
@@ -62,7 +62,7 @@ const AwardDetails = () => {
         title="Tickets"
         dataFooter={dataFooter}
         loading={loading}
-        titleFooter="Relacionados con tu busqueda"
+        titleFooter="Relacionados con tu búsqueda"
       >
         <div className="max-h-[500px] overflow-y-auto custom-scrollbar ">
           <Tickets onClick={handleTickets} ticketsBuy={ticketsBuy}/>
@@ -71,9 +71,9 @@ const AwardDetails = () => {
           <TitleText text="Detalle de tickets" />
         
           <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-          <div className="w-[200px] h-[200px]">
+          <div className="w-[200px] h-[200px] ">
             <img
-              src={""}
+              src={"https://via.placeholder.com/500x300?text=Raffle+1"}
               alt={""}
               className="w-full h-full object-cover sm:object-contain"
             />

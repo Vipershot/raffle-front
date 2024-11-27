@@ -35,7 +35,7 @@ export const AppSection = ({ children, title, link, loading }: Props) => {
         <div className="md:px-[10%] px-[10px]">
           <div className="flex justify-between align-center mb-2">
             <TitleText text={title} />
-            <Link to={link}>Ver mas...</Link>
+            <Link to={link}>Ver más...</Link>
           </div>
           <Carousel
             swipeable={true}
