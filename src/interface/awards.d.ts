@@ -11,3 +11,15 @@ export interface IAward {
     userId?:       string;
    }
    
+   export interface IAwardDetail {
+    id: string
+    ticketNumber: number
+    userId: string
+    raffleId: string
+    createdAt: string
+    updatedAt: string
+    deletedAt: string
+  }
+  
+
+  export type ITickets = IAwardDetail[]

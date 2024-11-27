@@ -3,14 +3,13 @@ import createNumbersArray from "../../../utils/testTickets";
 
 interface Props {
   onClick: (number: number) => void;
-  ticketsBuy: number[];
+  ticketsBuy: number[] | undefined;
 }
 
 const Tickets = ({ onClick, ticketsBuy }: Props) => {
   const numbers = createNumbersArray();
   const numbersState = numbers.map((item) => ({ state: false, number: item }));
   const [numberss, setNumberss] = useState(numbersState);
-
   const handleChecked = (selectedNumber: number) => {
     // Actualizar el estado del checkbox seleccionado
     const updatedNumbers = numberss.map((item) =>
@@ -24,7 +23,7 @@ const Tickets = ({ onClick, ticketsBuy }: Props) => {
   return (
     <div className="flex flex-wrap gap-2">
       {numberss.map((data, i) => {
-        if (ticketsBuy.includes(data.number)) {
+        if (ticketsBuy?.includes(data.number)) {
           return (
             <label
               key={i}

@@ -1,14 +1,16 @@
 import  { useEffect, useState } from "react";
-import Tickets from "../Tickets/Tickets";
-import { LayoutContent } from "../LayoutContent/LayoutContent";
-import { getLowestPrice } from "../../../services/awards";
+import Tickets from "../../molecules/Tickets/Tickets";
+import { LayoutContent } from "../../molecules/LayoutContent/LayoutContent";
+import { getLowestPrice, getAward } from "../../../services/awards";
 import { AppButton } from "../../atoms/AppButton/AppButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { addCommaIfNotLast } from "../../../utils/ticktes";
+import { ITickets } from "../../../interface/awards";
 
 const AwardDetails = () => {
-  const ticketsBuy = [2,4]
+  const {id} = useParams()
+  const [ticketsBuy, setTicketsBuy] = useState<number[]>([]);
   const [ticketsSelected, setTicketsSelected] = useState<number[]>([]);
   const navigate = useNavigate();
   const [dataFooter, setDataFooter] = useState([]);
@@ -17,6 +19,8 @@ const AwardDetails = () => {
   const loadAwards = async () => {
     setLoading(true);
     const mostRecent = await getLowestPrice();
+    const awardDetail: ITickets = await getAward(id as string)
+    setTicketsBuy(awardDetail.map(item => Number(item.ticketNumber)))
     setDataFooter(mostRecent);
     setLoading(false);
   };
@@ -33,7 +37,7 @@ const AwardDetails = () => {
   
   useEffect(() => {
     loadAwards();
-  }, []);
+  },[]);
 
   return (
     <>
