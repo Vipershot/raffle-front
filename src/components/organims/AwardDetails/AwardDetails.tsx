@@ -53,7 +53,7 @@ const AwardDetails = () => {
   
   useEffect(() => {
     loadAwards();
-  },[]);
+  },[id]);
 
   return (
     <>
