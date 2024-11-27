@@ -23,7 +23,7 @@ export const ContentBestPriceAwards = () => {
       loadAwards()
     }, []);
   return (
-    <LayoutContent title={'Productos con mejores precios'} dataFooter={dataFooter} loading={loading} >
+    <LayoutContent title={'Productos con mejores precios'} dataFooter={dataFooter} loading={loading} grid>
         {loading ? 'Cargando...' :  bestPrices.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 
