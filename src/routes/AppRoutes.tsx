@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { ViewLogin, ViewRegister, ViewDashboard, ViewMostRecent, ViewBestPrices, ViewAdward, ViewPayment } from "../views";
+import { ViewErrorPage } from "../views/ViewErrorPage";
 
 const AppRoutes = () => {
 
@@ -13,6 +14,7 @@ const AppRoutes = () => {
         <Route path="/most-recent" element={<ViewMostRecent/>} />
         <Route path="/best-prices" element={<ViewBestPrices/>} />
         <Route path="/award/:id" element={<ViewAdward />} />
+        <Route path="*" element={<ViewErrorPage/>} />
       </Route>
     </Routes>
   );
