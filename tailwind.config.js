@@ -13,6 +13,9 @@ export default {
         disabled: "#e5e7eb",
         light:'#f2f2f2'
       },
+      gridTemplateColumns: {
+        '16': 'repeat(16, minmax(0, 1fr))',
+      }
     },
   },
   plugins: [

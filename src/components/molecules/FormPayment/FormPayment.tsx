@@ -15,11 +15,13 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   handleDataPayment: (data: IFormPayment) => void;
   mount: number;
+  ticketPrice: number;
+  count:number;
 }
 
-export const FormPayment = ({ handleDataPayment, mount }: Props) => {
+export const FormPayment = ({ handleDataPayment, mount, ticketPrice, count }: Props) => {
   const mountBs = mount * 49;
-  const mountUsd = mount * 10;
+  const mountUsd = count * ticketPrice;
 
   const initialStatePagoMovil: IMethodPagoMovil = {
     dni: "",
@@ -127,7 +129,7 @@ export const FormPayment = ({ handleDataPayment, mount }: Props) => {
             <AppInput
               label="Numero de referencia"
               type="text"
-              placeholder="Ingresar cedula de identidad"
+              placeholder="Ingresar numero de referencia"
               value={dataFormPagoMovil.idRef}
               onChange={(e) =>
                 setDataFormPagoMovil({
@@ -139,7 +141,7 @@ export const FormPayment = ({ handleDataPayment, mount }: Props) => {
             <AppInput
               label={`Ingresa monto a pagar: ${mountBs} Bs`}
               type="text"
-              placeholder={`${mountBs}...`}
+              placeholder={`${mountBs} Bs...`}
               value={
                 dataFormPagoMovil.mount !== 0
                   ? dataFormPagoMovil.mount.toString()

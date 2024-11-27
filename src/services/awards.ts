@@ -3,7 +3,7 @@ import { axiosRaffle } from '../config/axios'
 
 export const getAward= async(raffleId: string) =>{
     try {
-        const response =  await axiosRaffle.get(`/raffles/${raffleId}/tickets`)
+        const response =  await axiosRaffle.get(`/raffles/${raffleId}`)
         return response.data
     } catch (error) {
         console.log(error)

@@ -8,18 +8,15 @@ interface Props {
     titleFooter?:string
     dataFooter: IAward[]
     loading:boolean
+    grid?:boolean
     children:ReactNode
 }
-export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter,loading,children}:Props) => {
+export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter,loading,children, grid =false}:Props) => {
   return (
     <div>
-        <div className='py-5 px-[10px] md:px-60 md:py-20  mt-5 bg-light'>
+        <div className='py-5 px-[10px] lg:px-60 md:py-20  mt-5 bg-light'>
             <TitleText text={title} />
-<<<<<<< HEAD
-            <div className='flex flex-wrap gap-2 gap-y-10 mt-5'>
-=======
-            <main className='flex flex-wrap  gap-2 gap-y-10 mt-5'>
->>>>>>> 33fb704b487f0ef6211cad765c8d820c3c816369
+            <div className={`${grid ? 'grid grid-cols-2 sm:grid-cols-3  lg:grid-cols-4' : 'flex flex-wrap '} gap-2 gap-y-10 mt-5`}>
                 {children}
             </div>
         </div>

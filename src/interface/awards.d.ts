@@ -9,6 +9,8 @@ export interface IAward {
     totalTickets: number;
     updatedAt?:    Date;
     userId?:       string;
+    status?: string
+    tickets?: Ticket[]
    }
    
    export interface IAwardDetail {
@@ -21,5 +23,14 @@ export interface IAward {
     deletedAt: string
   }
   
-
-  export type ITickets = IAwardDetail[]
+  
+  export interface ITicket {
+    id: string
+    ticketNumber: string
+    userId: string
+    raffleId: string
+    createdAt: string
+    updatedAt: string
+    deletedAt: string
+  }
+  

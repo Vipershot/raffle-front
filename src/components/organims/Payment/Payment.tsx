@@ -4,13 +4,14 @@ import { IFormPayment } from "../../../interface/metodsPayment";
 import { useLocation } from "react-router-dom";
 import { addCommaIfNotLast } from "../../../utils/ticktes";
 import { TitleText } from "../../atoms/TitleText/TitleText";
+import { IAward } from "../../../interface/awards";
 
 
 export const Payment = () => {
   const [dataPayment, setDataPayment] = useState<IFormPayment>();
   const {state} = useLocation()
-  const {ticketsSelected} = state
-
+  const {ticketsSelected, award} = state
+  const awardDetail: IAward = award
   const handleDataPayment = (data:IFormPayment) =>{
     setDataPayment(data)
   }
@@ -32,24 +33,24 @@ export const Payment = () => {
     <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-2">
           <div className="w-[200px] h-[200px]">
             <img
-              src={"https://via.placeholder.com/500x300?text=Raffle+1"}
-              alt={""}
+              src={awardDetail.cover}
+              alt={awardDetail.title}
               className="w-full h-full object-cover sm:object-contain"
             />
           </div>
             <div className="flex flex-col justify-between md:h-full">
               <div>
-                <p className="text-dark max-w-xs">Precio de ticket: <b className="text-primary">${10}</b></p>
+                <p className="text-dark max-w-xs">Precio de ticket: <b className="text-primary">${awardDetail.ticketPrice}</b></p>
                 <p className="text-dark max-w-xs">Total de tickets seleccionados: <b className="text-primary">{ticketsSelected.length}</b></p>
                 <p className="text-dark max-w-xs">Número de Tickets seleccionados: <br/> <b className="text-primary">{ticketsSelected.map(addCommaIfNotLast)}</b></p>
               </div>
               <div>
-               {ticketsSelected.length > 0 && <p className="text-end my-1"><span className="bg-primary text-white p-1 rounded">Total a pagar: ${10 * ticketsSelected.length}</span></p>}
+               {ticketsSelected.length > 0 && <p className="text-end my-1"><span className="bg-primary text-white p-1 rounded">Total a pagar: ${Number(awardDetail.ticketPrice) * ticketsSelected.length}</span></p>}
               </div>
             </div>
           </div>
           </div>
-    <FormPayment handleDataPayment={handleDataPayment} mount={ticketsSelected.length}/>
+    <FormPayment handleDataPayment={handleDataPayment} mount={ticketsSelected.length} ticketPrice={Number(awardDetail.ticketPrice)} count={ticketsSelected.length}/>
   </>
  
 };

@@ -24,7 +24,7 @@ export const ContentMostRecentAwards = () => {
       loadAwards()
     }, []);
   return (
-    <LayoutContent title={'Productos agregados más recientes'} dataFooter={dataFooter} loading={loading} >
+    <LayoutContent title={'Productos agregados más recientes'} dataFooter={dataFooter} loading={loading} grid>
    {loading ? 'Cargando...' :  mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 
