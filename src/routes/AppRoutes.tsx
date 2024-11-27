@@ -14,6 +14,7 @@ const AppRoutes = () => {
         <Route path="/most-recent" element={<ViewMostRecent/>} />
         <Route path="/best-prices" element={<ViewBestPrices/>} />
         <Route path="/award/:id" element={<ViewAdward />} />
+        <Route path="/award/:*" element={<ViewErrorPage />} />
         <Route path="*" element={<ViewErrorPage/>} />
       </Route>
     </Routes>
