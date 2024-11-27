@@ -1,4 +1,4 @@
-import { AwardDetails } from "../organims/ContentAwardDetails/ContentAwardDetails"
+import AwardDetails from "../organims/AwardDetails/AwardDetails"
 
 
 export const AwardTemplate = () => {

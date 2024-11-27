@@ -1,6 +1,7 @@
 import {ChangeEvent} from 'react'
 interface Props {
     onChange: (event:ChangeEvent<HTMLInputElement> )=> void
+    onClick?: ()=> void
     disabled?: boolean
     label: string
     className?: string
@@ -20,7 +21,8 @@ export const AppInput = ({
   maxLength,
   value,
   name,
-  type = "text"
+  type = "text",
+  onClick
 }: Props) => {
   return (
     <>
@@ -35,6 +37,7 @@ export const AppInput = ({
         <div className="relative mt-1 rounded-md ">
          
           <input
+          onClick={onClick}
           maxLength={maxLength}
           placeholder={placeholder}
            onChange={(e)=>onChange(e)}

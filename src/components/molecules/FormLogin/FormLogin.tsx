@@ -25,7 +25,7 @@ export const FormLogin = ({ onSubmit}:Props) => {
       setDataForm(initialState)
   }
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-1/4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-[90%] lg:w-1/4">
       <TitleText text="Bienvenido" />
       <AppInput
         label="Email"

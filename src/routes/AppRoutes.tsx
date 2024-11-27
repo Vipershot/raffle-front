@@ -1,9 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { ViewLogin, ViewRegister, ViewDashboard, ViewMostRecent } from "../views";
-import { Payment } from "../components/organims/Payment/Payment";
-import { ViewBestPrices } from "../views/ViewBestPrices";
-import { ViewAdward } from "../views/ViewAdwardDetails";
-
+import { ViewLogin, ViewRegister, ViewDashboard, ViewMostRecent, ViewBestPrices, ViewAdward, ViewPayment } from "../views";
+import { ViewErrorPage } from "../views/ViewErrorPage";
 
 const AppRoutes = () => {
 
@@ -13,11 +10,11 @@ const AppRoutes = () => {
         <Route index element={<ViewDashboard/>} />
         <Route path="/register" element={<ViewRegister />} />
         <Route path="/login" element={<ViewLogin/>} />
-        <Route path="/payment/:id" element={<Payment/>} />
+        <Route path="/payment/:id" element={<ViewPayment/>} />
         <Route path="/most-recent" element={<ViewMostRecent/>} />
         <Route path="/best-prices" element={<ViewBestPrices/>} />
         <Route path="/award/:id" element={<ViewAdward />} />
-
+        <Route path="*" element={<ViewErrorPage/>} />
       </Route>
     </Routes>
   );

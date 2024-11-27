@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { IAward } from "../../../interface/awards";
+import { getDayComplete } from "../../../utils/date";
 
 export const CardProduct = ({
   description,
@@ -17,18 +18,13 @@ export const CardProduct = ({
       if (totalTickets < 71) return "Quedan pocos disponibles";
     }
   };
-  const getDayComplete = (day: Date) => {
-    const DT = new Date(day);
-    const D = DT.getDay();
-    const M = DT.toLocaleString("es-ES", { month: "short", year: "numeric" });
-    const completeDay = `${D} ${M}`;
-    return completeDay;
-  };
+ 
 
   return (
-    <div className="bg-white max-w-[200px] md:max-w-[400px] ">
-     
-        <img src={cover} alt={description} />
+    <div className="bg-white col-span-1">
+      <Link to={`/award/${id}`} >
+        <img src={cover} alt={description}  />
+      </Link>
         <div className="flex flex-col p-3">
         <Link to={`/award/${id}`} >
         <h2 className="text-sm text-primary">{description}</h2>

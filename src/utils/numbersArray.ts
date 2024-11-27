@@ -1,6 +1,6 @@
-function createNumbersArray() {
+const createNumbersArray = (number: number) => {
     const startNumber = 1;
-    const endNumber = 1000;
+    const endNumber = number;
     const numbers = [];
   
     for (let number = startNumber; number <= endNumber; number++) {
