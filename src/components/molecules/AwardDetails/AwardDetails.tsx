@@ -60,9 +60,10 @@ const AwardDetails = () => {
         titleFooter="Relacionados con tu busqueda"
       >
         <div className="max-h-[500px] overflow-y-auto custom-scrollbar ">
+          
           <Tickets onClick={handleTickets}/>
         </div>
-    {ticketsSelected.length > 0  && <div className="w-full bg-white border flex flex-col  p-10" style={{position:'sticky', bottom:0}}>
+    {ticketsSelected.length > 0  && <div className="w-full bg-white border flex flex-col p-6" style={{position:'sticky', bottom:0}}>
           <TitleText text="Detalle de tickets" />
         
           <div className="flex flex-col md:flex-row justify-center items-center gap-2">
@@ -75,9 +76,9 @@ const AwardDetails = () => {
           </div>
             <div className="flex flex-col justify-between md:h-full">
               <div>
-                <p className="text-dark max-w-xs">Precio de ticket: ${10}</p>
-                <p className="text-dark max-w-xs">Total de tickets seleccionados: {ticketsSelected.length}</p>
-                <p className="text-dark max-w-xs">Numero de Tickets seleccionados: {ticketsSelected.map(addCommaIfNotLast)}</p>
+                <p className="text-dark max-w-xs">Precio de ticket: <b className="text-primary">${10}</b></p>
+                <p className="text-dark max-w-xs">Total de tickets seleccionados: <b className="text-primary">{ticketsSelected.length}</b></p>
+                <p className="text-dark max-w-xs">Numero de Tickets seleccionados: <b className="text-primary">{ticketsSelected.map(addCommaIfNotLast)}</b> </p>
               </div>
               <div>
                {ticketsSelected.length > 0 && <p className="text-end my-1"><span className="bg-primary text-white p-1 rounded">Precio: ${10 * ticketsSelected.length}</span></p>}
