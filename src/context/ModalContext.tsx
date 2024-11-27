@@ -2,12 +2,14 @@ import React, { createContext, useState, ReactNode } from 'react';
 interface AuthContextType {
     modalState: boolean;
     handleModal: () => void;
-
+    modalOff:() => void
 }
 
 const ModalContext = createContext<AuthContextType>({
   modalState: false,
   handleModal: () => {},
+  modalOff: () => {},
+
 });
 
 interface AuthProviderProps {
@@ -18,13 +20,14 @@ const ModalProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [modalState, setModalState] = useState(false);
 
   const handleModal = () => {
-    // Implementación del login (por ejemplo, actualiza el estado)
     setModalState(!modalState)
   };
 
-
+  const modalOff = () => {
+    setModalState(false)
+  };
   return (
-    <ModalContext.Provider value={{ modalState, handleModal }}>
+    <ModalContext.Provider value={{ modalState, handleModal, modalOff }}>
       {children}
     </ModalContext.Provider>
   );

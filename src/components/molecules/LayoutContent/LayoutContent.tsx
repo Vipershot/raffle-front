@@ -16,7 +16,7 @@ export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter
     <div>
         <div className='py-5 px-[10px] lg:px-60 md:py-20  mt-5 bg-light'>
             <TitleText text={title} />
-            <div className={`${grid ? 'grid grid-cols-2 sm:grid-cols-3  lg:grid-cols-4' : 'flex flex-wrap '} gap-2 gap-y-10 mt-5`}>
+            <div className={`${grid ? 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5' : 'flex flex-wrap '} gap-2 gap-y-10 mt-5`}>
                 {children}
             </div>
         </div>

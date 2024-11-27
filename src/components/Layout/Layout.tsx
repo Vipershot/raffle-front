@@ -34,7 +34,7 @@ export const Layout = ({ children }: Props) => {
                 opacity: 0.6,
                 position: "absolute",
                 background: "black",
-                width: "100vw",
+                width: "100%",
               }}
             >
             
