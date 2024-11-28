@@ -38,16 +38,16 @@ export const FormRegister = ({onSubmit}: Props) => {
       />
       <AppInput
         type="email"
-        label="Email "
+        label="Correo electrónico "
         value={dataForm.email}
-        placeholder="Ingresa tu email"
+        placeholder="Ingresa tu correo electrónico"
         onChange={(e) => {setDataForm({...dataForm, email:e.target.value})}}
       />
       <AppInput
         type="password"
-        label="Password "
+        label="Contraseña "
         value={dataForm.password}
-        placeholder="Ingresa tu password"
+        placeholder="Ingresa tu contraseña"
         onChange={(e) => {setDataForm({...dataForm, password:e.target.value})}}
       />
       <AppButton onClick={() => {}} title="Registrar" />

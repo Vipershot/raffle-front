@@ -1,5 +1,5 @@
 import React from "react";
-
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 interface Props {
   open: boolean;
@@ -27,11 +27,11 @@ const AppModal = ({ open, onClose, title, children }: Props) => {
        
         <div>{children}</div>
         <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+          className="absolute top-2 right-2 text-primary hover:text-info"
           onClick={onClose}
           
         >
-          ✖
+          <IoIosCloseCircleOutline className="text-lg" size={25}  />
         </button>
       </div>
     </div>

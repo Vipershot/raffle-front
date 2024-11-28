@@ -28,8 +28,8 @@ export const FormLogin = ({ onSubmit}:Props) => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-[90%] lg:w-1/4">
       <TitleText text="Bienvenido" />
       <AppInput
-        label="Email"
-        placeholder="Ingresa email"
+        label="Correo electrónico"
+        placeholder="Ingresa correo electrónico"
         type="email"
         
         onChange={(e) => {setDataForm({...dataForm, email:e.target.value})}}
@@ -37,8 +37,8 @@ export const FormLogin = ({ onSubmit}:Props) => {
       />
       <AppInput
         type="password"
-        label="Password"
-        placeholder="Ingresa password"
+        label="Contraseña"
+        placeholder="Ingresa contraseña"
         
         onChange={(e) => {setDataForm({...dataForm, password:e.target.value})}}
         value={dataForm.password}

@@ -269,7 +269,7 @@ export const FormPayment = ({ handleDataPayment, mount, ticketPrice, count }: Pr
           onClose={() => setIsModalOpen(false)}
           title={
             <>
-            <BiLoader  className="inline-block ml-2" />  Procesando pago 
+            <BiLoader  className="inline-block ml-2 text-info" />  Procesando pago 
             </>
           }
   
