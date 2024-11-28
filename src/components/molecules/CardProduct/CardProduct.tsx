@@ -23,7 +23,7 @@ export const CardProduct = ({
   return (
     <div className="bg-white col-span-1">
       <Link to={`/award/${id}`} >
-        <img src={cover} alt={description}  />
+        <img className="h-[200px] object-contain" src={cover} alt={description}  />
       </Link>
         <div className="flex flex-col p-3">
         <Link to={`/award/${id}`} >
