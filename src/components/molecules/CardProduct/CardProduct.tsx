@@ -23,11 +23,11 @@ export const CardProduct = ({
   return (
     <div className="bg-white col-span-1">
       <Link to={`/award/${id}`} >
-        <img className="h-[200px] object-contain" src={cover} alt={description}  />
+        <img className="h-[200px] w-[100%] object-contain" src={cover} alt={description}  />
       </Link>
         <div className="flex flex-col p-3">
         <Link to={`/award/${id}`} >
-        <h2 className="text-sm text-primary">{description}</h2>
+        <h2 className="text-sm text-primary">{description.substring(0, 50)}</h2>
       </Link>
 
           <h3 className="text-xs">

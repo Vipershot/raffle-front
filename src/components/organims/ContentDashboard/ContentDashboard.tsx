@@ -26,7 +26,7 @@ export const ContentDashboard = () => {
         <AppSection loading={loading} title="Más Recientes" link="/most-recent">
                 {mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
-                    description={`${title !== undefined && title.substring(0, 20)} - ${description.substring(0, 40)}`} 
+                    description={`${title} - ${description}`} 
                     ticketPrice={ticketPrice} 
                     endDate={endDate} 
                     createdAt={createdAt}
@@ -39,7 +39,7 @@ export const ContentDashboard = () => {
         <AppSection loading={loading} title="Mejores precios" link="/best-prices">
         {lowestPrice.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
-                    description={`${title !== undefined && title.substring(0, 20)} - ${description.substring(0, 40)}`} 
+                    description={`${title} - ${description}`} 
                     ticketPrice={ticketPrice} 
                     endDate={endDate} 
                     createdAt={createdAt}
