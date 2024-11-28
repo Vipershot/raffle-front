@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TitleText } from "../TitleText/TitleText";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { AppButton } from "../AppButton/AppButton";
 interface Props {
   children: ReactNode;
   title: string;
@@ -33,9 +34,9 @@ export const AppSection = ({ children, title, link, loading }: Props) => {
         <h1>Cargando...</h1>
       ) : (
         <div className="md:px-[10%] px-[10px]">
-          <div className="flex justify-between align-center mb-2">
+          <div className="flex justify-between items-center mb-2">
             <TitleText text={title} />
-            <Link to={link}>Ver más...</Link>
+            <Link to={link} ><AppButton title="Ver más..." appearance="text" size="sm" bold/></Link>
           </div>
           <Carousel
             swipeable={true}

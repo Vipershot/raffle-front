@@ -1,28 +1,31 @@
-import { useState } from "react";
-import createNumbersArray from "../../../utils/testTickets";
 
 interface Props {
   onClick: (number: number) => void;
   ticketsBuy: number[] | undefined;
+  totalTickets: {
+    number:number
+    state: boolean
+  }[]
+  handleTickets: (item: {
+    number: number;
+    state: boolean;
+}[]) => void
 }
 
-const Tickets = ({ onClick, ticketsBuy }: Props) => {
-  const numbers = createNumbersArray();
-  const numbersState = numbers.map((item) => ({ state: false, number: item }));
-  const [numberss, setNumberss] = useState(numbersState);
+const Tickets = ({ onClick, ticketsBuy, totalTickets,handleTickets  }: Props) => {
+
   const handleChecked = (selectedNumber: number) => {
-    // Actualizar el estado del checkbox seleccionado
-    const updatedNumbers = numberss.map((item) =>
+    const updatedNumbers = totalTickets.map((item) =>
       item.number === selectedNumber
-        ? { ...item, state: !item.state } // Cambiar el estado del checkbox
+        ? { ...item, state: !item.state } 
         : item
     );
     onClick(selectedNumber);
-    setNumberss(updatedNumbers); // Actualizar el estado
+    handleTickets(updatedNumbers)
   };
   return (
     <div className="flex flex-wrap gap-2">
-      {numberss.map((data, i) => {
+      {totalTickets.map((data, i) => {
         if (ticketsBuy?.includes(data.number)) {
           return (
             <label
@@ -56,7 +59,7 @@ const Tickets = ({ onClick, ticketsBuy }: Props) => {
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   fontSize: "14px",
-                  pointerEvents: "none", // El texto no debe interferir con el clic
+                  pointerEvents: "none", 
                 }}
               >
                 {data.number}
@@ -102,7 +105,7 @@ const Tickets = ({ onClick, ticketsBuy }: Props) => {
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   fontSize: "14px",
-                  pointerEvents: "none", // El texto no debe interferir con el clic
+                  pointerEvents: "none", 
                 }}
               >
                 {data.number}
