@@ -54,22 +54,23 @@ const AwardDetails = () => {
   return (
     <>{
       award ?     <div>
-      <div className="flex flex-col md:flex-row justify-center mt-5 gap-2">
-        <div className="w-[100%] md:w-[50%] h-[200px]">
+      <div className="flex flex-col md:flex-row justify-center items-center mt-5">
+        <div className="h-[200px] md:h-[400px] w-[100%] md:w-[50%]">
           <img
             src={award?.cover}
             alt={award?.title}
-            className="w-full h-full object-contain mt-8"
+            className="w-full h-full object-contain mt-4"
           />
         </div>
-        <div className="w-[100%] md:w-[40%] flex flex-col items-center p-4 mt-8 md:mt-0 mb-8">
+        <div className="w-[100%] md:w-[50%] flex flex-col items-center p-2 mt-6 md:mt-0 mb-2">
           <div className="w-[90%] flex flex-col gap-2">
-          <h2 className="text-dark font-bold text-[16px] md:text-xl">
+          <h2 className="font-bold text-[16px] md:text-xl">
             {award?.title}
           </h2>
-          <p className="text-[13px] md:text-[16px]">Precio: ${award?.ticketPrice}</p>
+          <p className="text-dark font-bold text-[13px] md:text-[18px]"> Fecha: {getDayComplete(award.endDate)}</p>
+          <p className="text-dark text-[13px] font-bold md:text-[16px]">Precio: ${award?.ticketPrice}</p>
           <p className="text-dark text-[13px] md:text-[16px]">Descripción: {award?.description}</p>
-          <p className="text-dark text-[13px] md:text-[16px]"> Fecha: {getDayComplete(award.endDate)}</p>
+          
         </div>
         </div>
       </div>
