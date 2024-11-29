@@ -24,7 +24,8 @@ const Tickets = ({ onClick, ticketsBuy, totalTickets,handleTickets  }: Props) =>
     handleTickets(updatedNumbers)
   };
   return (
-    <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-14 gap-2">
+    <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-18 gap-2">
+       
       {totalTickets.map((data, i) => {
         if (ticketsBuy?.includes(data.number)) {
           return (

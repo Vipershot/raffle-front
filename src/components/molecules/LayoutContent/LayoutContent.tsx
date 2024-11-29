@@ -15,13 +15,44 @@ export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter
   return (
     <div>
         <div className='py-2 px-[10px] lg:px-60 md:py-10  mt-5 bg-light'>
-        <TitleText text={title} />
+       <div className='flex flex-wrap justify-between'>
+       <TitleText text={title} />
+        <div className="mt-2 mb-2">
+          <h4 className="font-bold text-dark text-sm md:text-md">
+            Seleccion de tickets:
+          </h4>
+          <ul className="flex gap-1 mt-1 text-dark text-sm md:text-md">
+            <li className="flex items-center gap-1">
+              <span
+                className="w-4 h-4 bg-gray-300 border rounded-full inline-block"
+                style={{ border: "1px solid #ccc" }}
+              ></span>
+              <span>No disponibles</span>
+            </li>
+            <li className="flex items-center gap-1">
+              <span
+                className="w-4 h-4 bg-primary border rounded-full inline-block"
+              ></span>
+              <span>Seleccionados</span>
+            </li>
+            <li className="flex items-center gap-1">
+              <span
+                className="w-4 h-4 bg-white border rounded-full inline-block"
+                style={{ border: "1px solid #ccc" }}
+              ></span>
+              <span>Disponibles</span>
+            </li>
+          </ul>
+        </div>
+       </div>
 
             <div className={`${grid ? 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5' : 'flex flex-wrap justify-center'} gap-2 gap-y-10 mt-5`}>
 
                 {children}
             </div>
+          
         </div>
+        
         <footer className='py-3 md:py-10'>
             <AppSectionFooter loading={loading} title={titleFooter} link="/most-recent">
                     {dataFooter.map(({title, cover, id}) => <Link key={id} to={`/award/${id}`}><img src={cover} alt={title} className="h-[200px] w-[100%] object-contain"/></Link>)}

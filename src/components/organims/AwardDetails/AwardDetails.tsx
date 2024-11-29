@@ -10,7 +10,7 @@ import { IAward } from "../../../interface/awards";
 import { getDayComplete } from "../../../utils/date";
 import { IoIosArrowUp } from "react-icons/io";
 import createNumbersArray from "../../../utils/numbersArray";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
 const AwardDetails = () => {
   const { id } = useParams();
@@ -146,7 +146,7 @@ const AwardDetails = () => {
                   className="absolute top-2 right-2 text-primary hover:text-info"
                   onClick={() => setModalDetail(false)}
                 >
-                  <IoIosCloseCircleOutline className="text-lg" size={25} />
+                  <IoIosArrowDown className="text-lg" size={25} />
                 </button>
                 <div className="flex flex-col md:flex-row justify-evenly items-center gap-2">
                   <div className="w-[200px] h-[200px]">
@@ -184,33 +184,6 @@ const AwardDetails = () => {
                         ))}
                       </p>
                     </div>
-                    <div className="mt-2 mb-2">
-          <h4 className="font-bold text-dark text-sm md:text-md">
-            Seleccion de tickets:
-          </h4>
-          <ul className="text-dark text-sm md:text-md">
-            <li className="flex items-center gap-2">
-              <span
-                className="w-4 h-4 bg-gray-300 border rounded-full inline-block"
-                style={{ border: "1px solid #ccc" }}
-              ></span>
-              <span>No disponibles</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span
-                className="w-4 h-4 bg-primary border rounded-full inline-block"
-              ></span>
-              <span>Seleccionados</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span
-                className="w-4 h-4 bg-white border rounded-full inline-block"
-                style={{ border: "1px solid #ccc" }}
-              ></span>
-              <span>Disponibles</span>
-            </li>
-          </ul>
-        </div>
                     <div>
                       <AppButton
                         size="full"
