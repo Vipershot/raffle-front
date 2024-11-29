@@ -1,12 +1,12 @@
 import {  FormEvent, useState } from "react";
-import { DataForm } from "../../../interface/login";
+import { IUserAuth } from "../../../interface/login";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 
 interface Props {
-  onSubmit: (dataForm: DataForm )=> void
- 
+  onSubmit: (dataForm: IUserAuth )=> void
+  loading:boolean
   
 }
 
@@ -17,8 +17,8 @@ const initialState = {
   password: ""
 }
 
-export const FormLogin = ({ onSubmit}:Props) => {
-  const [dataForm, setDataForm] = useState<DataForm>(initialState)
+export const FormLogin = ({ onSubmit, loading}:Props) => {
+  const [dataForm, setDataForm] = useState<IUserAuth>(initialState)
   const handleSubmit =(event: FormEvent)=>{
       event.preventDefault()
       onSubmit(dataForm);
@@ -43,7 +43,7 @@ export const FormLogin = ({ onSubmit}:Props) => {
         onChange={(e) => {setDataForm({...dataForm, password:e.target.value})}}
         value={dataForm.password}
       />
-      <AppButton onClick={() => {}} title="Ingresar" />
+      <AppButton title={loading ? "Cargando...":"Ingresar"} disabled={loading}/>
     </form>
   );
 };

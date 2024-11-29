@@ -1,15 +1,17 @@
 import React, { createContext, useState, ReactNode } from 'react';
-type IState = 'checking' | 'authenticated' | 'not-authenticated'
+
 interface AuthContextType {
-  state: IState;
-  login: () => void;
+  authenticated: boolean;
+  login: (token:string) => void;
   logout: () => void;
+  token:string | null;
 }
 
 const AuthContext = createContext<AuthContextType>({
-  state: 'checking',
+  authenticated: false,
   login: () => {},
-  logout: () => {}
+  logout: () => {},
+  token:null
 });
 
 interface AuthProviderProps {
@@ -17,20 +19,25 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [state, setState] = useState<IState>('not-authenticated');
-
-  const login = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [token, setToken] = useState<string |null >(null)
+  const login = (token:string) => {
     // Implementación del login (por ejemplo, actualiza el estado)
-    setState('authenticated')
+    setAuthenticated(true)
+    localStorage.setItem("token", token)
+    setToken(token)
   };
 
   const logout = () => {
     // Implementación del logout (por ejemplo, actualiza el estado)
-    setState('not-authenticated')
+    localStorage.removeItem("token");
+    setAuthenticated(false)
+    setToken(null)
+
   };
 
   return (
-    <AuthContext.Provider value={{ state, login, logout }}>
+    <AuthContext.Provider value={{ authenticated, login, logout, token }}>
       {children}
     </AuthContext.Provider>
   );

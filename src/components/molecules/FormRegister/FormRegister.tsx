@@ -2,16 +2,13 @@ import { FormEvent, useState } from "react";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
+import { IUserAuth } from "../../../interface/login";
 
 interface Props {
-    onSubmit: (dataForm: DataForm )=> void
+    onSubmit: (dataForm: IUserAuth )=> void
 }
 
-type DataForm = {
-    name: string
-    email: string
-    password: string
-}
+
 
 const initialState = {
     name: "",
@@ -20,7 +17,7 @@ const initialState = {
 }
 
 export const FormRegister = ({onSubmit}: Props) => {
-    const [dataForm, setDataForm] = useState<DataForm>(initialState)
+    const [dataForm, setDataForm] = useState<IUserAuth>(initialState)
     const handleSubmit =(event: FormEvent)=>{
         event.preventDefault()
         onSubmit(dataForm);

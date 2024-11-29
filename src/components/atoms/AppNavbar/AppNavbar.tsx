@@ -4,8 +4,10 @@ import { AppButton } from "../AppButton/AppButton";
 import { AppInput } from "../AppInput/AppInput";
 import { useContext } from "react";
 import { ModalContext } from "../../../context/ModalContext";
+import { AuthContext } from "../../../context/AuthContext";
 
 export const AppNavbar = () => {
+  const {authenticated, logout} = useContext(AuthContext)
   const { handleModal, modalOff } = useContext(ModalContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -25,7 +27,7 @@ export const AppNavbar = () => {
         </div>
       )}
 
-      <div className="flex space-x-2">
+ {!authenticated ?  <div className="flex space-x-2">
         <AppButton
           onClick={() => {
             modalOff();
@@ -44,7 +46,7 @@ export const AppNavbar = () => {
           appearance="text"
           size="sm"
         />
-      </div>
+      </div> : <AppButton size="sm" onClick={logout} title="Cerrar Sesion"/>}
       {pathname !== "/login" && pathname !== "/register" && (
         <div className="w-[100%] block lg:hidden">
           <AppInput
