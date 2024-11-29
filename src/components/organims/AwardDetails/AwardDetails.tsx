@@ -11,6 +11,7 @@ import { getDayComplete } from "../../../utils/date";
 import { IoIosArrowUp } from "react-icons/io";
 import createNumbersArray from "../../../utils/numbersArray";
 import { IoIosArrowDown } from "react-icons/io";
+import { Legend } from "../../molecules/Legend/Legend";
 
 const AwardDetails = () => {
   const { id } = useParams();
@@ -124,6 +125,8 @@ const AwardDetails = () => {
             loading={loading}
             titleFooter="Relacionados con tu búsqueda"
           >
+            <Legend/>
+
             <div className="max-h-[500px] overflow-y-auto custom-scrollbar flex justify-between">
               {award.tickets && totalTickets && (
                 <Tickets

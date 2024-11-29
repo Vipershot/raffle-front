@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   authenticated: boolean;
@@ -19,6 +20,7 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const navigate = useNavigate()
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState<string |null >(null)
   const login = (token:string) => {
@@ -30,10 +32,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     // Implementación del logout (por ejemplo, actualiza el estado)
-    localStorage.removeItem("token");
     setAuthenticated(false)
     setToken(null)
-
+    localStorage.removeItem("token");
+    navigate('/login')
   };
 
   return (

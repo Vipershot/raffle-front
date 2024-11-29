@@ -4,6 +4,7 @@ import { AppSection } from '../../atoms/AppSection/AppSection'
 import { CardProduct } from '../../molecules/CardProduct/CardProduct'
 import { getLowestPrice, getMostRecent } from '../../../services/awards'
 import { IAward } from '../../../interface/awards'
+import { getProfile } from '../../../services/auth'
 export const ContentDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [mostRecent, setMostRecent] = useState<IAward[]>([]);
@@ -19,6 +20,8 @@ export const ContentDashboard = () => {
   }
   useEffect(() => {
     loadAwards()
+    getProfile()
+
   }, []);
   
   return (

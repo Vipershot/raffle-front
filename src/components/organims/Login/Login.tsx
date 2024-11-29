@@ -9,6 +9,7 @@ import { AppButton } from "../../atoms/AppButton/AppButton"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../context/AuthContext"
 
+
 export const Login = () => {
   const navigate = useNavigate()
   const {login} = useContext(AuthContext)
@@ -21,7 +22,8 @@ export const Login = () => {
       const {token} = await loginUser(dataForm)
       login(token)
       navigate("/")
-    } catch (error) {
+    } catch (e) {
+      console.log(e)
       setMessage({title:"Error al iniciar sesion", description:"Intente de nuevo en un momento", icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />})
       openModal()
     }

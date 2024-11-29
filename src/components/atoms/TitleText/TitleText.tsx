@@ -11,7 +11,7 @@ export const TitleText =({text, color='gray-800', size="md"}: Props)=>{
 
     return <>
       
-        <h1 className={`${getSizeText(size)} font-bold text-${color}`}>{text}</h1>
+        <h1 className={`${getSizeText(size)}  font-bold text-${color}`}>{text}</h1>
        
     </>
 }
