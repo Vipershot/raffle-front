@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tickets from "../../molecules/Tickets/Tickets";
 import { LayoutContent } from "../../molecules/LayoutContent/LayoutContent";
 import { getLowestPrice, getAward } from "../../../services/awards";
-import { getExchangeRate } from "../../../services/awards"; // Importa el servicio
+import { getExchangeRate } from "../../../services/awards";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
@@ -12,11 +12,13 @@ import { IoIosArrowUp } from "react-icons/io";
 import createNumbersArray from "../../../utils/numbersArray";
 import { IoIosArrowDown } from "react-icons/io";
 import { Legend } from "../../molecules/Legend/Legend";
+import AppModal from "../../atoms/AppModal/AppModal";
 
 const AwardDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  
+  const [showAlert, setShowAlert] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [award, setAward] = useState<IAward | null>(null);
   const [exchangeRate, setExchangeRate] = useState<number>(0);
@@ -36,6 +38,24 @@ const AwardDetails = () => {
       console.error("Error obteniendo la tasa de cambio:", error);
     }
   };
+
+  // const handleOnClick = () => {
+   
+  //     if (!isAuthenticated()) {
+  //       setShowAlert(true);
+  //     } else {
+  //       navigate(`/payment/${id}`, {
+  //         state: { ticketsSelected, award },
+  //       });
+  //     }
+    
+  // };
+
+  // const isAuthenticated = () => {
+  //   getProfile()
+    
+  //   return !!localStorage.getItem('token');
+  // };
 
   const loadAwards = async () => {
     setLoading(true);
@@ -125,7 +145,7 @@ const AwardDetails = () => {
             loading={loading}
             titleFooter="Relacionados con tu búsqueda"
           >
-            <Legend/>
+            <Legend />
 
             <div className="max-h-[500px] overflow-y-auto custom-scrollbar flex justify-between">
               {award.tickets && totalTickets && (
@@ -188,7 +208,43 @@ const AwardDetails = () => {
                       </p>
                     </div>
                     <div>
-                      <AppButton
+                    {showAlert && (
+        <AppModal 
+        open
+        title={"Para continuar con la compra..."}
+       
+          onClose={() =>{ 
+            
+            setShowAlert(false)}}
+        >
+        <p className="text-dark mb-5">Debes iniciar sesion o registrarte</p>
+          <AppButton size="full" title="Iniciar sesion" onClick={()=>{navigate('/login')}}/>
+          <div className="mt-2 h-0.5 bg-disabled" ></div>
+
+          <AppButton size="full" appearance="text" title="Registrarse" onClick={()=>{navigate('/register')}}/>
+        </AppModal>
+      )}
+                  <AppButton
+                  
+                    size="full"
+                    title="Comprar"
+                    onClick={() => {
+                      if(localStorage.getItem('token')){
+                        navigate(`/payment/${id}`, {
+                          state: { ticketsSelected, award },
+                        })
+                      }else{
+                          setShowAlert(true)
+                      }
+                    }
+                    
+                    }
+                    
+                  
+                  
+                    
+                  />
+                      {/* <AppButton
                         size="full"
                         title="Comprar"
                         onClick={() =>
@@ -197,7 +253,7 @@ const AwardDetails = () => {
                           })
                         }
                         disabled={ticketsSelected.length === 0}
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>
@@ -206,33 +262,84 @@ const AwardDetails = () => {
 
             {!modalDetail && ticketsSelected.length !== 0 && (
               <div
-                className="w-full bg-white border flex flex-col p-3"
+                className="w-full bg-white rounded flex flex-col items-center p-4"
                 style={{ position: "sticky", bottom: 0 }}
               >
                 <button
-                  className="w-full flex justify-center text-primary mb-1"
+                  className="w-full flex justify-center text-primary"
                   onClick={() => setModalDetail(true)}
                 >
                   <IoIosArrowUp className="text-lg" size={25} />
                 </button>
-                <div className="flex flex-col md:flex-row justify-between items-center px-5 space-y-3 md:space-y-0">
-                  <span className="font-bold text-primary rounded text-sm md:text-xl">
-                    Total Bs.F{" "}
-                    {(priceInBolivars * ticketsSelected.length).toFixed(2)} / ${" "}
-                    {(
-                      Number(award.ticketPrice) * ticketsSelected.length
-                    ).toFixed(2)}
-                  </span>
+
+                <div className="w-full flex flex-wrap justify-center  md:justify-between items-center px-5">
+                  <div className="flex space-x-6 gap-5 items-center mb-2">
+                    <div className="text-center">
+                      <span className="block font-bold text-primary text-lg md:text-xl">
+                        {ticketsSelected.length}
+                      </span>
+                      <span className="block text-sm text-primary">
+                        Tickets
+                      </span>
+                    </div>
+
+                    <div className="text-center">
+                      <span className="block font-bold text-primary text-lg md:text-xl">
+                        {(priceInBolivars * ticketsSelected.length).toFixed(2)}
+                      </span>
+                      <span className="block text-sm text-primary">Bs.F</span>
+                    </div>
+
+                    <div className="text-center">
+                      <span className="block font-bold text-primary text-lg md:text-xl">
+                        {(
+                          Number(award.ticketPrice) * ticketsSelected.length
+                        ).toFixed(2)}
+                      </span>
+                      <span className="block text-sm text-primary">USDT</span>
+                    </div>
+                  </div>
+                 
+                  {showAlert && (
+        <AppModal 
+        open
+        title={"Para continuar con la compra..."}
+       
+          onClose={() =>{ 
+            
+            setShowAlert(false)}}
+        >
+        <p className="text-dark mb-5">Debes iniciar sesion o registrarte</p>
+          <AppButton size="full" title="Iniciar sesion" onClick={()=>{navigate('/login')}}/>
+          <div className="mt-2 h-0.5 bg-disabled" ></div>
+
+          <AppButton size="full" appearance="text" title="Registrarse" onClick={()=>{navigate('/register')}}/>
+        </AppModal>
+      )}
                   <AppButton
+                  
                     size="md"
                     title="Seleccionar método de pago"
-                    onClick={() =>
-                      navigate(`/payment/${id}`, {
-                        state: { ticketsSelected, award },
-                      })
+                    onClick={() => {
+                      if(localStorage.getItem('token')){
+                        navigate(`/payment/${id}`, {
+                          state: { ticketsSelected, award },
+                        })
+                      }else{
+                          setShowAlert(true)
+                      }
                     }
-                    disabled={ticketsSelected.length === 0}
+                    
+                    }
+                    
+                  
+                  
+                    
                   />
+                   
+                 
+    
+   
                 </div>
               </div>
             )}

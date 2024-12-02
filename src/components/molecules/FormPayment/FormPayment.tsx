@@ -17,10 +17,11 @@ interface Props {
   mount: number;
   ticketPrice: number;
   count:number;
+  priceInBolivars: number;
 }
 
-export const FormPayment = ({ handleDataPayment, mount, ticketPrice, count }: Props) => {
-  const mountBs = mount * 49;
+export const FormPayment = ({ handleDataPayment,  ticketPrice, count, priceInBolivars }: Props) => {
+  // const mountBs = mount * 49;
   const mountUsd = count * ticketPrice;
 
   const initialStatePagoMovil: IMethodPagoMovil = {
@@ -139,9 +140,9 @@ export const FormPayment = ({ handleDataPayment, mount, ticketPrice, count }: Pr
               }
             />
             <AppInput
-              label={`Ingresa monto a pagar: ${mountBs} Bs`}
+              label={`Ingresa monto a pagar: ${priceInBolivars.toFixed(2)} Bs`}
               type="text"
-              placeholder={`${mountBs} Bs...`}
+              placeholder={`${priceInBolivars.toFixed(2)} Bs...`}
               value={
                 dataFormPagoMovil.mount !== 0
                   ? dataFormPagoMovil.mount.toString()

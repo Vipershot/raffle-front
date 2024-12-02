@@ -107,6 +107,7 @@ export const Payment = () => {
         </div>
       </div>
       <FormPayment
+       priceInBolivars={priceInBolivars}
         handleDataPayment={handleDataPayment}
         mount={ticketsSelected.length}
         ticketPrice={Number(awardDetail.ticketPrice)}
