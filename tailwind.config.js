@@ -11,6 +11,7 @@ export default {
         info: "#f07151",
         dark: "gray",
         disabled: "#e5e7eb",
+        online: "#34D399",
         light:'#f2f2f2'
       },
       gridTemplateColumns: {

@@ -6,8 +6,9 @@ import { useContext, useEffect, useState } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { AuthContext } from "../../../context/AuthContext";
 import { RxAvatar } from "react-icons/rx";
-import { Popover } from "../../molecules/Popover/Popover";
+import { Popover } from "../../organims/Popover/Popover";
 import { getProfile } from "../../../services/auth";
+
 
 export const AppNavbar = () => {
 

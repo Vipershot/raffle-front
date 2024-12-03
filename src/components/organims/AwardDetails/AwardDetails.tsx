@@ -39,23 +39,6 @@ const AwardDetails = () => {
     }
   };
 
-  // const handleOnClick = () => {
-   
-  //     if (!isAuthenticated()) {
-  //       setShowAlert(true);
-  //     } else {
-  //       navigate(`/payment/${id}`, {
-  //         state: { ticketsSelected, award },
-  //       });
-  //     }
-    
-  // };
-
-  // const isAuthenticated = () => {
-  //   getProfile()
-    
-  //   return !!localStorage.getItem('token');
-  // };
 
   const loadAwards = async () => {
     setLoading(true);
@@ -244,16 +227,7 @@ const AwardDetails = () => {
                   
                     
                   />
-                      {/* <AppButton
-                        size="full"
-                        title="Comprar"
-                        onClick={() =>
-                          navigate(`/payment/${id}`, {
-                            state: { ticketsSelected, award },
-                          })
-                        }
-                        disabled={ticketsSelected.length === 0}
-                      /> */}
+                   
                     </div>
                   </div>
                 </div>
