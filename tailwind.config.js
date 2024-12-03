@@ -7,12 +7,12 @@ export default {
     extend: {
       colors: {
         primary: "#e14b2f",
-        secondary: "blue",
+        secondary: "#34D399",
         info: "#f07151",
-        dark: "gray",
+        dark: "#444444",
         disabled: "#e5e7eb",
         online: "#34D399",
-        light:'#f2f2f2'
+        light:'#f9f9f9'
       },
       gridTemplateColumns: {
         '14': 'repeat(14, minmax(0, 1fr))',

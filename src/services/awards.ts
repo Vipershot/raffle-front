@@ -76,14 +76,11 @@ export const getExchangeRateFromInternal = async (): Promise<number> => {
     }
   };
 
-  export const postBuyTicket = async (raffleId: string, numbers: number[]): Promise<number> => {
+  export const postBuyTicket = async (raffleId: string, numbers: {ticketNumbers:number[]}): Promise<number> => {
     try {
-      console.log("URL:", `/api/v1/raffles/${raffleId}/buy-ticket`);
-      console.log("Payload:", { numbers });
-  
       const response = await axiosRaffle.post(
-        `/api/v1/raffles/${raffleId}/buy-ticket`,
-        { numbers },
+        `/raffles/${raffleId}/buy-ticket`,
+        numbers,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,

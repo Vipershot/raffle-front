@@ -28,7 +28,7 @@ export const ContentDashboard = () => {
     <div className='flex flex-col gap-y-10 py-10 md:px-52 sm:px-0'>
         <AppSection loading={loading} title="Más recientes" link="/most-recent">
                 {mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
-                    totalTickets={totalTickets} 
+                    totalTickets={Number(totalTickets)} 
                     description={`${title} - ${description}`} 
                     ticketPrice={ticketPrice} 
                     endDate={endDate} 

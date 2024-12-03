@@ -36,8 +36,9 @@ export const Payment = () => {
   }, []);
 
   const handlePay = async () => {
+    console.log(ticketsSelected)
     try {
-      const ticketId = await postBuyTicket(award.id, ticketsSelected);
+      const ticketId = await postBuyTicket(award.id, {ticketNumbers:ticketsSelected});
       console.log("Compra exitosa, ID del ticket:", ticketId);
     } catch (error) {
       console.error("Error al comprar ticket:", error);
