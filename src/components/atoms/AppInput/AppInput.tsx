@@ -5,7 +5,7 @@ interface Props {
     disabled?: boolean
     label: string
     className?: string
-    placeholder: string
+    placeholder?: string
     maxLength?: number
     value?: string
     type?: "search" | "text" | "email" | "password"

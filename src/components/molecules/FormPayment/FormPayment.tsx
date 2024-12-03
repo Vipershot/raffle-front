@@ -16,11 +16,18 @@ interface Props {
   handleDataPayment: (data: IFormPayment) => void;
   mount: number;
   ticketPrice: number;
-  count:number;
+  count: number;
   priceInBolivars: number;
+  handlePay: () => void
 }
 
-export const FormPayment = ({ handleDataPayment,  ticketPrice, count, priceInBolivars }: Props) => {
+export const FormPayment = ({
+  handleDataPayment,
+  ticketPrice,
+  count,
+  priceInBolivars,
+  handlePay
+}: Props) => {
   // const mountBs = mount * 49;
   const mountUsd = count * ticketPrice;
 
@@ -83,7 +90,9 @@ export const FormPayment = ({ handleDataPayment,  ticketPrice, count, priceInBol
     }
     setDataFormBinance(initialStateBinance);
     setDataFormPagoMovil(initialStatePagoMovil);
+    handlePay()
   };
+
   const renderPaymentInfo = () => {
     switch (selectedMethod) {
       case "0":
@@ -110,19 +119,20 @@ export const FormPayment = ({ handleDataPayment,  ticketPrice, count, priceInBol
                 onChange={(e) =>
                   setDataFormPagoMovil({
                     ...dataFormPagoMovil,
-                    name: e.target.value,
+                    name: e.target.value.replace(/[^a-zA-Z\s]/g, ""),
                   })
                 }
               />
               <AppInput
                 label="Cedula de Identidad"
                 type="text"
+                maxLength={8}
                 placeholder="1.234.567"
                 value={dataFormPagoMovil.dni}
                 onChange={(e) =>
                   setDataFormPagoMovil({
                     ...dataFormPagoMovil,
-                    dni: e.target.value,
+                    dni: e.target.value.replace(/\D/g, ""),
                   })
                 }
               />
@@ -131,23 +141,20 @@ export const FormPayment = ({ handleDataPayment,  ticketPrice, count, priceInBol
               label="Numero de referencia"
               type="text"
               placeholder="Ingresar numero de referencia"
+              maxLength={11}
               value={dataFormPagoMovil.idRef}
               onChange={(e) =>
                 setDataFormPagoMovil({
                   ...dataFormPagoMovil,
-                  idRef: e.target.value,
+                  idRef: e.target.value.replace(/\D/g, ""),
                 })
               }
             />
             <AppInput
               label={`Ingresa monto a pagar: ${priceInBolivars.toFixed(2)} Bs`}
               type="text"
-              placeholder={`${priceInBolivars.toFixed(2)} Bs...`}
-              value={
-                dataFormPagoMovil.mount !== 0
-                  ? dataFormPagoMovil.mount.toString()
-                  : ""
-              }
+              /*       placeholder={`${priceInBolivars.toFixed(2)} Bs...`} */
+              value={priceInBolivars.toFixed(2)}
               onChange={(e) =>
                 setDataFormPagoMovil({
                   ...dataFormPagoMovil,
@@ -270,10 +277,10 @@ export const FormPayment = ({ handleDataPayment,  ticketPrice, count, priceInBol
           onClose={() => setIsModalOpen(false)}
           title={
             <>
-            <BiLoader  className="inline-block ml-2 text-info" />  Procesando pago 
+              <BiLoader className="inline-block ml-2 text-info" /> Procesando
+              pago
             </>
           }
-  
         >
           <div className="space-y-4">
             <p className="text-dark">Su pago esta siendo procesado.</p>
