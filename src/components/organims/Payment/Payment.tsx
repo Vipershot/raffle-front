@@ -4,7 +4,7 @@ import { IFormPayment } from "../../../interface/metodsPayment";
 import { useLocation } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IAward } from "../../../interface/awards";
-import { getExchangeRate } from "../../../services/awards";
+import { getExchangeRate, postBuyTicket } from "../../../services/awards";
 
 export const Payment = () => {
   const [dataPayment, setDataPayment] = useState<IFormPayment>();
@@ -22,7 +22,6 @@ export const Payment = () => {
       ? Number(awardDetail.ticketPrice) * exchangeRate
       : 0;
 
-  // Load exchange rate on component mount
   useEffect(() => {
     const fetchExchangeRate = async () => {
       try {
@@ -36,11 +35,22 @@ export const Payment = () => {
     fetchExchangeRate();
   }, []);
 
+  const handlePay = async () => {
+    try {
+      const ticketId = await postBuyTicket(award.id, ticketsSelected);
+      console.log("Compra exitosa, ID del ticket:", ticketId);
+    } catch (error) {
+      console.error("Error al comprar ticket:", error);
+    }
+  }
+
   useEffect(() => {
     if (dataPayment) {
       console.log("Service", dataPayment);
     }
   }, [dataPayment]);
+
+  console.log(award)
 
   return (
     <>
@@ -112,6 +122,7 @@ export const Payment = () => {
         mount={ticketsSelected.length}
         ticketPrice={Number(awardDetail.ticketPrice)}
         count={ticketsSelected.length}
+        handlePay={handlePay}
       />
     </>
   );
