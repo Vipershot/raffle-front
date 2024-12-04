@@ -9,30 +9,34 @@ import { RxAvatar } from "react-icons/rx";
 import { Popover } from "../../organims/Popover/Popover";
 import { getProfile } from "../../../services/auth";
 
-
 export const AppNavbar = () => {
+  const {
+    handleModal,
+    modalOff,
+    modalOn,
+    changeModalName,
+    showPopover,
+    popoverOff,
+    popoverOn,
+  } = useContext(ModalContext);
 
-  const [showPopover, setShowPopover] = useState(false);
-
-  const togglePopover = () => {
-    setShowPopover((prev) => !prev);
-  };
   const [profile, setProfile] = useState({
-    email:'',
-    name: ''
-});
+    email: "",
+    name: "",
+  });
 
-  const {logout} = useContext(AuthContext)
-  const { handleModal, modalOff } = useContext(ModalContext);
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   useEffect(() => {
-    if(pathname == '/'){
-      if(localStorage.getItem('token')){
-        getProfile().then(res => setProfile({name:res.name, email:res.email}))
+    if (pathname == "/") {
+      if (localStorage.getItem("token")) {
+        getProfile().then((res) =>
+          setProfile({ name: res.name, email: res.email })
+        );
+      }
     }
-    }
-    setShowPopover(false)
+    popoverOff();
   }, [pathname]);
   return (
     <nav className="p-10 bg-white shadow-md flex flex-wrap items-center justify-between">
@@ -40,49 +44,59 @@ export const AppNavbar = () => {
         <TitleText text={"Raffle"} color="primary" />
       </Link>
       {pathname !== "/login" && pathname !== "/register" && (
-
-<div className="w-[60%] hidden lg:block">
+        <div className="w-[60%] hidden lg:block">
           <AppInput
             onChange={() => {}}
-            onClick={handleModal}
+            onClick={() => {
+              changeModalName("list");
+              handleModal();
+            }}
             label={""}
             placeholder={"Buscar..."}
           />
         </div>
       )}
 
- {!localStorage.getItem('token') ?  <div className="flex space-x-2">
-        <AppButton
-          onClick={() => {
-            modalOff();
-            navigate("/login");
-            setShowPopover(false)
-          }}
-          title="Inicia sesion"
-          size="sm"
-          appearance="text"
-        />
-        <AppButton
-          onClick={() => {
-            modalOff();
-            navigate("/register");
-            setShowPopover(false)
-          }}
-          title="Registrar"
-          appearance="text"
-          size="sm"
-        />
-      </div> :
-       <div className="relative ">
-       <RxAvatar
-         onClick={togglePopover}
-         className="text-lg text-primary hover:text-info cursor-pointer"
-         size={35}
-       />
-       {showPopover && <Popover onClick={logout} profile={profile}/>}
-     </div>}
-      
-   
+      {!localStorage.getItem("token") ? (
+        <div className="flex space-x-2">
+          <AppButton
+            onClick={() => {
+              modalOff();
+              navigate("/login");
+            }}
+            title="Inicia sesion"
+            size="sm"
+            appearance="text"
+          />
+          <AppButton
+            onClick={() => {
+              modalOff();
+              navigate("/register");
+            }}
+            title="Registrar"
+            appearance="text"
+            size="sm"
+          />
+        </div>
+      ) : (
+        <div className="relative ">
+          <RxAvatar
+            onClick={() => {
+              modalOn();
+              changeModalName("popover");
+              if (showPopover) {
+                popoverOff();
+              } else {
+                popoverOn();
+              }
+            }}
+            className="text-lg text-primary hover:text-info cursor-pointer"
+            size={35}
+          />
+          {showPopover && <Popover onClick={logout} profile={profile} />}
+        </div>
+      )}
+
       {pathname !== "/login" && pathname !== "/register" && (
         <div className="w-[100%] block lg:hidden">
           <AppInput
