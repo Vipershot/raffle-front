@@ -17,7 +17,7 @@ export const TicketsPopover =()=>{
       <RxAvatar size={40} />
       <RxAvatar size={40} />
       <RxAvatar size={40} />
-      <IoIosArrowForward className='text-gray-300' size={30} />
+      <IoIosArrowForward className='text-gray-300' size={50} />
       
 
     </div>
