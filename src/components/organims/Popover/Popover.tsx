@@ -1,38 +1,33 @@
-import { AppButton } from '../../atoms/AppButton/AppButton'
-import { TitleText } from '../../atoms/TitleText/TitleText';
-import { DetailProfile } from '../../molecules/DetailProfile/DetailProfile';
-import { TicketsPopover } from '../../molecules/TicketsPopover/TicketsPopover';
-import { RiRadioButtonLine } from "react-icons/ri";
-import { HiArrowPath } from "react-icons/hi2";
+import { AppButton } from "../../atoms/AppButton/AppButton";
+import { DetailProfile } from "../../molecules/DetailProfile/DetailProfile";
+import { useState } from "react";
+import { TicketsPopoverOnline } from "../../molecules/TicktesPopoverOnline/TicketsPopoverOnline";
+import { EditProfile } from "../../molecules/EditProfile/EditProfile";
+import { DetailsTicketsPopover } from "../../molecules/DetailsTicketsPopover/DetailsTicketsPopover";
+import { IDetailBuyTicket } from "../../../interface/awards";
 interface Props {
-    onClick: () => void
-    profile:{name:string; email:string}
+  onClick: () => void;
+  profile: { name: string; email: string };
 }
-export const Popover = ({onClick, profile}:Props) => {
- 
+
+
+export const Popover = ({ onClick, profile }: Props) => {
+  const [popoverName, setPopoverName] = useState('online')
+  const [data, setData] = useState<IDetailBuyTicket | undefined >(undefined);
+  const handlePopover =(item: string, data?:IDetailBuyTicket )=>{
+    setPopoverName(item)
+    setData(data)
+  }
   return (
-    <div className="absolute top-full mt-2 right-0 w-[380px] md:w-[450px]  bg-white border border-gray-300 rounded shadow-md p-5 z-10">
-   <DetailProfile  profile={profile}/>
-    <div className="mt-2 h-0.5 bg-disabled" ></div>
-   
-   <div className="flex items-center justify-between mt-3">
-  <div className="flex gap-2 items-center">
-    <RiRadioButtonLine className="text-lg text-online" size={18} />
-    <TitleText text="Tickets en curso" size="xs" />
-  </div>
-  <HiArrowPath  className='text-info' size={18} />
-</div>
+    <div className="absolute top-7 mt-2 -right-10 md:top-full md:right-0 w-[100vw] md:w-[450px]  bg-white border border-gray-300 rounded shadow-md p-5 z-10">
+      <DetailProfile handlePopover={handlePopover} profile={profile} />
+      <div className="mt-2 h-0.5 bg-disabled"></div>
 
-     <div className="flex flex-col h-[40vh] overflow-y-auto custom-scrollbar items-center gap-3 mb-4 mt-2">
-    <TicketsPopover/>
-    <TicketsPopover/>
-    <TicketsPopover/>
-    <TicketsPopover/>
-    <TicketsPopover/>
-      
-
+     {popoverName === "online" && <TicketsPopoverOnline handlePopover={handlePopover}/>}
+     {popoverName === "profile" && <EditProfile handlePopover={handlePopover}/>}
+     {popoverName === "details" && <DetailsTicketsPopover data={data}  handlePopover={handlePopover}/>}
+     <div className="mt-2 mb-2 h-0.5 bg-disabled"></div>
+      <AppButton size="full" title="Cerrar sesion" onClick={onClick} />
     </div>
-     <AppButton size="full" title="Cerrar sesion" onClick={onClick}  />
-   </div>
-  )
-}
+  );
+};

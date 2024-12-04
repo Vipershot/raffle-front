@@ -6,9 +6,10 @@ interface Props {
     profile: {name:string
         email:string
     }
+    handlePopover: (item: string)=> void
 }
 
-export const DetailProfile =({profile}: Props)=>{
+export const DetailProfile =({profile, handlePopover}: Props)=>{
     return <>
      <div className=" mb-2">
     <TitleText  text="Información de la cuenta" size="xs"/>
@@ -23,7 +24,7 @@ export const DetailProfile =({profile}: Props)=>{
     <p className="text-sm font-medium text-gray-800">{profile.name}</p>
     <p className="text-xs text-gray-500">{profile.email}</p>
   </div>
-  <SlSettings  className="text-info" size={20} />
+  <SlSettings  className="text-info cursor-pointer" size={20} onClick={()=>{handlePopover("profile")}} />
 </div>
 
     </>

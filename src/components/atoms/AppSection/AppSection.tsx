@@ -48,7 +48,7 @@ export const AppSection = ({ children, title, link, loading }: Props) => {
             keyBoardControl={true}
             customTransition="all .5"
             transitionDuration={500}
-            removeArrowOnDeviceType={[]}
+            removeArrowOnDeviceType={['mobile']}
             itemClass="px-1"        
           >
             {children}

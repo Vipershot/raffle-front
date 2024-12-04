@@ -26,7 +26,7 @@ export const AppInput = ({
 }: Props) => {
   return (
     <>
-      <div>
+      <div className='w-full'>
         <label
       
           htmlFor={label}

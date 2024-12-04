@@ -34,3 +34,12 @@ export interface IAward {
     deletedAt: string
   }
   
+  export type IDetailBuyTicket =  {
+    img:string;
+    title:string;
+    tickets:number[]
+    buyDate: string
+    endDate: string
+    hour: string
+    ticketPrice: string
+  }
