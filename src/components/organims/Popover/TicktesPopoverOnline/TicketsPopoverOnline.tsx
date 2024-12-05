@@ -1,8 +1,8 @@
 import { HiArrowPath } from "react-icons/hi2"
 import { RiRadioButtonLine } from "react-icons/ri"
-import { TicketsPopover } from "../TicketsPopover/TicketsPopover"
-import { TitleText } from "../../atoms/TitleText/TitleText"
-import { IDetailBuyTicket } from "../../../interface/awards"
+import { TicketsPopover } from "../../../molecules/TicketsPopover/TicketsPopover"
+import { TitleText } from "../../../atoms/TitleText/TitleText"
+import { IDetailBuyTicket } from "../../../../interface/awards"
 
 interface Props {
     handlePopover: (item:string, data:IDetailBuyTicket)=> void
@@ -29,7 +29,7 @@ export const TicketsPopoverOnline =({handlePopover}: Props) =>{
         <HiArrowPath className="text-info" size={18} />
       </div>
 
-      <div className="flex flex-col h-[40vh] overflow-y-auto custom-scrollbar items-center gap-3 mb-4 mt-2">
+      <div className="flex flex-col h-[40vh] overflow-y-auto custom-scrollbar mb-4 mt-2">
         <TicketsPopover data={dataTicket} handlePopover={handlePopover}/>
         <TicketsPopover data={dataTicket} handlePopover={handlePopover}/>
         <TicketsPopover data={dataTicket} handlePopover={handlePopover}/>

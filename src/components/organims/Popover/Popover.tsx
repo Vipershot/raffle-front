@@ -1,13 +1,15 @@
-import { AppButton } from "../../atoms/AppButton/AppButton";
-import { DetailProfile } from "../../molecules/DetailProfile/DetailProfile";
+
 import { useState } from "react";
-import { TicketsPopoverOnline } from "../../molecules/TicktesPopoverOnline/TicketsPopoverOnline";
-import { EditProfile } from "../../molecules/EditProfile/EditProfile";
+import { TicketsPopoverOnline } from "./TicktesPopoverOnline/TicketsPopoverOnline";
+import { EditProfile } from "./EditProfile/EditProfile";
 import { DetailsTicketsPopover } from "../../molecules/DetailsTicketsPopover/DetailsTicketsPopover";
 import { IDetailBuyTicket } from "../../../interface/awards";
+import { DetailProfile } from "./DetailProfile/DetailProfile";
+
 interface Props {
   onClick: () => void;
   profile: { name: string; email: string };
+
 }
 
 
@@ -24,10 +26,9 @@ export const Popover = ({ onClick, profile }: Props) => {
       <div className="mt-2 h-0.5 bg-disabled"></div>
 
      {popoverName === "online" && <TicketsPopoverOnline handlePopover={handlePopover}/>}
-     {popoverName === "profile" && <EditProfile handlePopover={handlePopover}/>}
+     {popoverName === "profile" && <EditProfile onClick={onClick} handlePopover={handlePopover} />}
      {popoverName === "details" && <DetailsTicketsPopover data={data}  handlePopover={handlePopover}/>}
-     <div className="mt-2 mb-2 h-0.5 bg-disabled"></div>
-      <AppButton size="full" title="Cerrar sesion" onClick={onClick} />
+
     </div>
   );
 };

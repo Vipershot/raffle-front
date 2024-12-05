@@ -14,11 +14,11 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
   return (
     <div>
       <div className="flex items-center justify-between mt-3">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center cursor-pointer" onClick={() => handlePopover("online")}>
           <IoIosArrowBack
-            className="text-lg text-gray-300 cursor-pointer"
+            className="text-lg text-gray-300 cursor-pointer hover:text-dark"
             size={18}
-            onClick={() => handlePopover("online")}
+            
           />
           <TitleText text="Detalle de ticket" size="xs" />
         </div>
@@ -85,7 +85,7 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
           
           />
           <p className="font-bold text-dark">
-          Premio Principal: <span className="font-light">{data && data.title.substring(0, 30)}</span>
+          Premio Principal: <span className="font-light">{data && data.title.substring(0, 25)}{data && data.title.length > 25 && '...' }</span>
           </p>
         </div>
       </div>

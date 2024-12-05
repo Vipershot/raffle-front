@@ -1,6 +1,7 @@
-import { TitleText } from "../../atoms/TitleText/TitleText"
+
 import { RxAvatar } from 'react-icons/rx'
 import { SlSettings } from "react-icons/sl";
+import { TitleText } from '../../../atoms/TitleText/TitleText';
 interface Props {
     
     profile: {name:string
