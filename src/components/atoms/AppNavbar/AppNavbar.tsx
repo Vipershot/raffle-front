@@ -56,7 +56,10 @@ export const AppNavbar = () => {
           />
         </div>
       )}
-
+      <Link to={"/winners"}>
+        {/* <TitleText  text={"Noticias"} color="primary" /> */}
+        <p className="text-info">Noticias</p>
+      </Link>
       {!localStorage.getItem("token") ? (
         <div className="flex space-x-2">
           <AppButton

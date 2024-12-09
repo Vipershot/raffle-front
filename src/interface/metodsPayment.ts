@@ -12,4 +12,5 @@ export type IMethodPagoMovil = {
     dni:string
     idRef:string
     mount: number
+    idCel: string,
 }

@@ -36,6 +36,7 @@ export const FormPayment = ({
     idRef: "",
     mount: 0,
     name: "",
+    idCel: "",
   };
 
   const initialStateBinance: IMethodBinance = {
@@ -150,11 +151,24 @@ export const FormPayment = ({
                 })
               }
             />
+             <AppInput
+              label="Número de teléfono"
+              type="text"
+              placeholder="Ingresar número de teléfono"
+              maxLength={11}
+              value={dataFormPagoMovil.idCel}
+              onChange={(e) =>
+                setDataFormPagoMovil({
+                  ...dataFormPagoMovil,
+                  idCel: e.target.value.replace(/\D/g, ""),
+                })
+              }
+            />
             <AppInput
               label={`Ingresa monto a pagar: ${priceInBolivars.toFixed(2)} Bs`}
               type="text"
-              /*       placeholder={`${priceInBolivars.toFixed(2)} Bs...`} */
-              value={priceInBolivars.toFixed(2)}
+                     placeholder={`${priceInBolivars.toFixed(2)} Bs...`} 
+            
               onChange={(e) =>
                 setDataFormPagoMovil({
                   ...dataFormPagoMovil,
