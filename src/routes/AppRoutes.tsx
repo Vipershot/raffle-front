@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { ViewLogin, ViewRegister, ViewDashboard, ViewMostRecent, ViewBestPrices, ViewAdward, ViewPayment } from "../views";
 import { ViewErrorPage } from "../views/ViewErrorPage";
+import { ViewHistory } from "../views/ViewHistory";
 
 const AppRoutes = () => {
 
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/award/:id" element={<ViewAdward />} />
         <Route path="/award/:*" element={<ViewErrorPage />} />
         <Route path="*" element={<ViewErrorPage/>} />
+        <Route path="/history" element={<ViewHistory/>} />
       </Route>
     </Routes>
   );
