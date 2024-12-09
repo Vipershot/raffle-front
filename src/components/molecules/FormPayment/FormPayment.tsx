@@ -274,7 +274,7 @@ export const FormPayment = ({
       <div>
         <AppModal
           open={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+         
           title={
             <>
               <BiLoader className="inline-block ml-2 text-info" /> Procesando

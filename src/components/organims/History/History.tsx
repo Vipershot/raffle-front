@@ -22,7 +22,9 @@ export default function History() {
        </div>
        
       </div>
+      <div className=" w-full">
       <AppTable/>
+      </div>
     </div>
   )
 }

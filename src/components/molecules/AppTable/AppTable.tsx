@@ -42,7 +42,7 @@ export const AppTable = () => {
 
   return (
     <>
-      <div className="container  p-2 hidden md:block">
+      <div className=" p-2 hidden md:block">
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left  text-gray-500">
             <thead className=" text-info font-bold  bg-gray-50">
