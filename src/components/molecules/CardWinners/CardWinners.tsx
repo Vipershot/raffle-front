@@ -17,7 +17,7 @@ export default function CardWinners({
 }: WinnerCardProps) {
   return (
     
-    <div className="max-w-md mx-auto overflow-hidden rounded-xl shadow-lg bg-white p-6">
+    <div className=" mx-auto overflow-hidden rounded-xl  w-full p-6">
   <div className="mb-4 space-y-4">
     <div className="flex justify-between">
       <div className="flex items-center gap-3">
@@ -25,7 +25,7 @@ export default function CardWinners({
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <TfiCup 
-              className="text-lg text-info cursor-pointer hover:text-primary"
+              className="text-lg text-info"
               size={20}
             />
             <span className="text-xl font-bold text-info">Ganador</span>
