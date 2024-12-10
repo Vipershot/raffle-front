@@ -5,10 +5,25 @@ import { CardProduct } from '../../molecules/CardProduct/CardProduct'
 import { getLowestPrice, getMostRecent } from '../../../services/awards'
 import { IAward } from '../../../interface/awards'
 import { getProfile } from '../../../services/auth'
+import AppModal from '../../atoms/AppModal/AppModal'
+import { Terms } from './Value'
+import { AppButton } from '../../atoms/AppButton/AppButton'
 export const ContentDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [mostRecent, setMostRecent] = useState<IAward[]>([]);
   const [lowestPrice, setLowestPrice] = useState<IAward[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
+
+  
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsModalOpen(false);
+    setIsChecked(false);
+  };
 
   const loadAwards = async() => {
     setLoading(true)
@@ -53,6 +68,34 @@ export const ContentDashboard = () => {
                 />)}
             
         </AppSection>
+        <AppModal open={isModalOpen}  title={"Términos y condiciones"}>
+          <div className="space-y-4 p-1">
+            <p className="text-dark">
+              Por favor lea atentamente nuestros términos y condiciones.
+            </p>
+           <Terms/>
+           <label className="flex items-center space-x-2">
+      <input 
+        type="checkbox"
+        checked={isChecked}
+        onChange={(e) => {
+          setIsChecked(e.target.checked);
+          setTermsAccepted(e.target.checked);
+        }}
+        
+      />
+      <span>Acepto términos y condiciones</span>
+    </label>
+
+            <AppButton
+              size="full"
+              onClick={() => {handleCloseModal()}}
+              title="Acepto terminos y condiciones"
+              disabled={!termsAccepted}
+              
+            />
+          </div>
+        </AppModal>
     </div>
   )
 }

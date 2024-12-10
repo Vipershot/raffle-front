@@ -15,11 +15,11 @@ const AppModal = ({ open, onClose, title,  children }: Props) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center modal-overlay bg-black bg-opacity-50"
       onClick={onClose} 
     >
       <div
-        className="relative w-96 bg-white rounded-lg shadow-lg p-6"
+        className="relative w-96 bg-white modal-content overflow-y-auto custom-scrollbar max-h-[80vh] rounded-lg  shadow-lg p-6 rounded-r-lg"
         onClick={(e) => e.stopPropagation()} 
       >
         <h2 className="text-lg font-semibold mb-4">{title}</h2>
