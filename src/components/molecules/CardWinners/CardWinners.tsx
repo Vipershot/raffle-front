@@ -17,7 +17,7 @@ export default function CardWinners({
 }: WinnerCardProps) {
   return (
     
-    <div className=" mx-auto overflow-hidden rounded-xl  w-full p-6">
+    <div className="  overflow-hidden rounded-xl  p-6">
   <div className="mb-4 space-y-4">
     <div className="flex justify-between">
       <div className="flex items-center gap-3">

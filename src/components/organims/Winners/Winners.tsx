@@ -17,12 +17,12 @@ export const Winners =()=>{
         </div>
             </div>
         <div className="flex flex-col gap-5 mb-5 items-center  w-full ">
-       <div className="max-w-md ">
+       <div className="w-full md:w-[700px] ">
        <CardWinners   />
         <div className="w-full h-[2px] bg-gray-300  mt-4"></div>
        </div>
 
-       <div className="max-w-md ">
+       <div className="w-full md:w-[700px]  ">
        <CardWinners 
         name="Juan Pérez"
         product="Samsung Galaxy S22"
