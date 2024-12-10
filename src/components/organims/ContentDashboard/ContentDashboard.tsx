@@ -70,7 +70,7 @@ export const ContentDashboard = () => {
         </AppSection>
         <AppModal open={isModalOpen}  title={"Términos y condiciones"}>
           <div className="space-y-4 p-1">
-            <p className="text-dark">
+            <p className="text-dark text-[12px]">
               Por favor lea atentamente nuestros términos y condiciones.
             </p>
            <Terms/>
@@ -84,11 +84,12 @@ export const ContentDashboard = () => {
         }}
         
       />
-      <span>Acepto términos y condiciones</span>
+      <span className="text-[12px]">Acepto términos y condiciones</span>
     </label>
 
             <AppButton
               size="full"
+              
               onClick={() => {handleCloseModal()}}
               title="Acepto terminos y condiciones"
               disabled={!termsAccepted}
