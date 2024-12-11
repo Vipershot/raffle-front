@@ -44,6 +44,7 @@ export interface IAward {
     tickets:      Ticket[];
     title:        string;
     totalTickets: string;
+    id:string;
    }
    
    export interface Ticket {

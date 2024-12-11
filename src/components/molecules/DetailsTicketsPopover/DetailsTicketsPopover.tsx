@@ -6,11 +6,14 @@ import { TbClockHour1 } from "react-icons/tb";
 import { PiMoneyWavyLight } from "react-icons/pi";
 import { LiaAwardSolid } from "react-icons/lia";
 import { getDayComplete, getHour } from "../../../utils/date";
+import { AppButton } from "../../atoms/AppButton/AppButton";
+import { useNavigate } from "react-router-dom";
 interface Props {
   handlePopover: (item: string) => void;
   data: IDetailBuyTicket | undefined;
 }
 export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
+  const navigate = useNavigate()
   return (
     <div>
       <div className="flex items-center justify-between mt-3">
@@ -78,7 +81,11 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
           Premio Principal: <span className="font-light">{data && data.title.substring(0, 25)}{data && data.title.length > 25 && '...' }</span>
           </p>
         </div>
+        <div className="flex items-center gap-2">
+          <AppButton title="Tickets Disponibles" onClick={()=> navigate(`/award/${data?.id}`)} size="full" />
+        </div>
       </div>
+      
     </div>
   );
 };
