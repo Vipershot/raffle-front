@@ -16,9 +16,9 @@ interface Props {
 
 const initialState = {
   name: "",
-  apellido: "",
+  lastName: "",
   email: "",
-  telefono: "",
+  phone: "",
   password: "",
   newPassword: "",
 };
@@ -43,7 +43,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
 
   const handleEdit = async () => {
     await patchProfile(dataForm)
-    setProfile({name: dataForm.name, email:dataForm.email})
+    setProfile({name: dataForm.name, email:dataForm.email, phone:dataForm.phone, lastName:dataForm.lastName })
     getProfile().then((res) =>
       setDataForm(res),
     );
@@ -80,9 +80,9 @@ console.log(dataForm)
           label=""
           placeholder="Apellido"
           type="text"
-          value={dataForm.apellido}
+          value={dataForm.lastName}
           onChange={(e) => {
-            setDataForm({ ...dataForm, apellido: e.target.value });
+            setDataForm({ ...dataForm, lastName: e.target.value });
           }}
         />
         <div className="col-span-2 md:col-span-1">
@@ -99,10 +99,10 @@ console.log(dataForm)
             label=""
             type="text"
             placeholder="Número de teléfono"
-            value={dataForm.telefono}
+            value={dataForm.phone}
             onChange={(e) => {
               const sanitizedValue = e.target.value.replace(/[^0-9]/g, '')
-              setDataForm({...dataForm, telefono:sanitizedValue})}}
+              setDataForm({...dataForm, phone:sanitizedValue})}}
           />
         </div>
         <div className="col-span-2 md:col-span-1">

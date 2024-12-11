@@ -6,8 +6,8 @@ interface AuthContextType {
   login: (token:string) => void;
   logout: () => void;
   token:string | null;
-  profile: {name: string, email:string},
-  setProfile: React.Dispatch<React.SetStateAction<{name: string, email:string}>>
+  profile: {name: string, email:string, phone:string, lastName:string},
+  setProfile: React.Dispatch<React.SetStateAction<{name: string, email:string, phone:string, lastName:string}>>
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -15,7 +15,7 @@ const AuthContext = createContext<AuthContextType>({
   login: () => {},
   logout: () => {},
   token:null,
-  profile: {name:"", email:""},
+  profile: {name:"", email:"", phone:"", lastName:""},
   setProfile: () => {}
 });
 
@@ -27,9 +27,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const navigate = useNavigate()
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState<string |null >(null)
-  const [profile, setProfile] = useState<{name: string, email:string}>({
+  const [profile, setProfile] = useState<{name: string, email:string, phone:string, lastName:string}>({
     name:"",
-    email:""
+    email:"",
+    phone:"",
+    lastName:""
   })
   const login = (token:string) => {
     // Implementación del login (por ejemplo, actualiza el estado)

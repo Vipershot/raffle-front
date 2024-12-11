@@ -29,12 +29,13 @@ export const AppNavbar = () => {
     if (pathname == "/") {
       if (localStorage.getItem("token")) {
         getProfile().then((res) =>
-          setProfile({ name: res.name, email: res.email })
+          setProfile(res)
         );
       }
     }
     popoverOff();
   }, [pathname]);
+  console.log(profile)
   return (
     <nav className="p-10 bg-white shadow-md flex flex-wrap items-center justify-between">
       <Link to={"/"} onClick={modalOff} className="flex items-center gap-2">
