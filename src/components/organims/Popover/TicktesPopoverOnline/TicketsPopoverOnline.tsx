@@ -42,6 +42,7 @@ const load = async() =>{
 
       <div className="flex flex-col h-[40vh] overflow-y-auto custom-scrollbar mb-4 mt-2">
         {ticketsBuy && ticketsBuy.map((item, i) =>  <TicketsPopover key={i} data={item} handlePopover={handlePopover}/>)}
+        {ticketsBuy?.length === 0 ? <p className="text-center font-bold m-auto">Adquiere tus primeros tickets</p> : ""}
       </div>
       </> }
  

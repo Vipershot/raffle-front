@@ -25,7 +25,6 @@ export const Popover = ({ onClick, profile }: Props) => {
     <div className="absolute top-7 mt-2 -right-10 md:top-full md:right-0 w-[100vw] md:w-[450px]  bg-white border border-gray-300 rounded shadow-md p-5 z-10">
       <DetailProfile handlePopover={handlePopover} profile={profile} />
       <div className="mt-2 h-0.5 bg-disabled"></div>
-
      {popoverName === "online" && <TicketsPopoverOnline handlePopover={handlePopover}/>}
      {popoverName === "profile" && <EditProfile onClick={onClick} handlePopover={handlePopover} />}
      {popoverName === "details" && <DetailsTicketsPopover data={data}  handlePopover={handlePopover}/>}
