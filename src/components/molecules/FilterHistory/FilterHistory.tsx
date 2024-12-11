@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AppButton } from '../../atoms/AppButton/AppButton';
 
 interface FilterOption {
@@ -12,11 +12,15 @@ const filterOptions: FilterOption[] = [
   { value: 'completed', label: 'Tickets finalizados' },
 ];
 
-export const FilterHistory: React.FC = () => {
+interface Props {
+  handleFilter: (value:string) => void
+}
+
+export const FilterHistory = ({handleFilter}:Props) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const handleFilterChange = (value: string) => {
-    
+    handleFilter(value)
     console.log(`Filtrado por: ${value}`);
     setIsMenuVisible(false);
   };

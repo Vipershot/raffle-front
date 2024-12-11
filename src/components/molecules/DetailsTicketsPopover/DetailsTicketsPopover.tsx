@@ -1,11 +1,11 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IDetailBuyTicket } from "../../../interface/awards";
-import { CiCalendarDate } from "react-icons/ci";
 import { BsCalendar2Check } from "react-icons/bs";
 import { TbClockHour1 } from "react-icons/tb";
 import { PiMoneyWavyLight } from "react-icons/pi";
 import { LiaAwardSolid } from "react-icons/lia";
+import { getDayComplete, getHour } from "../../../utils/date";
 interface Props {
   handlePopover: (item: string) => void;
   data: IDetailBuyTicket | undefined;
@@ -33,21 +33,11 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
               padding: "4px 10px",
             }}
           >
-            {item}
+            {item.ticketNumber}
           </b>
         ))}
       </div>
       <div className="flex flex-col gap-5 mt-5">
-        <div className="flex items-center gap-2">
-          <CiCalendarDate 
-            className="text-lg text-primary"
-            size={18}
-          
-          />
-          <p className="font-bold text-dark">
-            Fecha de compra: <span className="font-light">{data && data.buyDate}</span>
-          </p>
-        </div>
         <div className="flex items-center gap-2">
           <BsCalendar2Check
             className="text-lg text-primary"
@@ -55,7 +45,7 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
           
           />
           <p className="font-bold text-dark">
-          Fecha del Sorteo: <span className="font-light">{data && data.endDate}</span>
+          Fecha del Sorteo: <span className="font-light">{data && getDayComplete(data.endDate)}</span>
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -65,7 +55,7 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
           
           />
           <p className="font-bold text-dark">
-          Hora del Sorteo: <span className="font-light">{data && data.hour}</span>
+          Hora del Sorteo: <span className="font-light">{data && getHour(data.endDate)}</span>
           </p>
         </div>
         <div className="flex items-center gap-2">

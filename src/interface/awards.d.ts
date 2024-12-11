@@ -34,12 +34,21 @@ export interface IAward {
     deletedAt: string
   }
   
-  export type IDetailBuyTicket =  {
-    img:string;
-    title:string;
-    tickets:number[]
-    buyDate: string
-    endDate: string
-    hour: string
-    ticketPrice: string
-  }
+
+  export interface IDetailBuyTicket {
+    cover:        string;
+    description:  string;
+    endDate:      Date;
+    status:       string;
+    ticketPrice:  string;
+    tickets:      Ticket[];
+    title:        string;
+    totalTickets: string;
+   }
+   
+   export interface Ticket {
+    createdAt:    Date;
+    id:           string;
+    ticketNumber: string;
+   }
+  

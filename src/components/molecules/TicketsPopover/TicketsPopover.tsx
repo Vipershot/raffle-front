@@ -14,7 +14,7 @@ export const TicketsPopover =({handlePopover, data}:Props)=>{
    <div className="flex items-center  gap-3  mb-4 mt-2 border-b-2 border-gray-200 cursor-pointer  px-2" onClick={()=> handlePopover('details',data)}>
       <div className="w-15 h-15  rounded flex items-center justify-center text-white">
        
-        <img src={data.img} width={100}/>
+        <img src={data.cover} width={100}/>
       </div>
       <div>
         
@@ -31,7 +31,7 @@ export const TicketsPopover =({handlePopover, data}:Props)=>{
               padding: "4px 10px",
             }}
           >
-            {item}
+            {item.ticketNumber}
           </b>
         ))}
       </div>

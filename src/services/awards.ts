@@ -98,4 +98,47 @@ export const getExchangeRateFromInternal = async (): Promise<number> => {
   };
   
   
-  
+  export const getTicketsBuyOnline = async() =>{
+    try {
+        const response =  await axiosRaffle.get('/raffles/not-drawn',  {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            "Content-Type": "application/json", 
+          },
+        })
+        return response.data
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export const getTicketsBuy = async() =>{
+  try {
+      const response =  await axiosRaffle.get('/raffles',  {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          "Content-Type": "application/json", 
+        },
+      })
+      return response.data
+  } catch (error) {
+      console.log(error)
+      throw error
+  }
+}
+
+export const getTicketsBuyFinished = async() =>{
+  try {
+      const response =  await axiosRaffle.get('/raffles/drawn',  {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          "Content-Type": "application/json", 
+        },
+      })
+      return response.data
+  } catch (error) {
+      console.log(error)
+      throw error
+  }
+}
