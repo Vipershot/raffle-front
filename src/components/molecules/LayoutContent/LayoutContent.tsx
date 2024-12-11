@@ -20,7 +20,7 @@ export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter
       
        </div>
 
-            <div className={`${grid ? 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5' : 'flex flex-wrap justify-center'} gap-2 gap-y-10 mt-5`}>
+            <div className={`${grid ? 'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'flex flex-wrap justify-center'} gap-2 gap-y-10 mt-5`}>
 
                 {children}
             </div>

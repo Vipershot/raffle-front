@@ -9,7 +9,7 @@ export const AppFooter = () => {
 
     <>
       <div className="bg-info">
-        <div className="container p-5 ">
+        <div className=" p-5 ">
           <div className="text-white mb-3 flex justify-center gap-3">
             <strong> Copyright 2024, Todos nuestros derechos reservados</strong>{" "}
            <Link className="flex gap-1" to={'/'}> <IoTicketOutline
@@ -18,7 +18,7 @@ export const AppFooter = () => {
             />{" "}
             <strong className="cursor-pointer hover:text-dark">Raffle.com</strong></Link>
           </div>
-          <hr className="text-dark" />
+          <hr className="text-dark my-5" />
           <div>
             <p className="flex justify-center text-white">
               Aviso legal Politica de privacidad Quienes Somos Contacto Politica
@@ -28,7 +28,7 @@ export const AppFooter = () => {
           <div>
             <ul className="flex justify-center text-white gap-3 mt-3">
               <li>
-                {" "}
+               
                 <FaWhatsapp
                   className="cursor-pointer hover:text-dark"
                   size={30}

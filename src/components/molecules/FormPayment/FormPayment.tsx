@@ -3,22 +3,18 @@ import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { FcIphone, FcLibrary } from "react-icons/fc";
-import { BiLoader } from "react-icons/bi";
+
 import {
-  IMethodBinance,
-  IMethodPagoMovil,
-  IFormPayment,
+  IMethodPay
 } from "../../../interface/metodsPayment";
-import AppModal from "../../atoms/AppModal/AppModal";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
-  handleDataPayment: (data: IFormPayment) => void;
-  mount: number;
+  handleDataPayment: (data: IMethodPay) => void;
+  paymentAmount: number;
   ticketPrice: number;
   count: number;
   priceInBolivars: number;
-  handlePay: () => void
+  handlePay: (data: IMethodPay) => void
 }
 
 export const FormPayment = ({
@@ -28,70 +24,64 @@ export const FormPayment = ({
   priceInBolivars,
   handlePay
 }: Props) => {
-  // const mountBs = mount * 49;
+  // const mountBs = paymentAmount * 49;
   const mountUsd = count * ticketPrice;
 
-  const initialStatePagoMovil: IMethodPagoMovil = {
+  const initialState: IMethodPay = {
     dni: "",
-    idRef: "",
-    mount: 0,
+    reference: "",
+    paymentAmount: 0,
     name: "",
-    idCel: "",
+    phone: "",
+    email: null,
+    paymentMethod: "BINANCE"
   };
 
-  const initialStateBinance: IMethodBinance = {
-    idRef: "",
-    mount: 0,
-    email: "",
-  };
 
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-  const [dataFormPagoMovil, setDataFormPagoMovil] = useState<IMethodPagoMovil>(
-    initialStatePagoMovil
+  const [dataForm, setDataForm] = useState<IMethodPay>(
+    initialState
   );
-  const [dataFormBinance, setDataFormBinance] =
-    useState<IMethodBinance>(initialStateBinance);
+
   const [isFormValid, setIsFormValid] = useState(false);
-  const navigate = useNavigate();
   const paymentMethods = [
     { id: "0", name: "Pago Móvil", icon: FcIphone },
     { id: "1", name: "Binance", icon: FcLibrary },
     // { id: "2", name: "Divisa", icon: FcMoneyTransfer },
   ];
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   useEffect(() => {
     if (selectedMethod === "0") {
-      const { dni, idRef, name, mount } = dataFormPagoMovil;
+      const { dni, reference, name, paymentAmount } = dataForm;
       setIsFormValid(
         dni.trim() !== "" &&
-          idRef.trim() !== "" &&
+          reference.trim() !== "" &&
           name.trim() !== "" &&
-          mount > 0
+          paymentAmount > 0
       );
     } else if (selectedMethod === "1") {
-      const { email, idRef, mount } = dataFormBinance;
-      setIsFormValid(email.trim() !== "" && idRef.trim() !== "" && mount > 0);
+      const { email, reference, paymentAmount } = dataForm;
+      setIsFormValid(email?.trim() !== "" && reference.trim() !== "" && paymentAmount > 0);
     } else {
       setIsFormValid(false);
     }
-  }, [selectedMethod, dataFormPagoMovil, dataFormBinance]);
+  }, [selectedMethod, dataForm, dataForm]);
 
   const handleSubmit = () => {
-    setIsModalOpen(true);
     if (selectedMethod === "0") {
-      handleDataPayment(dataFormPagoMovil);
+      const {email, ...payload} = dataForm
+      handleDataPayment({...payload, paymentMethod: 'PAGO_MOVIL'})
+      console.log(email)
+      handlePay({...payload, paymentMethod: 'PAGO_MOVIL'})
     }
     if (selectedMethod === "1") {
-      handleDataPayment(dataFormBinance);
-    }
-    if (selectedMethod === "2") {
-      console.log("All data:", "Divisa pagada");
-    }
-    setDataFormBinance(initialStateBinance);
-    setDataFormPagoMovil(initialStatePagoMovil);
-    handlePay()
+      handleDataPayment({...dataForm, paymentMethod: 'BINANCE'})
+      handlePay({...dataForm, paymentMethod: 'BINANCE'})
+    }    
+ 
+    setDataForm(initialState);
   };
 
   const renderPaymentInfo = () => {
@@ -116,10 +106,10 @@ export const FormPayment = ({
                 label="Nombre titular cuenta"
                 type="text"
                 placeholder="Genesita"
-                value={dataFormPagoMovil.name}
+                value={dataForm.name}
                 onChange={(e) =>
-                  setDataFormPagoMovil({
-                    ...dataFormPagoMovil,
+                  setDataForm({
+                    ...dataForm,
                     name: e.target.value.replace(/[^a-zA-Z\s]/g, ""),
                   })
                 }
@@ -129,10 +119,10 @@ export const FormPayment = ({
                 type="text"
                 maxLength={8}
                 placeholder="1.234.567"
-                value={dataFormPagoMovil.dni}
+                value={dataForm.dni}
                 onChange={(e) =>
-                  setDataFormPagoMovil({
-                    ...dataFormPagoMovil,
+                  setDataForm({
+                    ...dataForm,
                     dni: e.target.value.replace(/\D/g, ""),
                   })
                 }
@@ -143,11 +133,11 @@ export const FormPayment = ({
               type="text"
               placeholder="Ingresar numero de referencia"
               maxLength={11}
-              value={dataFormPagoMovil.idRef}
+              value={dataForm.reference}
               onChange={(e) =>
-                setDataFormPagoMovil({
-                  ...dataFormPagoMovil,
-                  idRef: e.target.value.replace(/\D/g, ""),
+                setDataForm({
+                  ...dataForm,
+                  reference: e.target.value.replace(/\D/g, ""),
                 })
               }
             />
@@ -156,11 +146,11 @@ export const FormPayment = ({
               type="text"
               placeholder="Ingresar número de teléfono"
               maxLength={11}
-              value={dataFormPagoMovil.idCel}
+              value={dataForm.phone}
               onChange={(e) =>
-                setDataFormPagoMovil({
-                  ...dataFormPagoMovil,
-                  idCel: e.target.value.replace(/\D/g, ""),
+                setDataForm({
+                  ...dataForm,
+                  phone: e.target.value.replace(/\D/g, ""),
                 })
               }
             />
@@ -170,9 +160,9 @@ export const FormPayment = ({
                      placeholder={`${priceInBolivars.toFixed(2)} Bs...`} 
             
               onChange={(e) =>
-                setDataFormPagoMovil({
-                  ...dataFormPagoMovil,
-                  mount: Number(e.target.value) || 0,
+                setDataForm({
+                  ...dataForm,
+                  paymentAmount: Number(e.target.value) || 0,
                 })
               }
             />
@@ -189,10 +179,10 @@ export const FormPayment = ({
               label="Correo electronico"
               type="text"
               placeholder="Ingresa email"
-              value={dataFormBinance.email}
+              value={dataForm.email ? dataForm.email : ''}
               onChange={(e) =>
-                setDataFormBinance({
-                  ...dataFormBinance,
+                setDataForm({
+                  ...dataForm,
                   email: e.target.value,
                 })
               }
@@ -201,11 +191,11 @@ export const FormPayment = ({
               label="Numero de referencia"
               type="text"
               placeholder="Ingresar numero de referencia"
-              value={dataFormBinance.idRef}
+              value={dataForm.reference}
               onChange={(e) =>
-                setDataFormBinance({
-                  ...dataFormBinance,
-                  idRef: e.target.value,
+                setDataForm({
+                  ...dataForm,
+                  reference: e.target.value,
                 })
               }
             />
@@ -215,14 +205,14 @@ export const FormPayment = ({
               type="text"
               placeholder={`${mountUsd} USDT`}
               value={
-                dataFormBinance.mount !== 0
-                  ? dataFormBinance.mount.toString()
+                dataForm.paymentAmount !== 0
+                  ? dataForm.paymentAmount.toString()
                   : ""
               }
               onChange={(e) =>
-                setDataFormBinance({
-                  ...dataFormBinance,
-                  mount: Number(e.target.value) || 0,
+                setDataForm({
+                  ...dataForm,
+                  paymentAmount: Number(e.target.value) || 0,
                 })
               }
             />
@@ -257,8 +247,7 @@ export const FormPayment = ({
               checked={selectedMethod === method.id}
               onChange={(e) => {
                 setSelectedMethod(e.target.value);
-                setDataFormBinance(initialStateBinance);
-                setDataFormPagoMovil(initialStatePagoMovil);
+                setDataForm(initialState);
               }}
               className="form-radio text-blue-600"
             />
@@ -285,35 +274,7 @@ export const FormPayment = ({
           disabled={!isFormValid}
         />
       </div>
-      <div>
-        <AppModal
-          open={isModalOpen}
-         
-          title={
-            <>
-              <BiLoader className="inline-block ml-2 text-info" /> Procesando
-              pago
-            </>
-          }
-        >
-          <div className="space-y-4">
-            <p className="text-dark">Su pago esta siendo procesado.</p>
-            <p className="text-dark">
-              La información sobre tu compra llegará en breve a tu correo
-              electrónico.
-            </p>
-            <p className="text-dark">
-              Por favor revise su bandeja de entrada y carpeta de spam si no lo
-              ve en los próximos minutos.
-            </p>
-            <AppButton
-              size="full"
-              onClick={() => navigate("/")}
-              title="Confirmar"
-            />
-          </div>
-        </AppModal>
-      </div>
+  
     </div>
   );
 };

@@ -1,16 +1,10 @@
-export type IFormPayment = IMethodBinance | IMethodPagoMovil
 
-
-export type IMethodBinance = {
-    email:string
-    idRef:string
-    mount: number
-}
-
-export type IMethodPagoMovil = {
+export type IMethodPay = {
     name:string
+    email?:string | null
     dni:string
-    idRef:string
-    mount: number
-    idCel: string,
+    reference:string
+    paymentAmount: number
+    phone: string,
+    paymentMethod: 'BINANCE' | 'PAGO_MOVIL'
 }

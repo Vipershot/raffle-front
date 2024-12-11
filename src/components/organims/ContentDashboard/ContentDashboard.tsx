@@ -8,11 +8,13 @@ import { getProfile } from '../../../services/auth'
 import AppModal from '../../atoms/AppModal/AppModal'
 import { Terms } from './Value'
 import { AppButton } from '../../atoms/AppButton/AppButton'
+
+import { Loader } from '../../atoms/Loader/Loader'
 export const ContentDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [mostRecent, setMostRecent] = useState<IAward[]>([]);
   const [lowestPrice, setLowestPrice] = useState<IAward[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
@@ -40,8 +42,10 @@ export const ContentDashboard = () => {
   }, []);
   
   return (
-    <div className='flex flex-col gap-y-10 py-10 md:px-52 sm:px-0'>
-        <AppSection loading={loading} title="Más recientes" link="/most-recent">
+    <div className='flex flex-col gap-y-10 py-10 lg:px-42 sm:px-0'>
+      {loading ?<Loader/> : <>
+      
+      <AppSection loading={loading} title="Más recientes" link="/most-recent">
                 {mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={Number(totalTickets)} 
                     description={`${title} - ${description}`} 
@@ -97,6 +101,9 @@ export const ContentDashboard = () => {
             />
           </div>
         </AppModal>
+      </>
+      }
+ 
     </div>
   )
 }

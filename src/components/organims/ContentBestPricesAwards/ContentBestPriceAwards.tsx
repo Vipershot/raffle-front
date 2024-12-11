@@ -3,6 +3,7 @@ import { CardProduct } from '../../molecules/CardProduct/CardProduct'
 import {  getLowestPrice, getMostRecent } from '../../../services/awards'
 import { IAward } from '../../../interface/awards'
 import { LayoutContent } from '../../molecules/LayoutContent/LayoutContent'
+import { Loader } from '../../atoms/Loader/Loader'
 
 
 
@@ -23,8 +24,10 @@ export const ContentBestPriceAwards = () => {
       loadAwards()
     }, []);
   return (
-    <LayoutContent title={'Productos con mejores precios'} dataFooter={dataFooter} loading={loading} grid>
-        {loading ? 'Cargando...' :  bestPrices.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
+
+    <>
+    {loading ? <Loader/> :   <LayoutContent title={'Productos con mejores precios'} dataFooter={dataFooter} loading={loading} grid>
+        { bestPrices.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={totalTickets} 
                     description={`${title} - ${description}`} 
                     ticketPrice={ticketPrice} 
@@ -34,7 +37,10 @@ export const ContentBestPriceAwards = () => {
                     id={id}
                     key={id}
                 />)}    
-    </LayoutContent>
+    </LayoutContent>}
+    </>
+
+ 
   )
 }
 

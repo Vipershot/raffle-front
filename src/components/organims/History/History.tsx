@@ -7,33 +7,45 @@ import { getTicketsBuy, getTicketsBuyFinished, getTicketsBuyOnline } from "../..
 import { IDetailBuyTicket } from "../../../interface/awards";
 
 export default function History() {
-
+  const [loading, setloading] = useState(false);
   const [data, setData] = useState<IDetailBuyTicket[]>([]);
 
   const load = async() => {
     try {
+      setloading(true)
       const data = await getTicketsBuy()
       setData(data)
       console.log(data)
     } catch (error) {
       console.log(error)
+    }finally{
+      setloading(false)
     }
   }
 
   const handleFilter= async(value: string) => {
-    if(value === 'completed'){
-      const data = await getTicketsBuyFinished()
-      setData(data)
-    }
-    if(value === 'inProgress'){
-     const data = await getTicketsBuyOnline()
-     setData(data)
-    }
+    try {
+      setloading(true)
 
-    if(value === 'all'){
-      const data = await getTicketsBuy()
-      setData(data)
-     }
+      if(value === 'completed'){
+        const data = await getTicketsBuyFinished()
+        setData(data)
+      }
+      if(value === 'inProgress'){
+       const data = await getTicketsBuyOnline()
+       setData(data)
+      }
+  
+      if(value === 'all'){
+        const data = await getTicketsBuy()
+        setData(data)
+       }
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setloading(false)
+    }
+  
   }
 
   useEffect(() => {
@@ -58,7 +70,7 @@ export default function History() {
        
       </div>
       <div className=" w-full">
-      <AppTable tickets={data}/>
+      <AppTable tickets={data} loading={loading}/>
       </div>
     </div>
   )

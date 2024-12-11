@@ -6,6 +6,7 @@ import { CardProduct } from '../../molecules/CardProduct/CardProduct'
 import {  getLowestPrice, getMostRecent } from '../../../services/awards'
 import { IAward } from '../../../interface/awards'
 import { LayoutContent } from '../../molecules/LayoutContent/LayoutContent'
+import { Loader } from '../../atoms/Loader/Loader'
 
 
 export const ContentMostRecentAwards = () => {
@@ -23,18 +24,23 @@ export const ContentMostRecentAwards = () => {
     useEffect(() => {
       loadAwards()
     }, []);
-  return (
-    <LayoutContent title={'Productos agregados más recientes'} dataFooter={dataFooter} loading={loading} grid>
-   {loading ? 'Cargando...' :  mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
-                    totalTickets={totalTickets} 
-                    description={`${title} - ${description}`} 
-                    ticketPrice={ticketPrice} 
-                    endDate={endDate} 
-                    createdAt={createdAt}
-                    cover={cover}
-                    id={id}
-                    key={id}
-                />)}  
-    </LayoutContent>
+  return (<>
+  {
+    loading ? <Loader/> : <LayoutContent title={'Productos agregados más recientes'} dataFooter={dataFooter} loading={loading} grid>
+    { mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
+                     totalTickets={totalTickets} 
+                     description={`${title} - ${description}`} 
+                     ticketPrice={ticketPrice} 
+                     endDate={endDate} 
+                     createdAt={createdAt}
+                     cover={cover}
+                     id={id}
+                     key={id}
+                 />)}
+     </LayoutContent>
+  }
+      
+  </>
+
   )
 }

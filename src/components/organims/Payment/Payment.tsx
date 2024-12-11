@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import { FormPayment } from "../../molecules/FormPayment/FormPayment";
-import { IFormPayment } from "../../../interface/metodsPayment";
-import { useLocation } from "react-router-dom";
+import { IMethodPay } from "../../../interface/metodsPayment";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IAward } from "../../../interface/awards";
 import { getExchangeRate, postBuyTicket } from "../../../services/awards";
+import AppModal from "../../atoms/AppModal/AppModal";
+import { BiLoader } from "react-icons/bi";
+import { AppButton } from "../../atoms/AppButton/AppButton";
 
 export const Payment = () => {
-  const [dataPayment, setDataPayment] = useState<IFormPayment>();
+  const [dataPayment, setDataPayment] = useState<IMethodPay>();
   const [exchangeRate, setExchangeRate] = useState<number>(0); // State to store exchange rate
   const { state } = useLocation();
   const { ticketsSelected, award } = state;
   const awardDetail: IAward = award;
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDataPayment = (data: IFormPayment) => {
+  const handleDataPayment = (data: IMethodPay) => {
+    console.log(data)
+    setIsModalOpen(true)
     setDataPayment(data);
   };
 
@@ -35,10 +42,9 @@ export const Payment = () => {
     fetchExchangeRate();
   }, []);
 
-  const handlePay = async () => {
-    console.log(ticketsSelected)
+  const handlePay = async (data: IMethodPay) => {
     try {
-      const ticketId = await postBuyTicket(award.id, {ticketNumbers:ticketsSelected});
+      const ticketId = await postBuyTicket(award.id, {...data,ticketNumbers:ticketsSelected});
       console.log("Compra exitosa, ID del ticket:", ticketId);
     } catch (error) {
       console.error("Error al comprar ticket:", error);
@@ -120,11 +126,40 @@ export const Payment = () => {
       <FormPayment
        priceInBolivars={priceInBolivars}
         handleDataPayment={handleDataPayment}
-        mount={ticketsSelected.length}
+        paymentAmount={ticketsSelected.length}
         ticketPrice={Number(awardDetail.ticketPrice)}
         count={ticketsSelected.length}
         handlePay={handlePay}
       />
+          <div>
+        <AppModal
+          open={isModalOpen}
+         
+          title={
+            <>
+              <BiLoader className="inline-block ml-2 text-info" /> Procesando
+              pago
+            </>
+          }
+        >
+          <div className="space-y-4">
+            <p className="text-dark">Su pago esta siendo procesado.</p>
+            <p className="text-dark">
+              La información sobre tu compra llegará en breve a tu correo
+              electrónico.
+            </p>
+            <p className="text-dark">
+              Por favor revise su bandeja de entrada y carpeta de spam si no lo
+              ve en los próximos minutos.
+            </p>
+            <AppButton
+              size="full"
+              onClick={() => navigate("/")}
+              title="Confirmar"
+            />
+          </div>
+        </AppModal>
+      </div>
     </>
   );
 };

@@ -10,30 +10,28 @@ interface Props {
   link: string;
   loading: boolean;
 }
-export const AppSection = ({ children, title, link, loading }: Props) => {
+export const AppSection = ({ children, title, link }: Props) => {
   const responsive = {
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 1440 },
       items: 4,
       slidesToSlide: 1, // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1440, min: 640 },
       items: 3,
       slidesToSlide: 1, // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 640, min: 0 },
       items: 2,
       slidesToSlide: 1, // optional, default to 1.
     },
   };
   return (
     <>
-      {loading ? (
-        <h1>Cargando...</h1>
-      ) : (
-        <div className="md:px-[10%] px-[10px]">
+   
+        <div className="md:px-[5%] lg:px-[10%] px-[10px]">
           <div className="flex justify-between items-center mb-2">
             <TitleText text={title} />
             <Link to={link} ><AppButton title="Ver más..." appearance="text" size="sm" bold/></Link>
@@ -54,7 +52,7 @@ export const AppSection = ({ children, title, link, loading }: Props) => {
             {children}
           </Carousel>
         </div>
-      )}
+
     </>
   );
 };

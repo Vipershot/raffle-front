@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import { IDetailBuyTicket } from "../../../interface/awards";
 import { getDayComplete, getHour } from "../../../utils/date";
+import { Loader } from "../../atoms/Loader/Loader";
 
 interface Props {
   tickets: IDetailBuyTicket[]
+  loading:boolean
 }
 
-export const AppTable = ({tickets}:Props) => {
+export const AppTable = ({tickets, loading}:Props) => {
 
   return (
     <>
@@ -38,6 +41,7 @@ export const AppTable = ({tickets}:Props) => {
               </tr>
             </thead>
             <tbody>
+           {loading ? <tr > <td ></td> <td ></td>  <td ></td>   <td className="flex w-full justify-center" colSpan={2}><Loader/></td></tr>  : <>
               {tickets.map((ticket, i) => (
                 <tr
                   key={i}
@@ -52,8 +56,11 @@ export const AppTable = ({tickets}:Props) => {
                     </div>
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <Link to={`/award/14310b36-bd72-4bc2-8127-370a4b79ec20`} >
                     {ticket.title.substring(0, 25)}
                     {ticket.title.length > 25 && "..."}
+                    </Link>
+                  
                   </td>
                   <td className="px-6 py-4">${ticket.ticketPrice}</td>
                   <td className="px-6 py-4">{getDayComplete(ticket.endDate)}</td>
@@ -73,6 +80,7 @@ export const AppTable = ({tickets}:Props) => {
                   </div>
                 </tr>
               ))}
+            </>} 
             </tbody>
           </table>
         </div>

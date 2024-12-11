@@ -8,6 +8,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { RxAvatar } from "react-icons/rx";
 import { Popover } from "../../organims/Popover/Popover";
 import { getProfile } from "../../../services/auth";
+import { IoTicketOutline } from "react-icons/io5";
 
 export const AppNavbar = () => {
   const {
@@ -36,7 +37,11 @@ export const AppNavbar = () => {
   }, [pathname]);
   return (
     <nav className="p-10 bg-white shadow-md flex flex-wrap items-center justify-between">
-      <Link to={"/"} onClick={modalOff} className="flex items-center">
+      <Link to={"/"} onClick={modalOff} className="flex items-center gap-2">
+      <IoTicketOutline
+              className="cursor-pointer text-primary"
+              size={32}
+            />
         <TitleText text={"Raffle"} color="primary" />
       </Link>
       {pathname !== "/login" && pathname !== "/register" && (

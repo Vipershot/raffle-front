@@ -13,6 +13,7 @@ import createNumbersArray from "../../../utils/numbersArray";
 import { IoIosArrowDown } from "react-icons/io";
 import { Legend } from "../../molecules/Legend/Legend";
 import AppModal from "../../atoms/AppModal/AppModal";
+import { Loader } from "../../atoms/Loader/Loader";
 
 const AwardDetails = () => {
   const { id } = useParams();
@@ -86,12 +87,13 @@ const AwardDetails = () => {
     loadAwards();
   }, [id]);
 
-  if (loading) return <h1>Cargando...</h1>;
+  if (loading) return <Loader/> ;
 
   if (!award) return <h1>No se encontró el premio</h1>;
 
   return (
     <>
+    {loading ? <Loader/> : <>
       {award ? (
         <div>
           <div className="flex flex-col md:flex-row justify-center items-center mt-5">
@@ -320,6 +322,8 @@ const AwardDetails = () => {
           </LayoutContent>
         </div>
       ) : null}
+    </>}
+    
     </>
   );
 };
