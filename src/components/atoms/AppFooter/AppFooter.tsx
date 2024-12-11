@@ -1,68 +1,55 @@
 import { Link } from "react-router-dom";
-import { TitleText } from "../TitleText/TitleText";
+import { IoTicketOutline } from "react-icons/io5";
+import { FaWhatsapp } from "react-icons/fa";
+import { IoLogoInstagram } from "react-icons/io";
+import { CiFacebook } from "react-icons/ci";
 
 export const AppFooter = () => {
   return (
-    <Link to="/">
-      <div className="h-60 bg-info flex flex-col gap-5 md:flex-row md:justify-between   justify-between  items-start p-10 ">
-        <TitleText text={""} color="light" />
-        <div className="mt-2 mb-2">
-          <h4 className="font-bold text-white text-sm md:text-md">Acerca de</h4>
-          <ul className="flex gap-1 mt-1 text-black  text-sm md:text-md">
-            <li className="flex items-center gap-1">Raffle</li>
-          </ul>
-        </div>
-        <div className="mt-2 mb-2">
-          <h4 className="font-bold text-white text-sm md:text-md">
-            Otros sitios
-          </h4>
-          <ul className="flex gap-1 mt-1 text-black  text-sm md:text-md">
-            <li className="flex items-center gap-1">Desarrolladores</li>
-          </ul>
-        </div>
-        <div className="mt-2 mb-2">
-          <h4 className="font-bold text-white text-sm md:text-md">Ayuda</h4>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Comprar</li>
-          </ul>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Vender</li>
-          </ul>
-        </div>
-        <div className="mt-2 mb-2">
-          <h4 className="font-bold text-white text-sm md:text-md">
-            Redes sociales
-          </h4>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">X</li>
-          </ul>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">TikTok</li>
-          </ul>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Instagram</li>
-          </ul>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Facebook</li>
-          </ul>
-        </div>
-        <div className="mt-2 mb-2">
-          <h4 className="font-bold text-white text-sm md:text-md">Mi cuenta</h4>
-          <Link to="/login">
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Ingresa </li>
-          </ul>
-          </Link>
-          <Link to="/register">
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Registrarte</li>
-          </ul>
-          </Link>
-          <ul className="flex gap-1 mt-1 text-black text-sm md:text-md">
-            <li className="flex items-center gap-1">Compras</li>
-          </ul>
+
+    <>
+      <div className="bg-info">
+        <div className="container p-5 ">
+          <div className="text-white mb-3 flex justify-center gap-3">
+            <strong> Copyright 2024, Todos nuestros derechos reservados</strong>{" "}
+           <Link className="flex gap-1" to={'/'}> <IoTicketOutline
+              className="cursor-pointer hover:text-dark"
+              size={22}
+            />{" "}
+            <strong className="cursor-pointer hover:text-dark">Raffle.com</strong></Link>
+          </div>
+          <hr className="text-dark" />
+          <div>
+            <p className="flex justify-center text-white">
+              Aviso legal Politica de privacidad Quienes Somos Contacto Politica
+              de cookies Declaracion de privacidad
+            </p>
+          </div>
+          <div>
+            <ul className="flex justify-center text-white gap-3 mt-3">
+              <li>
+                {" "}
+                <FaWhatsapp
+                  className="cursor-pointer hover:text-dark"
+                  size={30}
+                />
+              </li>
+              <li>
+                <IoLogoInstagram
+                  className="cursor-pointer hover:text-dark"
+                  size={30}
+                />
+              </li>
+              <li>
+                <CiFacebook
+                  className="cursor-pointer hover:text-dark"
+                  size={30}
+                />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </Link>
+    </>
   );
 };
