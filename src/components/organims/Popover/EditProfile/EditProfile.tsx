@@ -4,7 +4,9 @@ import { TitleText } from "../../../atoms/TitleText/TitleText";
 import { TfiPencil } from "react-icons/tfi";
 import { IoIosArrowBack } from "react-icons/io";
 import { IProfile } from "../../../../interface/EditProfile";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
+import { getProfile, patchProfile } from "../../../../services/auth";
+import { AuthContext } from "../../../../context/AuthContext";
 
 interface Props {
   handlePopover: (item: string) => void;
@@ -23,14 +25,31 @@ const initialState = {
 
 export const EditProfile = ({ handlePopover, onClick }: Props) => {
   const [dataForm, setDataForm] = useState<IProfile>(initialState);
+  const { setProfile } = useContext(AuthContext);
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log(dataForm)
     setDataForm(initialState);
-  
   };
   
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getProfile().then((res) =>
+        setDataForm(res)
+      );
+    }
+  }, [])
+
+  const handleEdit = async () => {
+    await patchProfile(dataForm)
+    setProfile({name: dataForm.name, email:dataForm.email})
+    getProfile().then((res) =>
+      setDataForm(res),
+    );
+  }
+  
+console.log(dataForm)
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex items-center justify-between mt-3">
@@ -104,7 +123,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
         </div>
       </div>
       <div className="w-full mb-3">
-        <AppButton title="Guardar cambios" appearance="outline" size="full" />
+        <AppButton title="Guardar cambios" appearance="outline" size="full" onClick={handleEdit} />
       </div>
       <div className="w-full mb-3">
         <AppButton size="full" title="Cerrar sesion" onClick={onClick} />

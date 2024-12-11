@@ -34,7 +34,7 @@ const ModalProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [modalState, setModalState] = useState(false);
   const [modalName, setModalName] = useState<IModalName>('list');
   const [showPopover, setShowPopover] = useState(false);
-const changeModalName = (name:IModalName) =>{
+  const changeModalName = (name:IModalName) =>{
   setModalName(name)
 }
   const handleModal = () => {

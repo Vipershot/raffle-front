@@ -6,13 +6,17 @@ interface AuthContextType {
   login: (token:string) => void;
   logout: () => void;
   token:string | null;
+  profile: {name: string, email:string},
+  setProfile: React.Dispatch<React.SetStateAction<{name: string, email:string}>>
 }
 
 const AuthContext = createContext<AuthContextType>({
   authenticated: false,
   login: () => {},
   logout: () => {},
-  token:null
+  token:null,
+  profile: {name:"", email:""},
+  setProfile: () => {}
 });
 
 interface AuthProviderProps {
@@ -23,6 +27,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const navigate = useNavigate()
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState<string |null >(null)
+  const [profile, setProfile] = useState<{name: string, email:string}>({
+    name:"",
+    email:""
+  })
   const login = (token:string) => {
     // Implementación del login (por ejemplo, actualiza el estado)
     setAuthenticated(true)
@@ -39,7 +47,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authenticated, login, logout, token }}>
+    <AuthContext.Provider value={{ authenticated, login, logout, token, profile, setProfile }}>
       {children}
     </AuthContext.Provider>
   );

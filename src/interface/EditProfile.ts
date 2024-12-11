@@ -1,5 +1,5 @@
 export type IProfile = {
-    name?: string
+    name: string
     apellido: string
     email: string
     telefono: string

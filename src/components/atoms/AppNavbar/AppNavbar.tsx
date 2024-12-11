@@ -20,12 +20,8 @@ export const AppNavbar = () => {
     popoverOn,
   } = useContext(ModalContext);
 
-  const [profile, setProfile] = useState({
-    email: "",
-    name: "",
-  });
 
-  const { logout } = useContext(AuthContext);
+  const { logout, profile, setProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   useEffect(() => {

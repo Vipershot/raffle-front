@@ -1,4 +1,5 @@
 import { axiosRaffle } from "../config/axios"
+import { IProfile } from "../interface/EditProfile"
 import { IUserAuth } from "../interface/login"
 
 export const registerUser = async(data:IUserAuth) => {
@@ -28,6 +29,21 @@ export const getProfile = async() => {
                Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
+      
+        return response.data
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export const patchProfile = async(data:IProfile) => {
+    try {
+        const response =  await axiosRaffle.patch(`/users/`, data, {
+            headers:{
+               Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        },)
       
         return response.data
     } catch (error) {
