@@ -19,12 +19,12 @@ const AppModal = ({ open, onClose, title,  children }: Props) => {
       onClick={onClose} 
     >
       <div
-        className="relative w-96 bg-white modal-content overflow-y-auto custom-scrollbar max-h-[80vh] rounded-lg  shadow-lg p-6 rounded-r-lg"
+        className="relative w-96 bg-white modal-content rounded   shadow-lg p-6 "
         onClick={(e) => e.stopPropagation()} 
       >
-        <h2 className="text-lg font-semibold mb-4">{title}</h2>
+        <h2 className="text-lg font-semibold mb-4  ">{title}</h2>
        
-        <div>{children}</div>
+        <div className="overflow-y-auto custom-scrollbar max-h-[80vh]">{children}</div>
     {onClose &&    <button
           className="absolute top-2 right-2 text-primary hover:text-info"
           onClick={onClose}
