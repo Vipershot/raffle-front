@@ -5,11 +5,10 @@ import { AppInput } from "../AppInput/AppInput";
 import { useContext, useEffect } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { AuthContext } from "../../../context/AuthContext";
-import { RxAvatar } from "react-icons/rx";
 import { Popover } from "../../organims/Popover/Popover";
 import { getProfile } from "../../../services/auth";
 import { IoTicketOutline } from "react-icons/io5";
-
+import { HiMenu } from "react-icons/hi";
 export const AppNavbar = () => {
   const {
     handleModal,
@@ -36,7 +35,7 @@ export const AppNavbar = () => {
     popoverOff();
   }, [pathname]);
   return (
-    <nav className="p-10 bg-white shadow-md flex flex-wrap items-center justify-between">
+    <nav className="p-10 bg-white shadow-md flex flex-wrap gap-5 md:gap-0 items-center justify-between">
       <Link to={"/"} onClick={modalOff} className="flex items-center gap-2">
       <IoTicketOutline
               className="cursor-pointer text-primary"
@@ -84,7 +83,7 @@ export const AppNavbar = () => {
         </div>
       ) : (
         <div className="relative ">
-          <RxAvatar
+          <HiMenu
             onClick={() => {
               modalOn();
               changeModalName("popover");

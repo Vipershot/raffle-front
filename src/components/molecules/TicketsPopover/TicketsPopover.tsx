@@ -11,18 +11,18 @@ export const TicketsPopover =({handlePopover, data}:Props)=>{
 
     return <>
   
-   <div className="flex items-center  gap-3  mb-4 mt-2 border-b-2 border-gray-200 cursor-pointer  px-2" onClick={()=> handlePopover('details',data)}>
-      <div className="w-15 h-15  rounded flex items-center justify-center text-white">
+   <div className="flex items-center  gap-3  py-5 border-b-2 border-gray-200 cursor-pointer  px-2" onClick={()=> handlePopover('details',data)}>
+      <div className="rounded flex items-center justify-center text-white">
        
-        <img src={data.cover} width={100}/>
+        <img src={data.cover} className="h-[100px] w-[100px] object-contain"/>
       </div>
       <div>
         
         <p className="text-xs text-gray-500">{data.title.substring(0, 40)}{data.title.length > 40 && '...'}</p>
       </div>
      
-      <div className="flex gap-2 mt-2">
-        {data?.tickets.map((item, index) => (
+      <div className="flex gap-2 mt-2 ">
+        {data?.tickets.slice(0, 3).map((item, index) => (
           <b
             key={index}
             className="text-white bg-info text-center text-sm"

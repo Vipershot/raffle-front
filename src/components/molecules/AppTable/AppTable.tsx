@@ -56,7 +56,7 @@ export const AppTable = ({tickets, loading}:Props) => {
                     </div>
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <Link to={`/award/14310b36-bd72-4bc2-8127-370a4b79ec20`} >
+                    <Link to={`/award/${ticket.id}`} className="hover:text-primary">
                     {ticket.title.substring(0, 25)}
                     {ticket.title.length > 25 && "..."}
                     </Link>
@@ -67,13 +67,7 @@ export const AppTable = ({tickets, loading}:Props) => {
                   <td className="px-6 py-4">{getDayComplete(ticket.endDate)}</td>
                   <td className="px-6 py-4">{getHour(ticket.endDate)}</td>
 
-                  <div
-                    // className={`border mt-6 rounded-full font-bold ${
-                    //   ticket.numeroTicket === parseInt(ticket.tituloBody)
-                    //     ? "bg-info text-white"
-                    //     : "bg-light text-dark"
-                    // }`}
-                  >
+                  <div>
                     <td className="px-2 py-3">
                       {ticket.description.substring(0, 40)}
                     </td>
@@ -86,7 +80,8 @@ export const AppTable = ({tickets, loading}:Props) => {
         </div>
       </div>
       {/* estas card serian para celular */}
-      <div className="container p-6 md:hidden">
+      {
+        loading ? <Loader/> :  <div className="container p-6 md:hidden">
         {tickets.map((ticket, i) => (
           <div
             key={i}
@@ -115,13 +110,7 @@ export const AppTable = ({tickets, loading}:Props) => {
               <p className="text-dark">
                 Hora del Sorteo: <strong>{getHour(ticket.endDate)}</strong>
               </p>
-              <div
-                // className={`border mt-6 rounded-full  ${
-                //   ticket.numeroTicket === parseInt(ticket.tituloBody)
-                //     ? "bg-info text-white"
-                //     : "bg-light text-dark"
-                // }`}
-              >
+              <div>
                 <span className="px-4 py-2 flex justify-center text-dark">
                   <strong>{ticket.description.substring(0, 40)}</strong>
                 </span>
@@ -130,6 +119,8 @@ export const AppTable = ({tickets, loading}:Props) => {
           </div>
         ))}
       </div>
+      }
+    
     </>
   );
 };

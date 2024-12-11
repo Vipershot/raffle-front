@@ -18,7 +18,7 @@ const load = async() =>{
   try {
     setLoading(true)
   const data = await getTicketsBuyOnline()
-    console.log( data)
+    console.log(data)
     setTicketsBuy(data)
   } catch (error) {
     console.log(error)
@@ -42,7 +42,8 @@ const load = async() =>{
 
       <div className="flex flex-col h-[40vh] overflow-y-auto custom-scrollbar mb-4 mt-2">
         {ticketsBuy && ticketsBuy.map((item, i) =>  <TicketsPopover key={i} data={item} handlePopover={handlePopover}/>)}
-      </div></> }
+      </div>
+      </> }
  
       </>
     
