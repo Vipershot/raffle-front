@@ -8,26 +8,35 @@ import { getExchangeRate, postBuyTicket } from "../../../services/awards";
 import AppModal from "../../atoms/AppModal/AppModal";
 import { BiLoader } from "react-icons/bi";
 import { AppButton } from "../../atoms/AppButton/AppButton";
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { MdOutlineErrorOutline } from "react-icons/md";
+
+interface ECustomError extends Error {
+  response: { data: { message: string } };
+}
 
 export const Payment = () => {
   const [dataPayment, setDataPayment] = useState<IMethodPay>();
-  const [exchangeRate, setExchangeRate] = useState<number>(0); // State to store exchange rate
+  const [exchangeRate, setExchangeRate] = useState<number>(0);
   const { state } = useLocation();
+  const [message, setMessage] = useState({
+    title: "titulo",
+    icon: <BiLoader className="inline-block ml-2 text-info" />,
+    description: "descripcion",
+    onClick: () => {},
+  });
   const { ticketsSelected, award } = state;
   const awardDetail: IAward = award;
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDataPayment = (data: IMethodPay) => {
-    console.log(data)
-    setIsModalOpen(true)
+    console.log(data);
     setDataPayment(data);
   };
 
   const priceInBolivars =
-    exchangeRate > 0
-      ? Number(awardDetail.ticketPrice) * exchangeRate
-      : 0;
+    exchangeRate > 0 ? Number(awardDetail.ticketPrice) * exchangeRate : 0;
 
   useEffect(() => {
     const fetchExchangeRate = async () => {
@@ -44,12 +53,47 @@ export const Payment = () => {
 
   const handlePay = async (data: IMethodPay) => {
     try {
-      const ticketId = await postBuyTicket(award.id, {...data,ticketNumbers:ticketsSelected});
+      const ticketId = await postBuyTicket(award.id, {
+        ...data,
+        ticketNumbers: ticketsSelected,
+      });
+      setIsModalOpen(true);
+
+      setMessage({
+        title: "Pago con exito",
+        icon: (
+          <IoCheckmarkCircleOutline
+            size={30}
+            className="inline-block ml-2 text-online"
+          />
+        ),
+        description:
+          "Para verificar el estado de su transacción, por favor revise su correo electrónico en la carpeta de spam. El mensaje de confirmación debería llegar en minutos. Gracias por su compra.",
+        onClick: () => {
+          navigate("/");
+        },
+      });
       console.log("Compra exitosa, ID del ticket:", ticketId);
     } catch (error) {
+      const { response } = error as ECustomError;
+      setIsModalOpen(true);
+
+      setMessage({
+        title: "Pago con error",
+        icon: (
+          <MdOutlineErrorOutline
+            size={30}
+            className="inline-block ml-2 text-red"
+          />
+        ),
+        description: response.data.message,
+        onClick: () => {
+          setIsModalOpen(false);
+        },
+      });
       console.error("Error al comprar ticket:", error);
     }
-  }
+  };
 
   useEffect(() => {
     if (dataPayment) {
@@ -57,7 +101,7 @@ export const Payment = () => {
     }
   }, [dataPayment]);
 
-  console.log(award)
+  console.log(award);
 
   return (
     <>
@@ -109,10 +153,7 @@ export const Payment = () => {
                 <p className=" my-1">
                   <span className="font-bold text-primary rounded text-sm md:text-xl">
                     Total Bs.F{" "}
-                    {(
-                      priceInBolivars * ticketsSelected.length
-                    ).toFixed(2)}{" "}
-                    / ${" "}
+                    {(priceInBolivars * ticketsSelected.length).toFixed(2)} / ${" "}
                     {(
                       Number(award.ticketPrice) * ticketsSelected.length
                     ).toFixed(2)}
@@ -124,37 +165,28 @@ export const Payment = () => {
         </div>
       </div>
       <FormPayment
-       priceInBolivars={priceInBolivars}
+        priceInBolivars={priceInBolivars}
         handleDataPayment={handleDataPayment}
         paymentAmount={ticketsSelected.length}
         ticketPrice={Number(awardDetail.ticketPrice)}
         count={ticketsSelected.length}
         handlePay={handlePay}
       />
-          <div>
+      <div>
         <AppModal
           open={isModalOpen}
-         
           title={
             <>
-              <BiLoader className="inline-block ml-2 text-info" /> Procesando
-              pago
+              {message.icon} {message.title}
             </>
           }
         >
           <div className="space-y-4">
-            <p className="text-dark">Su pago esta siendo procesado.</p>
-            <p className="text-dark">
-              La información sobre tu compra llegará en breve a tu correo
-              electrónico.
-            </p>
-            <p className="text-dark">
-              Por favor revise su bandeja de entrada y carpeta de spam si no lo
-              ve en los próximos minutos.
-            </p>
+            <p className="text-dark">{message.description}</p>
+
             <AppButton
               size="full"
-              onClick={() => navigate("/")}
+              onClick={message.onClick}
               title="Confirmar"
             />
           </div>
@@ -163,4 +195,3 @@ export const Payment = () => {
     </>
   );
 };
-

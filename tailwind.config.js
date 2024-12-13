@@ -12,7 +12,8 @@ export default {
         dark: "#444444",
         disabled: "#e5e7eb",
         online: "#34D399",
-        light:'#f9f9f9'
+        light:'#f9f9f9',
+        red: '#ff0000'
       },
       gridTemplateColumns: {
         '14': 'repeat(14, minmax(0, 1fr))',

@@ -32,7 +32,6 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
     console.log(dataForm)
     setDataForm(initialState);
   };
-  
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
