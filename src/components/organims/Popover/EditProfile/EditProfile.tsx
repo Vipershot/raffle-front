@@ -25,13 +25,13 @@ const initialState = {
 
 export const EditProfile = ({ handlePopover, onClick }: Props) => {
   const [dataForm, setDataForm] = useState<IProfile>(initialState);
-  const { setProfile } = useContext(AuthContext);
+  const { setProfile, profile } = useContext(AuthContext);
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log(dataForm)
     setDataForm(initialState);
   };
-  
+  console.log('profilr', profile)
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

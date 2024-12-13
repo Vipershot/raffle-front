@@ -105,7 +105,7 @@ export const FormPayment = ({
               <AppInput
                 label="Nombre titular cuenta"
                 type="text"
-                placeholder="Genesita"
+                placeholder="Titular de la cuenta"
                 value={dataForm.name}
                 onChange={(e) =>
                   setDataForm({
@@ -115,10 +115,10 @@ export const FormPayment = ({
                 }
               />
               <AppInput
-                label="Cedula de Identidad"
+                label="Cédula de Identidad"
                 type="text"
                 maxLength={8}
-                placeholder="1.234.567"
+                placeholder="Documento de identidad"
                 value={dataForm.dni}
                 onChange={(e) =>
                   setDataForm({
@@ -129,9 +129,9 @@ export const FormPayment = ({
               />
             </div>
             <AppInput
-              label="Numero de referencia"
+              label="Número de referencia"
               type="text"
-              placeholder="Ingresar numero de referencia"
+              placeholder="Ingresar número de referencia"
               maxLength={11}
               value={dataForm.reference}
               onChange={(e) =>
@@ -176,9 +176,9 @@ export const FormPayment = ({
               <strong>BinanceRaffle@gmail.com</strong>
             </p>
             <AppInput
-              label="Correo electronico"
+              label="Correo electrónico"
               type="text"
-              placeholder="Ingresa email"
+              placeholder="Ingresa correo electrónico"
               value={dataForm.email ? dataForm.email : ''}
               onChange={(e) =>
                 setDataForm({
@@ -188,9 +188,9 @@ export const FormPayment = ({
               }
             />
             <AppInput
-              label="Numero de referencia"
+              label="Número de referencia"
               type="text"
-              placeholder="Ingresar numero de referencia"
+              placeholder="Ingresar número de referencia"
               value={dataForm.reference}
               onChange={(e) =>
                 setDataForm({
