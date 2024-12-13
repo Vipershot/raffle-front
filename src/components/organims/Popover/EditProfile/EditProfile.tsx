@@ -25,6 +25,7 @@ const initialState = {
 
 export const EditProfile = ({ handlePopover, onClick }: Props) => {
   const [dataForm, setDataForm] = useState<IProfile>(initialState);
+  const [fieldChanges, setFieldChanges] = useState<{ [key: string]: string }>({});
   const { setProfile } = useContext(AuthContext);
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -42,14 +43,19 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
   }, [])
 
   const handleEdit = async () => {
-    await patchProfile(dataForm)
-    setProfile({name: dataForm.name, email:dataForm.email, phone:dataForm.phone, lastName:dataForm.lastName })
+    await patchProfile(fieldChanges)
+    setFieldChanges({});
     getProfile().then((res) =>
       setDataForm(res),
     );
+    setProfile({name: dataForm.name, email:dataForm.email, phone:dataForm.phone, lastName:dataForm.lastName })
   }
+
+  const handleChange = (field: string, value: string) => {
+    setFieldChanges((prev) => ({ ...prev, [field]: value })); // Solo actualiza el campo que cambia
+  };
   
-console.log(dataForm)
+console.log(fieldChanges)
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex items-center justify-between mt-3">
@@ -71,27 +77,23 @@ console.log(dataForm)
           label=""
           placeholder="Nombre"
           type="text"
-          value={dataForm.name}
-          onChange={(e) => {
-            setDataForm({ ...dataForm, name: e.target.value });
-          }}
+          value={fieldChanges.name || dataForm.name}
+          onChange={(e) => handleChange("name", e.target.value)}
         />
         <AppInput
           label=""
           placeholder="Apellido"
           type="text"
-          value={dataForm.lastName}
-          onChange={(e) => {
-            setDataForm({ ...dataForm, lastName: e.target.value });
-          }}
+          value={fieldChanges.lastName || dataForm.lastName}
+          onChange={(e) => handleChange("lastName", e.target.value)}
         />
         <div className="col-span-2 md:col-span-1">
           <AppInput
             label=""
             type="email"
             placeholder="Correo electrónico"
-            value={dataForm.email}
-            onChange={(e) => {setDataForm({...dataForm, email:e.target.value})}}
+            value={fieldChanges.email || dataForm.email}
+            onChange={(e) => handleChange("email", e.target.value)}
           />
         </div>
         <div className="col-span-2 md:col-span-1">
@@ -99,26 +101,27 @@ console.log(dataForm)
             label=""
             type="text"
             placeholder="Número de teléfono"
-            value={dataForm.phone}
+            value={fieldChanges.phone || dataForm.phone}
             onChange={(e) => {
-              const sanitizedValue = e.target.value.replace(/[^0-9]/g, '')
-              setDataForm({...dataForm, phone:sanitizedValue})}}
+              const sanitizedValue = e.target.value.replace(/[^0-9]/g, "");
+              handleChange("phone", sanitizedValue);
+            }}
           />
         </div>
         <div className="col-span-2 md:col-span-1">
           <AppInput label="" 
           type="password"
           placeholder="Contraseña" 
-          value={dataForm.password}
-          onChange={(e) => {setDataForm({...dataForm, password:e.target.value})}} />
+          value={fieldChanges.password || dataForm.password}
+          onChange={(e) => handleChange("password", e.target.value)} />
         </div>
         <div className="col-span-2 md:col-span-1">
           <AppInput
             label=""
             type="password"
             placeholder="Cambiar contraseña"
-            value={dataForm.newPassword}
-            onChange={(e) => {setDataForm({...dataForm, newPassword:e.target.value})}}
+            value={fieldChanges.newPassword || dataForm.newPassword}
+            onChange={(e) => handleChange("newPassword", e.target.value)}
           />
         </div>
       </div>

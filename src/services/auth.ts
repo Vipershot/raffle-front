@@ -37,7 +37,7 @@ export const getProfile = async() => {
     }
 }
 
-export const patchProfile = async(data:IProfile) => {
+export const patchProfile = async(data:Partial<IProfile>) => {
     try {
         const response =  await axiosRaffle.patch(`/users/`, data, {
             headers:{
