@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TitleText } from "../TitleText/TitleText";
 import { AppButton } from "../AppButton/AppButton";
-import { AppInput } from "../AppInput/AppInput";
+// import { AppInput } from "../AppInput/AppInput";
 import { useContext, useEffect } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import { AuthContext } from "../../../context/AuthContext";
@@ -11,7 +11,7 @@ import { IoTicketOutline } from "react-icons/io5";
 import { HiMenu } from "react-icons/hi";
 export const AppNavbar = () => {
   const {
-    handleModal,
+    // handleModal,
     modalOff,
     modalOn,
     changeModalName,
