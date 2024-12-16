@@ -33,7 +33,7 @@ export const FormPayment = ({
     paymentAmount: 0,
     name: "",
     phone: "",
-    email: null,
+    email: "",
     paymentMethod: "BINANCE"
   };
 
@@ -77,7 +77,7 @@ export const FormPayment = ({
       console.log(email)
       handlePay({...payload, paymentMethod: 'PAGO_MOVIL'})
     }
-    if (selectedMethod === "1") {
+    if (selectedMethod === "1" && errorEmail ==="") {
       handleDataPayment({...dataForm, paymentMethod: 'BINANCE'})
       handlePay({...dataForm, paymentMethod: 'BINANCE'})
     }    
@@ -178,7 +178,7 @@ export const FormPayment = ({
             </p>
             <AppInput
               label="Correo electrónico"
-              type="email"
+              type="text"
               placeholder="Ingresa correo electrónico"
               value={dataForm.email ? dataForm.email : ''}
               onChange={(e) =>{
@@ -197,14 +197,14 @@ export const FormPayment = ({
               error={errorEmail}
             />
             <AppInput
-              label="Número de orden"
+              label="Número de referencia"
               type="text"
-              placeholder="Id de orden"
+              placeholder="Ingresar número de referencia"
               value={dataForm.reference}
               onChange={(e) =>
                 setDataForm({
                   ...dataForm,
-                  reference: e.target.value.replace(/\D/g, ""),
+                  reference: e.target.value,
                 })
               }
             />
