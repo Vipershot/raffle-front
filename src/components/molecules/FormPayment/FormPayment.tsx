@@ -177,7 +177,7 @@ export const FormPayment = ({
             </p>
             <AppInput
               label="Correo electrónico"
-              type="text"
+              type="email"
               placeholder="Ingresa correo electrónico"
               value={dataForm.email ? dataForm.email : ''}
               onChange={(e) =>
@@ -188,14 +188,14 @@ export const FormPayment = ({
               }
             />
             <AppInput
-              label="Número de referencia"
+              label="Número de orden"
               type="text"
-              placeholder="Ingresar número de referencia"
+              placeholder="Id de orden"
               value={dataForm.reference}
               onChange={(e) =>
                 setDataForm({
                   ...dataForm,
-                  reference: e.target.value,
+                  reference: e.target.value.replace(/\D/g, ""),
                 })
               }
             />
