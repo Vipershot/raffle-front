@@ -44,7 +44,7 @@ export const AppNavbar = () => {
             />
         <TitleText text={"Raffle"} color="primary" />
       </Link>
-      {pathname !== "/login" && pathname !== "/register" && (
+      {/* {pathname !== "/login" && pathname !== "/register" && (
         <div className="w-[60%] hidden lg:block">
           <AppInput
             onChange={() => {}}
@@ -56,11 +56,10 @@ export const AppNavbar = () => {
             placeholder={"Buscar..."}
           />
         </div>
-      )}
-      <Link to={"/winners"}>
-        {/* <TitleText  text={"Noticias"} color="primary" /> */}
+      )} */}
+      {/* <Link to={"/winners"}>
         <p className="text-info">Noticias</p>
-      </Link>
+      </Link> */}
       {!localStorage.getItem("token") ? (
         <div className="flex space-x-2">
           <AppButton
@@ -100,7 +99,7 @@ export const AppNavbar = () => {
           {showPopover && <Popover onClick={logout} profile={profile} />}
         </div>
       )}
-
+{/* 
       {pathname !== "/login" && pathname !== "/register" && (
         <div className="w-[100%] block lg:hidden">
           <AppInput
@@ -110,7 +109,7 @@ export const AppNavbar = () => {
             placeholder={"Buscar..."}
           />
         </div>
-      )}
+      )} */}
     </nav>
   );
 };

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IAward } from "../../../interface/awards";
 import { getDayComplete } from "../../../utils/date";
 import { AppButton } from "../../atoms/AppButton/AppButton";
+import { IoTicketOutline } from "react-icons/io5";
 
 export const CardProduct = ({
   description,
@@ -17,7 +18,7 @@ export const CardProduct = ({
 
   const validateAvailable = () => {
     if (totalTickets) {
-      if (totalTickets == totalTickets ) return "Full disponible";
+      if (totalTickets == totalTickets ) return "Disponible";
       if (totalTickets < 50) return "Estas a tiempo";
       if (totalTickets < 71) return "Quedan pocos";
     }
@@ -43,7 +44,10 @@ export const CardProduct = ({
           <h3 className="md:text-xl text-primary font-semibold">{getDayComplete(endDate)}</h3>
         </div>
         <Link to={`/award/${id}`}>
-          <AppButton size="full" title="Tickets" />
+          <AppButton size="full" title={<div className="flex gap-2 justify-center items-center"><IoTicketOutline
+              className="cursor-pointer text-white"
+              size={22}
+            />Tickets</div>} />
         </Link>
       </div>
     </div>

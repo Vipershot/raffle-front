@@ -15,7 +15,7 @@ const AppModal = ({ open, onClose, title,  children }: Props) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center modal-overlay bg-black bg-opacity-50"
+      className="fixed  inset-0 z-50 flex items-center justify-center modal-overlay bg-black bg-opacity-50"
       onClick={onClose} 
     >
       <div

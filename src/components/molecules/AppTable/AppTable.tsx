@@ -26,18 +26,18 @@ export const AppTable = ({tickets, loading}:Props) => {
                 <th scope="col" className="px-6 py-3">
                   Precio
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   Fecha de Compra
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   Fecha del Sorteo
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Hora del Sorteo
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   Ticket Ganador
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>
@@ -63,14 +63,14 @@ export const AppTable = ({tickets, loading}:Props) => {
                   
                   </td>
                   <td className="px-6 py-4">${ticket.ticketPrice}</td>
-                  <td className="px-6 py-4">{getDayComplete(ticket.endDate)}</td>
+                  {/* <td className="px-6 py-4">{getDayComplete(ticket.endDate)}</td> */}
                   <td className="px-6 py-4">{getDayComplete(ticket.endDate)}</td>
                   <td className="px-6 py-4">{getHour(ticket.endDate)}</td>
 
                   <div>
-                    <td className="px-2 py-3">
+                    {/* <td className="px-2 py-3">
                       {ticket.description.substring(0, 40)}
-                    </td>
+                    </td> */}
                   </div>
                 </tr>
               ))}
@@ -101,20 +101,20 @@ export const AppTable = ({tickets, loading}:Props) => {
               <p className="mb-2 text-dark">
                 Precio: <strong>${ticket.ticketPrice}</strong>
               </p>
-              <p className="text-dark">
+              {/* <p className="text-dark">
                 Fecha de Compra: <strong>{getDayComplete(ticket.endDate)}</strong>
-              </p>
+              </p> */}
               <p className="text-dark">
                 Fecha del Sorteo: <strong>{getDayComplete(ticket.endDate)}</strong>
               </p>
               <p className="text-dark">
                 Hora del Sorteo: <strong>{getHour(ticket.endDate)}</strong>
               </p>
-              <div>
+              {/* <div>
                 <span className="px-4 py-2 flex justify-center text-dark">
                   <strong>{ticket.description.substring(0, 40)}</strong>
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         ))}

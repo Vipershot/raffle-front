@@ -1,8 +1,9 @@
+import { ReactElement } from "react"
 import { getAppearance, getSizeButton } from "../../../utils/styles"
 
 interface Props {
     onClick?: ()=> void
-    title: string
+    title: string | ReactElement
     disabled?: boolean
     appearance?: "outline" | "primary" | "text",
     size?: 'sm' | 'md'| 'lg' | 'full'

@@ -31,7 +31,7 @@ export const AppSectionFooter = ({ children, title,  loading }: Props) => {
       {loading ? (
         <h1>Cargando...</h1>
       ) : (
-        <div >
+        <div style={{position:'relative', zIndex:'-1'}}>
           <div className="flex px-5 md:px-10 justify-between align-center">
             <TitleText text={title} />
           </div>
@@ -46,8 +46,9 @@ export const AppSectionFooter = ({ children, title,  loading }: Props) => {
             customTransition="all .5"
             transitionDuration={500}
             removeArrowOnDeviceType={[]}
-            itemClass="px-1"       
-            className="mt-5" 
+            itemClass="px-1 "       
+            className="mt-5  "
+             
           >
             {children}
           </Carousel>

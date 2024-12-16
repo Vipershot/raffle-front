@@ -146,7 +146,7 @@ const AwardDetails = () => {
             </div>
             {modalDetail && ticketsSelected.length !== 0 && (
               <div
-                className="w-full bg-white border flex flex-col p-6"
+                className="w-full bg-white rounded flex flex-col p-6"
                 style={{ position: "sticky", bottom: 0 }}
               >
                 <TitleText text="Detalle de tickets" />
@@ -285,8 +285,8 @@ const AwardDetails = () => {
             
             setShowAlert(false)}}
         >
-        <p className="text-dark mb-5">Debes iniciar sesion o registrarte</p>
-          <AppButton size="full" title="Iniciar sesion" onClick={()=>{navigate('/login')}}/>
+        <p className="text-dark mb-5">Debes iniciar sesión o registrarte</p>
+          <AppButton size="full" title="Iniciar sesión" onClick={()=>{navigate('/login')}}/>
           <div className="mt-2 h-0.5 bg-disabled" ></div>
 
           <AppButton size="full" appearance="text" title="Registrarse" onClick={()=>{navigate('/register')}}/>
