@@ -39,6 +39,7 @@ export const FormPayment = ({
 
 
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [errorEmail, setErrorEmail] = useState("")
   const [dataForm, setDataForm] = useState<IMethodPay>(
     initialState
   );
@@ -63,7 +64,7 @@ export const FormPayment = ({
       );
     } else if (selectedMethod === "1") {
       const { email, reference, paymentAmount } = dataForm;
-      setIsFormValid(email?.trim() !== "" && reference.trim() !== "" && paymentAmount > 0);
+      setIsFormValid(email?.trim() !== "" && reference.trim() !== "" && paymentAmount > 0 && errorEmail === "");
     } else {
       setIsFormValid(false);
     }
@@ -180,12 +181,20 @@ export const FormPayment = ({
               type="text"
               placeholder="Ingresa correo electrónico"
               value={dataForm.email ? dataForm.email : ''}
-              onChange={(e) =>
+              onChange={(e) =>{
+                let value = e.target.value;
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (value && !emailPattern.test(value)) {
+                  setErrorEmail("Formato de email no válido");
+                } else {
+                  setErrorEmail("");
+                }
                 setDataForm({
                   ...dataForm,
-                  email: e.target.value,
-                })
+                  email: value,
+                })}
               }
+              error={errorEmail}
             />
             <AppInput
               label="Número de referencia"

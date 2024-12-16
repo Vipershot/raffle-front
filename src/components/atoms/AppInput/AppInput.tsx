@@ -10,6 +10,7 @@ interface Props {
     value?: string
     type?: "search" | "text" | "email" | "password"
     name?:string
+    error?: string
 }
 
 export const AppInput = ({
@@ -22,7 +23,8 @@ export const AppInput = ({
   value,
   name,
   type = "text",
-  onClick
+  onClick,
+  error
 }: Props) => {
   return (
     <>
@@ -49,6 +51,7 @@ export const AppInput = ({
            style={{border:"none", outline:"none"}}
           name={name}
           />
+          <p>{error}</p>
         </div>
       </div>
     </>
