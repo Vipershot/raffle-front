@@ -182,7 +182,7 @@ export const FormPayment = ({
               placeholder="Ingresa correo electrónico"
               value={dataForm.email ? dataForm.email : ''}
               onChange={(e) =>{
-                let value = e.target.value;
+                const value = e.target.value;
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (value && !emailPattern.test(value)) {
                   setErrorEmail("Formato de email no válido");
