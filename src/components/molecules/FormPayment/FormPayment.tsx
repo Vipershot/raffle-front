@@ -85,7 +85,6 @@ export const FormPayment = ({
     setDataForm(initialState);
   };
 
-  console.log(dataForm)
 
   const renderPaymentInfo = () => {
     switch (selectedMethod) {
@@ -97,11 +96,11 @@ export const FormPayment = ({
             </p>
 
             <p className="text-sm text-muted-foreground mb-4">
-              Rif: <strong>J-34567809-0</strong>
+              Ced: <strong>V-26510955</strong>
             </p>
 
             <p className="text-sm text-muted-foreground mb-4">
-              Numero Celular: <strong>0323 456 45 45</strong>
+              Numero Celular: <strong>04241781737</strong>
             </p>
 
             <div className="flex space-x-4">
@@ -132,7 +131,7 @@ export const FormPayment = ({
               />
             </div>
             <AppInput
-              label="Número de referencia"
+              label="Número de referencia del pago"
               type="text"
               placeholder="Ingresar número de referencia"
               maxLength={11}
@@ -145,7 +144,7 @@ export const FormPayment = ({
               }
             />
              <AppInput
-              label="Número de teléfono"
+              label="Número de teléfono titular de cuenta"
               type="text"
               placeholder="Ingresar número de teléfono"
               maxLength={11}
@@ -166,7 +165,7 @@ export const FormPayment = ({
               onChange={(e) =>
                 setDataForm({
                   ...dataForm,
-                  paymentAmount: Number(e.target.value) || 0,
+                  paymentAmount:Number(e.target.value.replace(/[^0-9.]/g, "")),
                 })
               }
             />
@@ -177,7 +176,7 @@ export const FormPayment = ({
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
               Dirección de correo electrónico:{" "}
-              <strong>BinanceRaffle@gmail.com</strong>
+              <strong>manguilas2525@gmail.com</strong>
             </p>
             <AppInput
               label="Correo electrónico"
@@ -185,7 +184,7 @@ export const FormPayment = ({
               placeholder="Ingresa correo electrónico"
               value={dataForm.email ? dataForm.email : ''}
               onChange={(e) =>{
-                let value = e.target.value;
+                const value = e.target.value;
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (value && !emailPattern.test(value)) {
                   setErrorEmail("Formato de email no válido");
@@ -200,14 +199,14 @@ export const FormPayment = ({
               error={errorEmail}
             />
             <AppInput
-              label="Número de referencia"
+              label="ID orden"
               type="text"
-              placeholder="Ingresar número de referencia"
+              placeholder="Ingresar número de orden"
               value={dataForm.reference}
               onChange={(e) =>
                 setDataForm({
                   ...dataForm,
-                  reference: e.target.value,
+                  reference: e.target.value.replace(/\D/g, ""),
                 })
               }
             />
@@ -224,7 +223,7 @@ export const FormPayment = ({
               onChange={(e) =>
                 setDataForm({
                   ...dataForm,
-                  paymentAmount: Number(e.target.value) || 0,
+                  paymentAmount: Number(e.target.value.replace(/\D/g, "")) || 0,
                 })
               }
             />
