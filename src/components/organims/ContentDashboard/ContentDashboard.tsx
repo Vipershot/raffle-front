@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from 'react'
-import { AppSection } from '../../atoms/AppSection/AppSection'
+// import { AppSection } from '../../atoms/AppSection/AppSection'
 import { CardProduct } from '../../molecules/CardProduct/CardProduct'
-import { getLowestPrice, getMostRecent } from '../../../services/awards'
+import {  getMostRecent } from '../../../services/awards'
 import { IAward } from '../../../interface/awards'
 import { getProfile } from '../../../services/auth'
 import AppModal from '../../atoms/AppModal/AppModal'
@@ -10,10 +10,11 @@ import { Terms } from './Value'
 import { AppButton } from '../../atoms/AppButton/AppButton'
 
 import { Loader } from '../../atoms/Loader/Loader'
+import { LayoutContent } from '../../molecules/LayoutContent/LayoutContent'
 export const ContentDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [mostRecent, setMostRecent] = useState<IAward[]>([]);
-  const [lowestPrice, setLowestPrice] = useState<IAward[]>([]);
+  // const [lowestPrice, setLowestPrice] = useState<IAward[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -30,9 +31,9 @@ export const ContentDashboard = () => {
   const loadAwards = async() => {
     setLoading(true)
     const mostRecent = await getMostRecent()
-    const lowestPrice = await getLowestPrice()
+    // const lowestPrice = await getLowestPrice()
     setMostRecent(mostRecent)
-    setLowestPrice(lowestPrice)
+    // setLowestPrice(lowestPrice)
     setLoading(false)
   }
   useEffect(() => {
@@ -44,8 +45,19 @@ export const ContentDashboard = () => {
   return (
     <div className='flex flex-col gap-y-10 py-10 lg:px-42 sm:px-0'>
       {loading ?<Loader/> : <>
-      
-      <AppSection loading={loading} title="Más recientes" link="/most-recent">
+        <LayoutContent title={'Rifas Navideñas'} loading={loading} grid>
+    { mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
+                     totalTickets={totalTickets} 
+                     description={`${title} - ${description}`} 
+                     ticketPrice={ticketPrice} 
+                     endDate={endDate} 
+                     createdAt={createdAt}
+                     cover={cover}
+                     id={id}
+                     key={id}
+                 />)}
+     </LayoutContent>
+      {/* <AppSection loading={loading} title="Más recientes" link="/most-recent">
                 {mostRecent.map(({title,totalTickets, ticketPrice, description, endDate,createdAt, cover, id}) => <CardProduct 
                     totalTickets={Number(totalTickets)} 
                     description={`${title} - ${description}`} 
@@ -71,7 +83,8 @@ export const ContentDashboard = () => {
 
                 />)}
             
-        </AppSection>
+        </AppSection> */}
+
         <AppModal open={isModalOpen}  title={"Términos y condiciones"}>
           <div className="space-y-4 p-1">
             <p className="text-dark text-[12px]">
