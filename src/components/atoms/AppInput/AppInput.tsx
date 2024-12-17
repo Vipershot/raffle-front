@@ -8,9 +8,11 @@ interface Props {
     placeholder?: string
     maxLength?: number
     value?: string
-    type?: "search" | "text" | "email" | "password"
+    type?: "search" | "text" | "email" | "password" | "number"
     name?:string
     error?: string
+    step?: string
+    max?: string
 }
 
 export const AppInput = ({
@@ -24,6 +26,8 @@ export const AppInput = ({
   name,
   type = "text",
   onClick,
+  step,
+  max,
   error
 }: Props) => {
   return (
@@ -39,9 +43,11 @@ export const AppInput = ({
         <div className="relative mt-1 rounded-md ">
          
           <input
+          step={step}
           onClick={onClick}
           maxLength={maxLength}
           placeholder={placeholder}
+          max={max}
            onChange={(e)=>onChange(e)}
            type={type}
            disabled={disabled}

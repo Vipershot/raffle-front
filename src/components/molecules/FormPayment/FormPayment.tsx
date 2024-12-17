@@ -85,6 +85,8 @@ export const FormPayment = ({
     setDataForm(initialState);
   };
 
+  console.log(dataForm)
+
   const renderPaymentInfo = () => {
     switch (selectedMethod) {
       case "0":
@@ -157,9 +159,10 @@ export const FormPayment = ({
             />
             <AppInput
               label={`Ingresa monto a pagar: ${priceInBolivars.toFixed(2)} Bs`}
-              type="text"
-                     placeholder={`${priceInBolivars.toFixed(2)} Bs...`} 
-            
+              type="number"
+              step="0.1"
+              max="99999999.99"
+              placeholder={`${priceInBolivars.toFixed(2)} Bs...`} 
               onChange={(e) =>
                 setDataForm({
                   ...dataForm,

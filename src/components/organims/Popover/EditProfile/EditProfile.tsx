@@ -77,14 +77,14 @@ console.log(fieldChanges)
           placeholder="Nombre"
           type="text"
           value={fieldChanges.name || dataForm.name}
-          onChange={(e) => handleChange("name", e.target.value)}
+          onChange={(e) => handleChange("name", e.target.value.replace(/[^a-zA-Z\s]/g,""))}
         />
         <AppInput
           label=""
           placeholder="Apellido"
           type="text"
           value={fieldChanges.lastName || dataForm.lastName}
-          onChange={(e) => handleChange("lastName", e.target.value)}
+          onChange={(e) => handleChange("lastName", e.target.value.replace(/[^a-zA-Z\s]/g,""))}
         />
         <div className="col-span-2 md:col-span-1">
           <AppInput
