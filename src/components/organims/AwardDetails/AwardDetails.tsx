@@ -14,6 +14,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Legend } from "../../molecules/Legend/Legend";
 import AppModal from "../../atoms/AppModal/AppModal";
 import { Loader } from "../../atoms/Loader/Loader";
+import Rule from "../../molecules/RuleComponent/Rule";
 
 const AwardDetails = () => {
   const { id } = useParams();
@@ -30,6 +31,7 @@ const AwardDetails = () => {
   const [dataFooter, setDataFooter] = useState([]);
 
   const [modalDetail, setModalDetail] = useState(false);
+  const [modalRules, setModalRules] = useState(false)
 
   const loadExchangeRate = async () => {
     try {
@@ -91,6 +93,8 @@ const AwardDetails = () => {
 
   if (!award) return <h1>No se encontró el premio</h1>;
 
+  console.log(modalRules)
+
   return (
     <>
     {loading ? <Loader/> : <>
@@ -103,6 +107,7 @@ const AwardDetails = () => {
                 alt={award?.title}
                 className="w-full h-full object-contain mt-4"
               />
+              <AppModal width="w-[40rem]" open={modalRules} title="Reglas" children={<Rule/>} onClose={() => setModalRules(false)}/>
             </div>
             <div className="w-[100%] md:w-[50%] flex flex-col items-center p-2 mt-6 md:mt-0 mb-2">
               <div className="w-[90%] flex flex-col gap-2">
@@ -130,8 +135,21 @@ const AwardDetails = () => {
             loading={loading}
             titleFooter="Relacionados con tu búsqueda"
           >
-            <Legend />
-
+            <div className="w-full flex flex-col md:flex-row md:items-center justify-between">
+              <div>
+               <Legend />
+              </div>
+              <div className="mt-2">
+                <p className="ml-4 text-sm md:text-md">
+                  <a 
+                    onClick={() => setModalRules(true)} 
+                    className="hover:text-primary"
+                  >
+                    Reglas del sorteo
+                  </a>
+                </p>
+              </div>
+            </div>
             <div className="max-h-[500px] overflow-y-auto custom-scrollbar flex justify-between">
               {award.tickets && totalTickets && (
                 <Tickets

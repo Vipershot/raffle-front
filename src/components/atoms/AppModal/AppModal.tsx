@@ -3,12 +3,13 @@ import React from "react";
 
 interface Props {
   open: boolean;
+  width?: string;
   onClose?: () => void;
   title: React.ReactNode;
   children: React.ReactNode;
 }
 
-const AppModal = ({ open, onClose, title,  children }: Props) => {
+const AppModal = ({ open, onClose, title,  children, width = "w-96 " }: Props) => {
   if (!open) return null;
 
  
@@ -19,7 +20,7 @@ const AppModal = ({ open, onClose, title,  children }: Props) => {
       onClick={onClose} 
     >
       <div
-        className="relative w-96 bg-white modal-content rounded   shadow-lg p-6 "
+        className={`relative bg-white modal-content rounded  ${width} shadow-lg p-6 `}
         onClick={(e) => e.stopPropagation()} 
       >
         <h2 className="text-lg font-semibold mb-4  ">{title}</h2>
