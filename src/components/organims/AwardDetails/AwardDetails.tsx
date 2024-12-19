@@ -15,6 +15,7 @@ import { Legend } from "../../molecules/Legend/Legend";
 import AppModal from "../../atoms/AppModal/AppModal";
 import { Loader } from "../../atoms/Loader/Loader";
 import Rule from "../../molecules/RuleComponent/Rule";
+import  faq  from "../../../assets/faq.svg";
 
 const AwardDetails = () => {
   const { id } = useParams();
@@ -139,11 +140,12 @@ const AwardDetails = () => {
               <div>
                <Legend />
               </div>
-              <div className="mt-2">
-                <p className="ml-4 text-sm md:text-md">
+              <div className="mt-2 flex items-center">
+              <img src={faq} alt="" />
+                <p className="ml-1 text-sm md:text-md">
                   <a 
                     onClick={() => setModalRules(true)} 
-                    className="hover:text-primary"
+                    className="text-primary hover:text-black cursor-pointer"
                   >
                     Reglas del sorteo
                   </a>
