@@ -4,7 +4,7 @@ import { IMethodPay } from "../../../interface/metodsPayment";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IAward } from "../../../interface/awards";
-import { getExchangeRate, postBuyTicket } from "../../../services/awards";
+import { postBuyTicket } from "../../../services/awards";
 import AppModal from "../../atoms/AppModal/AppModal";
 import { BiLoader } from "react-icons/bi";
 import { AppButton } from "../../atoms/AppButton/AppButton";
@@ -17,7 +17,6 @@ interface ECustomError extends Error {
 
 export const Payment = () => {
   const [dataPayment, setDataPayment] = useState<IMethodPay>();
-  const [exchangeRate, setExchangeRate] = useState<number>(0);
   const { state } = useLocation();
   const [message, setMessage] = useState({
     title: "titulo",
@@ -36,20 +35,7 @@ export const Payment = () => {
   };
 
   const priceInBolivars =
-    exchangeRate > 0 ? Number(awardDetail.ticketPrice) * exchangeRate : 0;
-
-  useEffect(() => {
-    const fetchExchangeRate = async () => {
-      try {
-        const rate = await getExchangeRate();
-        setExchangeRate(rate);
-      } catch (error) {
-        console.error("Error fetching exchange rate:", error);
-      }
-    };
-
-    fetchExchangeRate();
-  }, []);
+  award.ticketPriceBCV * ticketsSelected.length
 
   const handlePay = async (data: IMethodPay) => {
     try {
@@ -153,7 +139,7 @@ export const Payment = () => {
                 <p className=" my-1">
                   <span className="font-bold text-primary rounded text-sm md:text-xl">
                     Total Bs.F{" "}
-                    {(priceInBolivars * ticketsSelected.length).toFixed(2)} / ${" "}
+                    {(award.ticketPriceBCV * ticketsSelected.length).toFixed(2)} / ${" "}
                     {(
                       Number(award.ticketPrice) * ticketsSelected.length
                     ).toFixed(2)}

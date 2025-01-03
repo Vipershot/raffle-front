@@ -5,6 +5,7 @@ export interface IAward {
     endDate:      Date;
     id:           string;
     ticketPrice:  string;
+    ticketPriceBCV?: number;
     title?:        string;
     totalTickets: number;
     updatedAt?:    Date;
