@@ -173,13 +173,10 @@ const AwardDetails = () => {
                     <div>
                       <span className="font-bold text-primary  rounded text-sm md:text-xl ">
                         Total Bs.F{" "}
-                        {(award.ticketPriceBCV * ticketsSelected.length).toFixed(2)}{" "}
-                        / ${" "}
-                        {(
-                          Number(award.ticketPrice) * ticketsSelected.length
-                        ).toFixed(2)}
+                        {award?.ticketPriceBCV !== undefined ? 
+                        (award.ticketPriceBCV * ticketsSelected.length).toFixed(2) : 'N'} / ${" "}
+                        {(Number(award.ticketPrice) * ticketsSelected.length).toFixed(2)}
                       </span>
-
                       <p className="text-dark max-w-xs mt-3">
                         Total de tickets seleccionados:{" "}
                         <b className="text-primary">{ticketsSelected.length}</b>
@@ -266,7 +263,8 @@ const AwardDetails = () => {
 
                     <div className="text-center">
                       <span className="block font-bold text-primary text-lg md:text-xl">
-                        {(award.ticketPriceBCV * ticketsSelected.length).toFixed(2)}
+                      {award?.ticketPriceBCV !== undefined ? 
+                      (award.ticketPriceBCV * ticketsSelected.length).toFixed(2) : 'N'} / ${" "}
                       </span>
                       <span className="block text-sm text-primary">Bs.F</span>
                     </div>
