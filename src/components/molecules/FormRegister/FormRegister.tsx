@@ -1,28 +1,65 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IUserAuth } from "../../../interface/login";
+import { useFormInput } from "../../../hooks/useFormInput";
 
 interface Props {
     onSubmit: (dataForm: IUserAuth )=> void
 }
 
-
-
-const initialState = {
-    name: "",
-    email: "",
-    password: ""
-}
-
 export const FormRegister = ({onSubmit}: Props) => {
-    const [dataForm, setDataForm] = useState<IUserAuth>(initialState)
+
+  const [valid, setValid] = useState(true)
+
+    const emailInput = useFormInput({
+      initialValue: "",
+      validate: (value) =>
+        value.includes("@") ? null : "Debe ingresar un correo electrónico válido",
+    });
+  
+    const passwordInput = useFormInput({
+      initialValue: "",
+      validate: (value) =>
+        value.length >= 8
+          ? null
+          : "La contraseña debe tener al menos 6 caracteres",
+    });
+
+    const nameInput = useFormInput({
+      initialValue: "",
+      validate: (value) =>
+        value.length === 0
+          ? "Debe ingresar su nombre"
+          : null
+    });
+
+    useEffect(() => {
+      if (nameInput.value.length > 0 && emailInput.value.length > 0 && emailInput.error === null && passwordInput.value.length > 0){
+        setValid(false)
+      } else {
+        setValid(true)
+      }
+    }, [nameInput.value, emailInput.value, passwordInput.value])
+    
+
     const handleSubmit =(event: FormEvent)=>{
+      if (nameInput.value.length > 0 && emailInput.value.length > 0 && passwordInput.value.length > 0) {
         event.preventDefault()
-        onSubmit(dataForm);
-        setDataForm(initialState)
+        onSubmit({
+          name: nameInput.value,
+          email: emailInput.value,
+          password: passwordInput.value,
+        });
+        nameInput.reset()
+        emailInput.reset();
+        passwordInput.reset();
+      } else {
+        null
+      }
     }
+
   return (
     <form onSubmit={handleSubmit}  className="flex flex-col gap-5 w-[90%] lg:w-1/4">
       <TitleText text="Registrar Usuario" />
@@ -30,24 +67,27 @@ export const FormRegister = ({onSubmit}: Props) => {
         type="text"
         label="Nombre"
         placeholder="Ingresa tu nombre"
-        value={dataForm.name}
-        onChange={(e) => {setDataForm({...dataForm, name:e.target.value})}}
+        value={nameInput.value}
+        onChange={nameInput.onChange}
+        error={nameInput.error}
       />
       <AppInput
         type="email"
         label="Correo electrónico "
-        value={dataForm.email}
         placeholder="Ingresa tu correo electrónico"
-        onChange={(e) => {setDataForm({...dataForm, email:e.target.value})}}
+        value={emailInput.value}
+        onChange={emailInput.onChange}
+        error={emailInput.error}
       />
       <AppInput
         type="password"
         label="Contraseña "
-        value={dataForm.password}
         placeholder="Ingresa tu contraseña"
-        onChange={(e) => {setDataForm({...dataForm, password:e.target.value})}}
+        value={passwordInput.value}
+        onChange={passwordInput.onChange}
+        error={passwordInput.error}
       />
-      <AppButton onClick={() => {}} title="Registrar" />
+      <AppButton onClick={() => {}} disabled={valid} title="Registrar" />
     </form>
   );
 };

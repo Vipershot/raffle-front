@@ -10,7 +10,7 @@ interface Props {
     value?: string
     type?: "search" | "text" | "email" | "password" | "number"
     name?:string
-    error?: string
+    error?: string | null
     step?: string
     max?: string
 }
