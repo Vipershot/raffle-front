@@ -4,6 +4,7 @@ import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IUserAuth } from "../../../interface/login";
 import { useFormInput } from "../../../hooks/useFormInput";
+import { inputValidEmail, inputValidName, inputValidPassword} from "../../../utils/inputValid";
 
 interface Props {
     onSubmit: (dataForm: IUserAuth )=> void
@@ -15,24 +16,17 @@ export const FormRegister = ({onSubmit}: Props) => {
 
     const emailInput = useFormInput({
       initialValue: "",
-      validate: (value) =>
-        value.includes("@") ? null : "Debe ingresar un correo electrónico válido",
+      validate: inputValidEmail
     });
   
     const passwordInput = useFormInput({
       initialValue: "",
-      validate: (value) =>
-        value.length >= 8
-          ? null
-          : "La contraseña debe tener al menos 6 caracteres",
+      validate: inputValidPassword
     });
 
     const nameInput = useFormInput({
       initialValue: "",
-      validate: (value) =>
-        value.length === 0
-          ? "Debe ingresar su nombre"
-          : null
+      validate: inputValidName
     });
 
     useEffect(() => {
