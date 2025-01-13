@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { IoTicketOutline } from "react-icons/io5";
-import { FaWhatsapp } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io";
-import { CiFacebook } from "react-icons/ci";
 
 export const AppFooter = () => {
   return (
