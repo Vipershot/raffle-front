@@ -7,7 +7,6 @@ export const registerUser = async(data:IUserAuth) => {
         const response =  await axiosRaffle.post(`/users/signup`, data)
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -17,7 +16,6 @@ export const loginUser = async(data:IUserAuth) => {
         const response =  await axiosRaffle.post(`/users/login`, data)
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -32,7 +30,6 @@ export const getProfile = async() => {
       
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -47,7 +44,6 @@ export const patchProfile = async(data:Partial<IProfile>) => {
       
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }

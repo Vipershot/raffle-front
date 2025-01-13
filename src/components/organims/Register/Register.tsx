@@ -14,17 +14,14 @@ export const Register = () => {
     const {isModalOpen, openModal} = useModal()
     const [message, setMessage] = useState<{title:string; description:string, icon: React.ReactNode} | null>(null)
     const navigate = useNavigate()
-    const handleRegister = async(dataForm:IUserAuth)=> {
+    const handleRegister = async()=> {
       try {
-        const res = await registerUser(dataForm)
-        console.log(res)
         setMessage({title:"Usuario Registrado", description:"Registro completado con exito", icon: <IoIosCheckmarkCircle  className="inline-block ml-2 text-info" size={30} />})
         openModal()
          
       } catch (error) {
         setMessage({title:"Error al registrar", description:"Registro fallido intente de nuevo", icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />})
         openModal()
-          console.log(error)
       }
    
     }

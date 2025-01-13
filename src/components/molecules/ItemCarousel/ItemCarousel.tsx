@@ -7,7 +7,6 @@ const ItemCarousel = ({title, description, date, imgUrl, id, price}:IItemCarouse
 
     const handleClick = () => {
       navigate(`/carusel/${id}`);
-      console.log(id)
     };
     return (<>
         <section className="flex justify-center">

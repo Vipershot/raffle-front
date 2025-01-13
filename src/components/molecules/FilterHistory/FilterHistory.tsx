@@ -21,7 +21,6 @@ export const FilterHistory = ({handleFilter}:Props) => {
 
   const handleFilterChange = (value: string) => {
     handleFilter(value)
-    console.log(`Filtrado por: ${value}`);
     setIsMenuVisible(false);
   };
 

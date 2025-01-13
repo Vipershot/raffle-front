@@ -30,7 +30,6 @@ export const Payment = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDataPayment = (data: IMethodPay) => {
-    console.log(data);
     setDataPayment(data);
   };
 
@@ -59,7 +58,6 @@ export const Payment = () => {
           navigate("/");
         },
       });
-      console.log("Compra exitosa, ID del ticket:", ticketId);
     } catch (error) {
       const { response } = error as ECustomError;
       setIsModalOpen(true);
@@ -81,13 +79,6 @@ export const Payment = () => {
     }
   };
 
-  useEffect(() => {
-    if (dataPayment) {
-      console.log("Service", dataPayment);
-    }
-  }, [dataPayment]);
-
-  console.log(award);
 
   return (
     <>

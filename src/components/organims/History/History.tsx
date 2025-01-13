@@ -15,9 +15,7 @@ export default function History() {
       setloading(true)
       const data = await getTicketsBuy()
       setData(data)
-      console.log(data)
     } catch (error) {
-      console.log(error)
     }finally{
       setloading(false)
     }
@@ -41,7 +39,6 @@ export default function History() {
         setData(data)
        }
     } catch (error) {
-      console.log(error)
     }finally{
       setloading(false)
     }

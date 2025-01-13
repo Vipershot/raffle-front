@@ -79,8 +79,6 @@ const AwardDetails = () => {
 
   if (!award) return <h1>No se encontró el premio</h1>;
 
-  console.log(award)
-
   return (
     <>
     {loading ? <Loader/> : <>

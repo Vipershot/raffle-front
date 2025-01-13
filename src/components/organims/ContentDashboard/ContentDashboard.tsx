@@ -38,7 +38,7 @@ export const ContentDashboard = () => {
   }
   useEffect(() => {
     loadAwards()
-    getProfile().then((res)=>{console.log(res)})
+    getProfile().then()
 
   }, []);
   

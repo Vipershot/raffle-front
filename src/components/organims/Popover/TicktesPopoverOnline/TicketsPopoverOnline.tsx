@@ -18,10 +18,8 @@ const load = async() =>{
   try {
     setLoading(true)
   const data = await getTicketsBuyOnline()
-    console.log(data)
     setTicketsBuy(data)
   } catch (error) {
-    console.log(error)
   }finally{
     setLoading(false)
   }
