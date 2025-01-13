@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Tickets from "../../molecules/Tickets/Tickets";
 import { LayoutContent } from "../../molecules/LayoutContent/LayoutContent";
 import { getLowestPrice, getAward } from "../../../services/awards";
-import { getExchangeRate } from "../../../services/awards";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
@@ -24,7 +23,6 @@ const AwardDetails = () => {
   const [showAlert, setShowAlert] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [award, setAward] = useState<IAward | null>(null);
-  const [exchangeRate, setExchangeRate] = useState<number>(0);
   const [totalTickets, setTotalTickets] = useState<
     { state: boolean; number: number }[] | null
   >(null);
@@ -33,15 +31,6 @@ const AwardDetails = () => {
 
   const [modalDetail, setModalDetail] = useState(false);
   const [modalRules, setModalRules] = useState(false)
-
-  const loadExchangeRate = async () => {
-    try {
-      const rate = await getExchangeRate();
-      setExchangeRate(rate);
-    } catch (error) {
-      console.error("Error obteniendo la tasa de cambio:", error);
-    }
-  };
 
 
   const loadAwards = async () => {
@@ -80,11 +69,7 @@ const AwardDetails = () => {
     }
   };
 
-  const priceInBolivars =
-    award && exchangeRate ? Number(award.ticketPrice) * exchangeRate : 0;
-
   useEffect(() => {
-    loadExchangeRate();
     setTotalTickets(null);
     setTicketsSelected([]);
     loadAwards();
@@ -94,7 +79,7 @@ const AwardDetails = () => {
 
   if (!award) return <h1>No se encontró el premio</h1>;
 
-  console.log(modalRules)
+  console.log(award)
 
   return (
     <>
@@ -122,7 +107,7 @@ const AwardDetails = () => {
                   Precio: ${award?.ticketPrice}
                 </p>
                 <p className="text-dark text-[13px] font-bold md:text-[16px]">
-                  Precio: BsF. {priceInBolivars.toFixed(2)}
+                  Precio: BsF. {award?.ticketPriceBCV}
                 </p>
                 <p className="text-dark text-[13px] md:text-[16px]">
                   Descripción: {award?.description}
@@ -188,13 +173,10 @@ const AwardDetails = () => {
                     <div>
                       <span className="font-bold text-primary  rounded text-sm md:text-xl ">
                         Total Bs.F{" "}
-                        {(priceInBolivars * ticketsSelected.length).toFixed(2)}{" "}
-                        / ${" "}
-                        {(
-                          Number(award.ticketPrice) * ticketsSelected.length
-                        ).toFixed(2)}
+                        {award?.ticketPriceBCV !== undefined ? 
+                        (award.ticketPriceBCV * ticketsSelected.length).toFixed(2) : 'N'} / ${" "}
+                        {(Number(award.ticketPrice) * ticketsSelected.length).toFixed(2)}
                       </span>
-
                       <p className="text-dark max-w-xs mt-3">
                         Total de tickets seleccionados:{" "}
                         <b className="text-primary">{ticketsSelected.length}</b>
@@ -281,7 +263,8 @@ const AwardDetails = () => {
 
                     <div className="text-center">
                       <span className="block font-bold text-primary text-lg md:text-xl">
-                        {(priceInBolivars * ticketsSelected.length).toFixed(2)}
+                      {award?.ticketPriceBCV !== undefined ? 
+                      (award.ticketPriceBCV * ticketsSelected.length).toFixed(2) : 'N'} / ${" "}
                       </span>
                       <span className="block text-sm text-primary">Bs.F</span>
                     </div>
