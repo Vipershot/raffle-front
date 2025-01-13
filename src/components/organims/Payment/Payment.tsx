@@ -16,7 +16,7 @@ interface ECustomError extends Error {
 }
 
 export const Payment = () => {
-  const [dataPayment, setDataPayment] = useState<IMethodPay>();
+  const [_, setDataPayment] = useState<IMethodPay>();
   const { state } = useLocation();
   const [message, setMessage] = useState({
     title: "titulo",
@@ -36,7 +36,6 @@ export const Payment = () => {
   const priceInBolivars =
   award.ticketPriceBCV * ticketsSelected.length
 
-  console.log(dataPayment)
   const handlePay = async (data: IMethodPay) => {
     try {
        await postBuyTicket(award.id, {

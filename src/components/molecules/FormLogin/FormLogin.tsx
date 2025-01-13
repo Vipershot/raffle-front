@@ -1,28 +1,37 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { IUserAuth } from "../../../interface/login";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
+import { useFormInput } from "../../../hooks/useFormInput";
+import { inputValidEmail, inputValidPassword } from "../../../utils/inputValid";
 
 interface Props {
   onSubmit: (dataForm: IUserAuth) => void;
   loading: boolean;
 }
 
-const initialState = {
-  email: "",
-  password: "",
-};
-
 export const FormLogin = ({ onSubmit, loading }: Props) => {
+
+  const emailInput = useFormInput({
+    initialValue: "",
+    validate: inputValidEmail
+  });
+
+  const passwordInput = useFormInput({
+    initialValue: "",
+    validate: inputValidPassword
+  });
   
-  const [dataForm, setDataForm] = useState<IUserAuth>(initialState);
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    onSubmit(dataForm);
-    setDataForm(initialState);
+    onSubmit({
+      email: emailInput.value,
+      password: passwordInput.value,
+    });
+    emailInput.reset();
+    passwordInput.reset();
   };
-
 
 
   return (
@@ -35,19 +44,17 @@ export const FormLogin = ({ onSubmit, loading }: Props) => {
         label="Correo electrónico"
         placeholder="Ingresa correo electrónico"
         type="email"
-        onChange={(e) => {
-          setDataForm({ ...dataForm, email: e.target.value });
-        }}
-        value={dataForm.email}
+        onChange={emailInput.onChange}
+        value={emailInput.value}
+        error={emailInput.error}
       />
       <AppInput
         type="password"
         label="Contraseña"
         placeholder="Ingresa contraseña"
-        onChange={(e) => {
-          setDataForm({ ...dataForm, password: e.target.value });
-        }}
-        value={dataForm.password}
+        onChange={passwordInput.onChange}
+        value={passwordInput.value}
+        error={passwordInput.error}
       />
 
       <AppButton
