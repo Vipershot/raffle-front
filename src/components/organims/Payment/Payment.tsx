@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FormPayment } from "../../molecules/FormPayment/FormPayment";
 import { IMethodPay } from "../../../interface/metodsPayment";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IAward } from "../../../interface/awards";
-import { postBuyTicket } from "../../../services/awards";
 import AppModal from "../../atoms/AppModal/AppModal";
 import { BiLoader } from "react-icons/bi";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { MdOutlineErrorOutline } from "react-icons/md";
+import { postBuyTicket } from "../../../services/awards";
 
 interface ECustomError extends Error {
   response: { data: { message: string } };
@@ -36,9 +36,10 @@ export const Payment = () => {
   const priceInBolivars =
   award.ticketPriceBCV * ticketsSelected.length
 
+  console.log(dataPayment)
   const handlePay = async (data: IMethodPay) => {
     try {
-      const ticketId = await postBuyTicket(award.id, {
+       await postBuyTicket(award.id, {
         ...data,
         ticketNumbers: ticketsSelected,
       });
@@ -75,7 +76,6 @@ export const Payment = () => {
           setIsModalOpen(false);
         },
       });
-      console.error("Error al comprar ticket:", error);
     }
   };
 
