@@ -29,7 +29,6 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
   const { setProfile } = useContext(AuthContext);
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(dataForm)
     setDataForm(initialState);
   };
 
@@ -54,7 +53,6 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
     setFieldChanges((prev) => ({ ...prev, [field]: value })); // Solo actualiza el campo que cambia
   };
   
-console.log(fieldChanges)
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex items-center justify-between mt-3">

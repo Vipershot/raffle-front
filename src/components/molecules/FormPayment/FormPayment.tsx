@@ -74,7 +74,6 @@ export const FormPayment = ({
     if (selectedMethod === "0") {
       const {email, ...payload} = dataForm
       handleDataPayment({...payload, paymentMethod: 'PAGO_MOVIL'})
-      console.log(email)
       handlePay({...payload, paymentMethod: 'PAGO_MOVIL'})
     }
     if (selectedMethod === "1" && errorEmail ==="") {

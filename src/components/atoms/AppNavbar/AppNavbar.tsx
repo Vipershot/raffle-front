@@ -34,7 +34,7 @@ export const AppNavbar = () => {
     }
     popoverOff();
   }, [pathname]);
-  console.log(profile)
+
   return (
     <nav className="p-10 bg-white shadow-md flex flex-wrap gap-5 md:gap-0 items-center justify-between">
       <Link to={"/"} onClick={modalOff} className="flex items-center gap-2">

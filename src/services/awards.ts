@@ -6,7 +6,6 @@ export const getAward= async(raffleId: string) =>{
         const response =  await axiosRaffle.get(`/raffles/${raffleId}`)
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -20,7 +19,6 @@ export const getMostRecent = async() =>{
         })
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -36,7 +34,6 @@ export const getLowestPrice = async() =>{
         })
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -52,7 +49,6 @@ export const getExchangeRateFromInternal = async (): Promise<number> => {
       const exchangeRate = response?.data?.exchangeRate || 0;
       return exchangeRate;
     } catch (error) {
-      console.error("Error obteniendo la tasa de cambio de la API interna:", error);
       throw error;
     }
   };
@@ -69,7 +65,6 @@ export const getExchangeRateFromInternal = async (): Promise<number> => {
       const internalRate = await getExchangeRateFromInternal();
       return internalRate;
     } catch (error) {
-      console.error("Error en el servicio combinado de tasas de cambio:", error);
   
       
       return 0;
@@ -92,7 +87,6 @@ export const getExchangeRateFromInternal = async (): Promise<number> => {
       const ticketId = response?.data?.ticketId || 0;
       return ticketId;
     } catch (error) {
-      console.error("Error al enviar la compra de ticket a la API interna:", error);
       throw error;
     }
   };
@@ -108,7 +102,6 @@ export const getExchangeRateFromInternal = async (): Promise<number> => {
         })
         return response.data
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -123,7 +116,6 @@ export const getTicketsBuy = async() =>{
       })
       return response.data
   } catch (error) {
-      console.log(error)
       throw error
   }
 }
@@ -138,7 +130,6 @@ export const getTicketsBuyFinished = async() =>{
       })
       return response.data
   } catch (error) {
-      console.log(error)
       throw error
   }
 }

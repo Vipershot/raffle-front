@@ -18,7 +18,6 @@ export const Popover = ({ onClick, profile }: Props) => {
   const [data, setData] = useState<IDetailBuyTicket | undefined >(undefined);
   const handlePopover =(item: string, data?:IDetailBuyTicket )=>{
     setPopoverName(item)
-    console.log('data')
     setData(data)
   }
   return (
