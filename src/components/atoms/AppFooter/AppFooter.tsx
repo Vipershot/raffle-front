@@ -27,25 +27,27 @@ export const AppFooter = () => {
           </div>
           <div>
             <ul className="flex justify-center text-white gap-3 mt-3">
-              <li>
+              {/* <li>
                
                 <FaWhatsapp
                   className="cursor-pointer hover:text-dark"
                   size={30}
                 />
-              </li>
+              </li> */}
               <li>
-                <IoLogoInstagram
+              <a target="_blank" href="https://www.instagram.com/raffle.ve/">
+              <IoLogoInstagram
                   className="cursor-pointer hover:text-dark"
                   size={30}
                 />
+              </a>
               </li>
-              <li>
+              {/* <li>
                 <CiFacebook
                   className="cursor-pointer hover:text-dark"
                   size={30}
                 />
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
