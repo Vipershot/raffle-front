@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { IoTicketOutline } from "react-icons/io5";
-import { FaWhatsapp } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io";
-import { CiFacebook } from "react-icons/ci";
 
 export const AppFooter = () => {
   return (
@@ -27,25 +25,27 @@ export const AppFooter = () => {
           </div>
           <div>
             <ul className="flex justify-center text-white gap-3 mt-3">
-              <li>
+              {/* <li>
                
                 <FaWhatsapp
                   className="cursor-pointer hover:text-dark"
                   size={30}
                 />
-              </li>
+              </li> */}
               <li>
-                <IoLogoInstagram
+              <a target="_blank" href="https://www.instagram.com/raffle.ve/">
+              <IoLogoInstagram
                   className="cursor-pointer hover:text-dark"
                   size={30}
                 />
+              </a>
               </li>
-              <li>
+              {/* <li>
                 <CiFacebook
                   className="cursor-pointer hover:text-dark"
                   size={30}
                 />
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
