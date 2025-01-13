@@ -24,6 +24,7 @@ export const Login = () => {
       navigate("/")
     } catch (e) {
       console.log(e)
+      setLoading(false)
       setMessage({title:"Error al iniciar sesion", description:"Intente de nuevo en un momento", icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />})
       openModal()
     }
