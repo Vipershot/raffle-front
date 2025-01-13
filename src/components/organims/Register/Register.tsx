@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useModal } from "../../../hooks/useModal"
 import { useState } from "react"
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
-import { IUserAuth } from "../../../interface/login"
-import { registerUser } from "../../../services/auth"
+
 
 
 
