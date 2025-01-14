@@ -8,7 +8,7 @@ import { LiaAwardSolid } from "react-icons/lia";
 import { getDayComplete, getHour } from "../../../utils/date";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { IoTicketOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineCelebration } from "react-icons/md";
 interface Props {
