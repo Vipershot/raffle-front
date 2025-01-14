@@ -8,8 +8,9 @@ import { LiaAwardSolid } from "react-icons/lia";
 import { getDayComplete, getHour } from "../../../utils/date";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { IoTicketOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { MdOutlineCelebration } from "react-icons/md";
 interface Props {
   handlePopover: (item: string) => void;
   data: IDetailBuyTicket | undefined;
@@ -17,6 +18,7 @@ interface Props {
 export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleCopy = async () => {
     try {
@@ -29,6 +31,17 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
       console.error("Error al copiar:", err);
     }
   };
+
+  useEffect(() => {
+    const lotteryDate = data ? new Date(data?.endDate) : 0;
+    const currentDate = new Date();
+
+    if (lotteryDate <= currentDate) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [data?.endDate]);
   return (
     <div>
       <div className="flex items-center justify-between mt-3">
@@ -58,24 +71,26 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
         ))}
       </div>
       <div className="flex flex-col gap-5 mt-5">
-      {copied && (
+        {copied && (
           <div>
             <span>
-              <p className="text-primary font-bold">ID copiado correctamente.</p>
+              <p className="text-primary font-bold">
+                ID copiado correctamente.
+              </p>
             </span>
           </div>
         )}
-        <div 
-        
+        <div
           className="flex items-center gap-2 cursor-pointer "
           onClick={handleCopy}
         >
           <IoTicketOutline className="text-lg text-primary" size={18} />
           <p className="font-bold text-dark">
-            ID-Sorteo: <span className="font-light hover:font-bold">{data?.id}</span>
+            ID-Sorteo:{" "}
+            <span className="font-light hover:font-bold">{data?.id}</span>
           </p>
         </div>
-    
+
         <div className="flex items-center gap-2">
           <BsCalendar2Check className="text-lg text-primary" size={18} />
           <p className="font-bold text-dark">
@@ -116,6 +131,29 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
             size="full"
           />
         </div>
+
+        <AppButton
+          size="full"
+          onClick={() => navigate(`/lottery/${data?.id}`)}
+          title={
+            <div
+              className={`flex gap-2 justify-center items-center ${
+                isDisabled
+                  ? " cursor-default text-black"
+                  : "cursor-pointer text-white"
+              }`}
+            >
+              Ver sorteo!{" "}
+              <MdOutlineCelebration
+                className={`cursor-${isDisabled ? "pointer" : "default"} ${
+                  isDisabled ? "text-black" : "text-black"
+                }`}
+                size={22}
+              />
+            </div>
+          }
+          disabled={isDisabled}
+        />
       </div>
     </div>
   );

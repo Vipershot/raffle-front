@@ -42,6 +42,7 @@ const load = async() =>{
         {ticketsBuy && ticketsBuy.map((item, i) =>  <TicketsPopover key={i} data={item} handlePopover={handlePopover}/>)}
         {ticketsBuy?.length === 0 ? <p className="text-center font-bold m-auto">Adquiere tus primeros tickets</p> : ""}
       </div>
+    
       </> }
  
       </>
