@@ -8,9 +8,10 @@ import { LiaAwardSolid } from "react-icons/lia";
 import { getDayComplete, getHour } from "../../../utils/date";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { IoTicketOutline } from "react-icons/io5";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineCelebration } from "react-icons/md";
+import useCountdown from "../../../hooks/useCountdown";
 interface Props {
   handlePopover: (item: string) => void;
   data: IDetailBuyTicket | undefined;
@@ -32,16 +33,18 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
     }
   };
 
-  useEffect(() => {
-    const lotteryDate = data ? new Date(data?.endDate) : 0;
-    const currentDate = new Date();
+  const lotteryDate = data ? new Date(data?.endDate) : new Date();
+  const { isCountdownActive, timer } = useCountdown(lotteryDate);
 
-    if (lotteryDate <= currentDate) {
+  useEffect(() => {
+    if (isCountdownActive) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [data?.endDate]);
+  }, [timer]);
+
+
   return (
     <div>
       <div className="flex items-center justify-between mt-3">
