@@ -6,7 +6,7 @@ export const AppFooter = () => {
   return (
 
     <>
-      <div className="bg-info mt-40">
+      <div className="bg-info mt-40 md:mt-4">
         <div className=" p-5 ">
           <div className="text-white mb-3 flex justify-center gap-3">
             <strong> Copyright 2024, Todos nuestros derechos reservados</strong>{" "}
