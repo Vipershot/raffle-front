@@ -39,8 +39,8 @@ export const FormRegister = ({onSubmit}: Props) => {
     
 
     const handleSubmit =(event: FormEvent)=>{
+      event.preventDefault();
       if (nameInput.value.length > 0 && emailInput.value.length > 0 && passwordInput.value.length > 0) {
-        event.preventDefault()
         onSubmit({
           name: nameInput.value,
           email: emailInput.value,
@@ -49,8 +49,6 @@ export const FormRegister = ({onSubmit}: Props) => {
         nameInput.reset()
         emailInput.reset();
         passwordInput.reset();
-      } else {
-        null
       }
     }
 

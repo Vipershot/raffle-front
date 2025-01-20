@@ -33,17 +33,20 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
     }
   };
 
-  const lotteryDate = data ? new Date(data?.endDate) : new Date();
-  const { isCountdownActive, timer } = useCountdown(lotteryDate);
-
   useEffect(() => {
-    if (isCountdownActive) {
+    const lotteryDate = data ? new Date(data?.endDate) : 0;
+    const currentDate = new Date();
+
+    if (lotteryDate <= currentDate) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [timer]);
+  }, [data?.endDate]);
 
+ // const verifyTimer = () => {
+   // useCountdown(data.endDate);
+ // };
 
   return (
     <div>

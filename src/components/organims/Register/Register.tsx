@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 import { useModal } from "../../../hooks/useModal"
 import { useState } from "react"
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
+import { registerUser } from "../../../services/auth"
+import { IUserAuth } from "../../../interface/login"
 
 
 
@@ -13,8 +15,9 @@ export const Register = () => {
     const {isModalOpen, openModal} = useModal()
     const [message, setMessage] = useState<{title:string; description:string, icon: React.ReactNode} | null>(null)
     const navigate = useNavigate()
-    const handleRegister = async()=> {
+    const handleRegister = async(data: IUserAuth)=> {
       try {
+        await registerUser(data)
         setMessage({title:"Usuario Registrado", description:"Registro completado con exito", icon: <IoIosCheckmarkCircle  className="inline-block ml-2 text-info" size={30} />})
         openModal()
          
