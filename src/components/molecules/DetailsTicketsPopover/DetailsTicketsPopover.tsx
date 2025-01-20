@@ -11,7 +11,8 @@ import { IoTicketOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineCelebration } from "react-icons/md";
-import useCountdown from "../../../hooks/useCountdown";
+/* import useCountdown from "../../../hooks/useCountdown"; */
+
 interface Props {
   handlePopover: (item: string) => void;
   data: IDetailBuyTicket | undefined;
