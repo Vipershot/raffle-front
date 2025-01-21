@@ -43,7 +43,7 @@ export const FormRegister = ({onSubmit}: Props) => {
       if (nameInput.value.length > 0 && emailInput.value.length > 0 && passwordInput.value.length > 0) {
         onSubmit({
           name: nameInput.value,
-          email: emailInput.value,
+          email: emailInput.value.toLowerCase(),
           password: passwordInput.value,
         });
         nameInput.reset()

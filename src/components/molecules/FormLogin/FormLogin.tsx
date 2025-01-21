@@ -26,7 +26,7 @@ export const FormLogin = ({ onSubmit, loading }: Props) => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     onSubmit({
-      email: emailInput.value,
+      email: emailInput.value.toLowerCase(),
       password: passwordInput.value,
     });
     emailInput.reset();
