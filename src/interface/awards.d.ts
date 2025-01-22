@@ -54,3 +54,10 @@ export interface IAward {
     ticketNumber: string;
    }
   
+   export interface RaffleWinners {
+    title: string;
+    cover: string;
+    drawnAt: Date | null;
+    endDate: Date;
+    winnerTickets: WinnerTicket[];
+  }
