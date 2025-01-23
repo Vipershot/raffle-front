@@ -23,22 +23,17 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const handleCopy = async () => {
-    try {
       if (data) {
         await navigator.clipboard.writeText(data.id);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000); // Ocultar mensaje después de 2 segundos
       }
-    } catch (err) {
-      console.error("Error al copiar:", err);
-    }
   };
 
   useEffect(() => {
-    const lotteryDate = data ? new Date(data?.endDate) : 0;
+    const lotteryDate = data ? new Date(new Date(data?.endDate).setDate(new Date().getDate() - 1) ): new Date();
     const currentDate = new Date();
-
-    if (lotteryDate <= currentDate) {
+    if (lotteryDate.getTime() <= currentDate.getTime()) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);

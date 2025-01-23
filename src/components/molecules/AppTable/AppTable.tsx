@@ -13,11 +13,11 @@ export const AppTable = ({tickets, loading}:Props) => {
   return (
     <>
       <div className=" p-2 hidden md:block">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto px-4">
           <table className="w-full text-sm text-left  text-gray-500">
             <thead className=" text-info font-bold  bg-gray-50">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-3 py-4">
                   Imagen
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -48,7 +48,7 @@ export const AppTable = ({tickets, loading}:Props) => {
                   className="bg-white border-b hover:bg-gray-50"
                 >
                   <td className="px-3 py-4">
-                    <div className="relative w-16 h-16">
+                    <div className="relative w-16 h-16 h-[100%]">
                       <img
                         src={ticket.cover}
                         className="object-cover rounded-md"

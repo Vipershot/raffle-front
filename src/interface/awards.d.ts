@@ -3,6 +3,7 @@ export interface IAward {
     createdAt:    Date;
     description:  string;
     endDate:      Date;
+    drawnAt?:     Date;
     id:           string;
     ticketPrice:  string;
     ticketPriceBCV?: number;
@@ -54,3 +55,10 @@ export interface IAward {
     ticketNumber: string;
    }
   
+   export interface RaffleWinners {
+    title: string;
+    cover: string;
+    drawnAt: Date | null;
+    endDate: Date;
+    winnerTickets: WinnerTicket[];
+  }

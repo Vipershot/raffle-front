@@ -27,7 +27,7 @@ export const CardProduct = ({
   return (
     <div className="bg-white col-span-1 relative md:p-5 flex flex-col gap-2  justify-between h-full p-3">
     <div>
-    <h1 className="font-bold text-white md:text-3xl bg-primary rounded-[100%] px-2 py-1  md:px-3 md:py-3 absolute">${ticketPrice.substring(0, 1)}</h1>
+    <h1 className="font-bold text-white md:text-2xl bg-primary rounded-[100%] px-2 py-1  md:px-3 md:py-3 absolute">${ticketPrice}</h1>
       <Link to={`/award/${id}`}>
         <img
           className="h-[100px] md:h-[200px] w-[100%] mb-2 object-contain"
@@ -39,7 +39,7 @@ export const CardProduct = ({
       </Link>
     </div>
     <div className="flex flex-col md:gap-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap">
           <h3 className="text-[12px] md:text-xl text-secondary font-semibold italic">{validateAvailable()}</h3>
           <h3 className="md:text-xl text-primary font-semibold">{getDayComplete(endDate)}</h3>
         </div>

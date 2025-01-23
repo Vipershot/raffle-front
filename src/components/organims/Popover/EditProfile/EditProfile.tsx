@@ -50,7 +50,8 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
   }
 
   const handleChange = (field: string, value: string) => {
-    setFieldChanges((prev) => ({ ...prev, [field]: value })); // Solo actualiza el campo que cambia
+    setFieldChanges((prev) => ({ ...prev, [field]: value }));
+    setDataForm((prev) => ({ ...prev, [field]: value }));
   };
   
   return (
@@ -74,14 +75,14 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
           label=""
           placeholder="Nombre"
           type="text"
-          value={fieldChanges.name || dataForm.name}
+          value={fieldChanges.name || dataForm.name || ""}
           onChange={(e) => handleChange("name", e.target.value.replace(/[^a-zA-Z\s]/g,""))}
         />
         <AppInput
           label=""
           placeholder="Apellido"
           type="text"
-          value={fieldChanges.lastName || dataForm.lastName}
+          value={fieldChanges.lastName || dataForm.lastName || ""}
           onChange={(e) => handleChange("lastName", e.target.value.replace(/[^a-zA-Z\s]/g,""))}
         />
         <div className="col-span-2 md:col-span-1">
@@ -89,7 +90,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
             label=""
             type="email"
             placeholder="Correo electrónico"
-            value={fieldChanges.email || dataForm.email}
+            value={fieldChanges.email || dataForm.email || ""}
             onChange={(e) => handleChange("email", e.target.value)}
           />
         </div>
@@ -98,7 +99,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
             label=""
             type="text"
             placeholder="Número de teléfono"
-            value={fieldChanges.phone || dataForm.phone}
+            value={fieldChanges.phone || dataForm.phone || ""}
             onChange={(e) => {
               const sanitizedValue = e.target.value.replace(/[^0-9]/g, "");
               handleChange("phone", sanitizedValue);
@@ -109,7 +110,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
           <AppInput label="" 
           type="password"
           placeholder="Contraseña" 
-          value={fieldChanges.password || dataForm.password}
+          value={fieldChanges.password || dataForm.password || ""}
           onChange={(e) => handleChange("password", e.target.value)} />
         </div>
         <div className="col-span-2 md:col-span-1">
@@ -117,7 +118,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
             label=""
             type="password"
             placeholder="Cambiar contraseña"
-            value={fieldChanges.newPassword || dataForm.newPassword}
+            value={fieldChanges.newPassword || dataForm.newPassword || ""}
             onChange={(e) => handleChange("newPassword", e.target.value)}
           />
         </div>

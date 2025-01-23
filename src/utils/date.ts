@@ -1,6 +1,6 @@
 export const getDayComplete = (day: Date) => {
     const DT = new Date(day);
-    const D = DT.getDay();
+    const D = DT.getDate(); // Changed from getDay to getDate
     const M = DT.toLocaleString("es-ES", { month: "short", year: "numeric" });
     const completeDay = `${D} ${M}`;
     return completeDay;
