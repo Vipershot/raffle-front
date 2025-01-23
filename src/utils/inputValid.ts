@@ -5,9 +5,9 @@ export const inputValidEmail = (value: string): string | null => {
 };
 
 export const inputValidPassword = (value: string): string | null => {
-  return value.length >= 4
+  return value.length >= 8
     ? null
-    : "La contraseña debe tener al menos 6 caracteres";
+    : "La contraseña debe tener al menos 8 caracteres";
 };
 
 export const inputValidName = (value: string): string | null => {

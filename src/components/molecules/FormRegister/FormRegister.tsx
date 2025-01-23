@@ -4,56 +4,85 @@ import { AppInput } from "../../atoms/AppInput/AppInput";
 import { TitleText } from "../../atoms/TitleText/TitleText";
 import { IUserAuth } from "../../../interface/login";
 import { useFormInput } from "../../../hooks/useFormInput";
-import { inputValidEmail, inputValidName, inputValidPassword} from "../../../utils/inputValid";
+import {
+  inputValidEmail,
+  inputValidName,
+  inputValidNumber,
+  inputValidPassword,
+} from "../../../utils/inputValid";
 
 interface Props {
-    onSubmit: (dataForm: IUserAuth )=> void
+  onSubmit: (dataForm: IUserAuth) => void;
 }
 
-export const FormRegister = ({onSubmit}: Props) => {
+export const FormRegister = ({ onSubmit }: Props) => {
+  const [valid, setValid] = useState(true);
 
-  const [valid, setValid] = useState(true)
+  const emailInput = useFormInput({
+    initialValue: "",
+    validate: inputValidEmail,
+  });
 
-    const emailInput = useFormInput({
-      initialValue: "",
-      validate: inputValidEmail
-    });
-  
-    const passwordInput = useFormInput({
-      initialValue: "",
-      validate: inputValidPassword
-    });
+  const passwordInput = useFormInput({
+    initialValue: "",
+    validate: inputValidPassword,
+  });
 
-    const nameInput = useFormInput({
-      initialValue: "",
-      validate: inputValidName
-    });
+  const nameInput = useFormInput({
+    initialValue: "",
+    validate: inputValidName,
+  });
 
-    useEffect(() => {
-      if (nameInput.value.length > 0 && emailInput.value.length > 0 && emailInput.error === null && passwordInput.value.length > 0){
-        setValid(false)
-      } else {
-        setValid(true)
-      }
-    }, [nameInput.value, emailInput.value, passwordInput.value])
-    
+  const phoneInput = useFormInput({
+    initialValue: "",
+    validate: inputValidNumber,
+  });
 
-    const handleSubmit =(event: FormEvent)=>{
-      event.preventDefault();
-      if (nameInput.value.length > 0 && emailInput.value.length > 0 && passwordInput.value.length > 0) {
-        onSubmit({
-          name: nameInput.value,
-          email: emailInput.value.toLowerCase(),
-          password: passwordInput.value,
-        });
-        nameInput.reset()
-        emailInput.reset();
-        passwordInput.reset();
-      }
+  useEffect(() => {
+    if (
+      phoneInput.value.length > 0 &&
+      nameInput.value.length > 0 &&
+      emailInput.value.length > 0 &&
+      emailInput.error === null &&
+      passwordInput.value.length >= 8
+    ) {
+      setValid(false);
+    } else {
+      setValid(true);
     }
+  }, [
+    nameInput.value,
+    emailInput.value,
+    passwordInput.value,
+    phoneInput.value,
+  ]);
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    if (
+      nameInput.value.length > 0 &&
+      emailInput.value.length > 0 &&
+      passwordInput.value.length > 0 &&
+      phoneInput.value.length >= 8
+    ) {
+      onSubmit({
+        name: nameInput.value,
+        email: emailInput.value.toLowerCase(),
+        password: passwordInput.value,
+        phone: phoneInput.value,
+      });
+      nameInput.reset();
+      emailInput.reset();
+      passwordInput.reset();
+      phoneInput.reset();
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit}  className="flex flex-col gap-5 w-[90%] lg:w-1/4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-5 w-[90%] lg:w-1/4"
+    >
       <TitleText text="Registrar Usuario" />
       <AppInput
         type="text"
@@ -62,6 +91,15 @@ export const FormRegister = ({onSubmit}: Props) => {
         value={nameInput.value}
         onChange={nameInput.onChange}
         error={nameInput.error}
+      />
+      <AppInput
+        type="number"
+        maxLength={11}
+        label="Numero de telefono"
+        placeholder="Ingresa tu nombre"
+        value={phoneInput.value.replace(/[^0-9]/g, "")}
+        onChange={phoneInput.onChange}
+        error={phoneInput.error}
       />
       <AppInput
         type="email"
