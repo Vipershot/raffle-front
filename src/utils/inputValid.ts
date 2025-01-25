@@ -17,4 +17,10 @@ export const inputValidName = (value: string): string | null => {
 export const inputValidNumber= (value: string): string | null => {
     return value.length >= 11 ? null : "Ingrese numero de telefono valido";
   };
-  
+
+export const inputValidOperator = (value: string): string | null => {
+  return value.startsWith("0424") || value.startsWith("0414") || value.startsWith("0412") || value.startsWith("0416") || value.startsWith("0426")
+    ? null
+    : "Ingrese un numero de operadora valido";
+};
+

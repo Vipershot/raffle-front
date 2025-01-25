@@ -37,8 +37,6 @@ export const ContentDashboard = () => {
     getProfile().then();
   }, []);
 
-  console.log(mostRecent)
-
   return (
     <div className="flex flex-col gap-y-10 py-10 lg:px-42 sm:px-0">
       {loading ? (

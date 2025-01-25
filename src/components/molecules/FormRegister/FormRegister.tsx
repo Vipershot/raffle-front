@@ -8,6 +8,7 @@ import {
   inputValidEmail,
   inputValidName,
   inputValidNumber,
+  inputValidOperator,
   inputValidPassword,
 } from "../../../utils/inputValid";
 
@@ -35,12 +36,12 @@ export const FormRegister = ({ onSubmit }: Props) => {
 
   const phoneInput = useFormInput({
     initialValue: "",
-    validate: inputValidNumber,
+    validate: (value: string) => inputValidNumber(value) && inputValidOperator(value),
   });
 
   useEffect(() => {
     if (
-      phoneInput.value.length > 0 &&
+      phoneInput.value.length >= 11 &&
       nameInput.value.length > 0 &&
       emailInput.value.length > 0 &&
       emailInput.error === null &&
@@ -63,7 +64,7 @@ export const FormRegister = ({ onSubmit }: Props) => {
       nameInput.value.length > 0 &&
       emailInput.value.length > 0 &&
       passwordInput.value.length > 0 &&
-      phoneInput.value.length >= 8
+      phoneInput.value.length >= 11
     ) {
       onSubmit({
         name: nameInput.value,
@@ -93,7 +94,7 @@ export const FormRegister = ({ onSubmit }: Props) => {
         error={nameInput.error}
       />
       <AppInput
-        type="number"
+        type="text"
         maxLength={11}
         label="Numero de telefono"
         placeholder="Ingresa tu nombre"
