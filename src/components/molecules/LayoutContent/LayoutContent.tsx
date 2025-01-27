@@ -14,7 +14,7 @@ interface Props {
 export const LayoutContent = ({title,titleFooter = "Otros productos", dataFooter,loading,children, grid =false}:Props) => {
   return (
     <div>
-        <div className='py-2 px-[10px] lg:px-60 md:py-10  mt-5 bg-light'>
+        <div className='py-2 px-[10px] lg:px-60 md:py-10 bg-light'>
        <div className='flex flex-wrap justify-between'>
        <TitleText text={title} />
       

@@ -61,8 +61,10 @@ const AwardDetails = () => {
 
   const handleTickets = (newTicket: number) => {
     if (!ticketsSelected.includes(newTicket)) {
+      localStorage.setItem('tickets',JSON.stringify([...ticketsSelected, newTicket]))
       setTicketsSelected([...ticketsSelected, newTicket]);
     } else {
+      localStorage.setItem('tickets',JSON.stringify(ticketsSelected.filter((item) => item !== newTicket)))
       const popTicket = ticketsSelected.filter((item) => item !== newTicket);
       setTicketsSelected(popTicket);
     }
@@ -73,6 +75,9 @@ const AwardDetails = () => {
     setTicketsSelected([]);
     loadAwards();
   }, [id]);
+  useEffect(() => {
+    localStorage.setItem('award', JSON.stringify(id))
+  }, []);
 
   if (loading) return <Loader />;
 

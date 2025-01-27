@@ -17,15 +17,25 @@ export const Login = () => {
   const {isModalOpen, openModal, closeModal} = useModal()
   const [message, setMessage] = useState<{title:string; description:string, icon: React.ReactNode} | null>(null)
   const handleLogin = async(dataForm:IUserAuth)=> {
+    const localTickets = localStorage.getItem('tickets') ? localStorage.getItem('tickets')!.length > 0 : false
+   
     try {
       setLoading(true)
       const {token} = await loginUser(dataForm)
       login(token)
-      navigate("/")
-    } catch (e) {
-      setLoading(false)
-      setMessage({title:"Error al iniciar sesion", description:"Intente de nuevo en un momento", icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />})
-      openModal()
+      const award = JSON.parse(localStorage.getItem('award') || '""');
+      if(localTickets){
+        navigate(`/award/` + award) 
+      }else{
+        navigate("/") 
+      } 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      if(e && e.response){
+        setLoading(false)
+        setMessage({title:"Error al iniciar sesion", description:e.response.data.message, icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />})
+        openModal()
+      }
     }
  
 }

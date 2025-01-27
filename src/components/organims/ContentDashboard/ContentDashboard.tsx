@@ -35,15 +35,17 @@ export const ContentDashboard = () => {
   useEffect(() => {
     loadAwards();
     getProfile().then();
+    localStorage.removeItem('tickets')
+    localStorage.removeItem('award')
   }, []);
 
   return (
-    <div className="flex flex-col gap-y-10 py-10 lg:px-42 sm:px-0">
+    <div className="flex flex-col gap-y-10 sm:px-0">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <LayoutContent title={"Rifas Navideñas"} loading={loading} grid>
+          <LayoutContent title={"Raffle Rifa"} loading={loading} grid>
             {mostRecent.map(
               ({
                 title,

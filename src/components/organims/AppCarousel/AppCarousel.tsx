@@ -1,29 +1,29 @@
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-interface Props {
-    data: {imgUrl:string}[]
-}
-const AppCarousel = ({data}:Props) => {
-    const responsive = {
-        desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 1,
-          slidesToSlide: 1 // optional, default to 1.
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 1,
-          slidesToSlide: 1 // optional, default to 1.
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1,
-          slidesToSlide: 1 // optional, default to 1.
-        }
-      };
+import img from '../../../assets/banner3.png'
+// interface Props {
+//     data: {imgUrl:string}[]
+// }
+const AppCarousel = () => {
+    // const responsive = {
+    //     desktop: {
+    //       breakpoint: { max: 3000, min: 1024 },
+    //       items: 1,
+    //       slidesToSlide: 1 // optional, default to 1.
+    //     },
+    //     tablet: {
+    //       breakpoint: { max: 1024, min: 464 },
+    //       items: 1,
+    //       slidesToSlide: 1 // optional, default to 1.
+    //     },
+    //     mobile: {
+    //       breakpoint: { max: 464, min: 0 },
+    //       items: 1,
+    //       slidesToSlide: 1 // optional, default to 1.
+    //     }
+    //   };
       return <>
-         <Carousel
+         {/* <Carousel
         swipeable={false}
         draggable={false}
         showDots={true}
@@ -45,7 +45,10 @@ const AppCarousel = ({data}:Props) => {
             </div>
         )
         )}
-      </Carousel>
+      </Carousel> */}
+      <div className="w-full md:h-[500px] object-cover bg-bottom aspect-[64/27] overflow-hidden">
+              <img src={img} alt="" className="w-full bg-bottom md:h-[500px] object-cover"/>
+            </div>
       </>
    
 }
