@@ -304,8 +304,7 @@ const AwardDetails = () => {
                               ? (
                                   award.ticketPriceBCV * ticketsSelected.length
                                 ).toFixed(2)
-                              : "N"}{" "}
-                            / ${" "}
+                              : "N"}
                           </span>
                           <span className="block text-sm text-primary">
                             Bs.F
