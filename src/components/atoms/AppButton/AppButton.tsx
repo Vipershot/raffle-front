@@ -8,6 +8,7 @@ interface Props {
     appearance?: "outline" | "primary" | "text",
     size?: 'sm' | 'md'| 'lg' | 'full'
     bold?: boolean
+    border?: boolean
 }
 
 export const AppButton =({
@@ -16,11 +17,16 @@ export const AppButton =({
     disabled = false,
     appearance = "primary",
     size = "md",
-    bold
+    bold,
+    border
 }:Props)=>{
  
 
     return <>
-    <button  className={` rounded-md ${getAppearance(disabled, appearance)} ${getSizeButton(size)} ${size === 'full' && 'w-full'} ${bold && 'font-bold'}` } disabled={disabled} onClick={onClick}>{title}</button>
+ 
+
+        <button  className={`p-0 rounded-md ${getAppearance(disabled, appearance, border)} ${getSizeButton(size)} ${size === 'full' && 'w-full'} ${bold && 'font-bold'}` } disabled={disabled} onClick={onClick}>
+        <div className="rounded-md p-2" style={{ border:border ?'1px dashed white' : 'none'}} >{title}  </div></button>
+  
     </>
 }

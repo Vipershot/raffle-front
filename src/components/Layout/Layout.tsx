@@ -13,7 +13,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <div>
       <AppNavbar />
-      <main className="min-h-screen relative">
+      <main className="relative">
         {modalState && (
           <>
         {modalName === 'list' &&  <div className="bg-light h-[40vh] overflow-y-auto custom-scrollbar ">

@@ -1,53 +1,35 @@
 import { Link } from "react-router-dom";
-import { IoTicketOutline } from "react-icons/io5";
 import { IoLogoInstagram } from "react-icons/io";
-
+import logoraffle from "../../../assets/logoraffle.png";
 export const AppFooter = () => {
   return (
-
     <>
-      <div className="bg-info mt-40 md:mt-4">
-        <div className=" p-5 ">
-          <div className="text-white mb-3 flex justify-center gap-3">
+      <div >
+        <div className="pb-10">
+          <div className=" text-dark flex justify-center  items-center p-6  gap-3 bg-white">
             <strong> Copyright 2024, Todos nuestros derechos reservados</strong>{" "}
-           <Link className="flex gap-1" to={'/'}> <IoTicketOutline
-              className="cursor-pointer hover:text-dark"
-              size={22}
-            />{" "}
-            <strong className="cursor-pointer hover:text-dark">Raffle.com</strong></Link>
+            <Link className="flex gap-1" to={"/"}>
+              <img src={logoraffle} alt="raffle" />
+            </Link>
+            <a
+              target="_blank"
+              className="text-primary"
+              href="https://www.instagram.com/raffle.ve/"
+            >
+              <IoLogoInstagram
+                className="cursor-pointer hover:text-dark"
+                size={30}
+              />
+            </a>
           </div>
-          <hr className="text-dark my-5" />
+          <div className="text-dark"></div>
           <div>
-            <p className="flex justify-center text-white">
+            <p className="flex justify-center text-dark">
               Aviso legal Politica de privacidad Quienes Somos Contacto Politica
               de cookies Declaracion de privacidad
             </p>
           </div>
-          <div>
-            <ul className="flex justify-center text-white gap-3 mt-3">
-              {/* <li>
-               
-                <FaWhatsapp
-                  className="cursor-pointer hover:text-dark"
-                  size={30}
-                />
-              </li> */}
-              <li>
-              <a target="_blank" href="https://www.instagram.com/raffle.ve/">
-              <IoLogoInstagram
-                  className="cursor-pointer hover:text-dark"
-                  size={30}
-                />
-              </a>
-              </li>
-              {/* <li>
-                <CiFacebook
-                  className="cursor-pointer hover:text-dark"
-                  size={30}
-                />
-              </li> */}
-            </ul>
-          </div>
+          <div></div>
         </div>
       </div>
     </>

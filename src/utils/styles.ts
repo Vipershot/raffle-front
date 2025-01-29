@@ -1,6 +1,6 @@
 import { IAppearance, ISize } from "../interface/styles"
 
-export const getAppearance = (disabled: boolean, appearance: IAppearance ) => {
+export const getAppearance = (disabled: boolean, appearance: IAppearance, border?: boolean ) => {
     if(!disabled){
         switch (appearance) {
             case 'primary':
@@ -10,7 +10,7 @@ export const getAppearance = (disabled: boolean, appearance: IAppearance ) => {
                 return 'text-info   hover:text-primary'
             
             case 'outline':
-                return 'border border-info text-info   hover:text-primary'
+                return `border border-info text-info ${border && 'border-dashed '}   hover:text-primary`
                    
             default: 
                 return 'bg-info text-white'

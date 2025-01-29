@@ -96,7 +96,7 @@ const AwardDetails = () => {
                   <img
                     src={award?.cover}
                     alt={award?.title}
-                    className="w-full h-full object-contain mt-4"
+                    className="w-full h-full md:w-50 md:h-80 object-contain mt-4"
                   />
                   <AppModal
                     width="w-[40rem]"

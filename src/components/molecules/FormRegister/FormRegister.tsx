@@ -82,7 +82,7 @@ export const FormRegister = ({ onSubmit }: Props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 w-[90%] lg:w-1/4"
+      className="flex flex-col gap-5 w-[90%] lg:w-1/2"
     >
       <TitleText text="Registrar Usuario" />
       <AppInput
@@ -118,7 +118,7 @@ export const FormRegister = ({ onSubmit }: Props) => {
         onChange={passwordInput.onChange}
         error={passwordInput.error}
       />
-      <AppButton onClick={() => {}} disabled={valid} title="Registrar" />
+      <AppButton disabled={valid} title="Registrar" />
     </form>
   );
 };

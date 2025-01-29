@@ -12,17 +12,17 @@ import { IUserAuth } from "../../../interface/login"
 
 
 export const Register = () => {
-    const {isModalOpen, openModal} = useModal()
-    const [message, setMessage] = useState<{title:string; description:string, icon: React.ReactNode} | null>(null)
+    const {isModalOpen, openModal, closeModal} = useModal()
+    const [message, setMessage] = useState<{title:string; description:string, icon: React.ReactNode, error:boolean} | null>(null)
     const navigate = useNavigate()
     const handleRegister = async(data: IUserAuth)=> {
       try {
         await registerUser(data)
-        setMessage({title:"Usuario Registrado", description:"Registro completado con exito", icon: <IoIosCheckmarkCircle  className="inline-block ml-2 text-info" size={30} />})
+        setMessage({title:"Usuario Registrado", description:"Registro completado con exito", icon: <IoIosCheckmarkCircle  className="inline-block ml-2 text-info" size={30} />, error: false})
         openModal()
          
       } catch (error) {
-        setMessage({title:"Error al registrar", description:"Registro fallido intente de nuevo", icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />})
+        setMessage({title:"Error al registrar", description:"Registro fallido intente de nuevo", icon: <IoIosCloseCircle  className="inline-block ml-2 text-info" size={30} />, error: true})
         openModal()
       }
    
@@ -45,10 +45,16 @@ export const Register = () => {
           <div className="space-y-4">
             <p className="text-dark">{message.description}</p>
       
-            <AppButton
+         <AppButton
               size="full"
-              onClick={() => navigate("/login")}
-              title="Confirmar"
+              onClick={() => {
+                if(message.error){
+                  closeModal()
+                }else{
+                  navigate("/login")
+                }
+              }}
+              title={message.error ? "Cerrar" :"Confirmar"}
             />
           </div>
         </AppModal>}

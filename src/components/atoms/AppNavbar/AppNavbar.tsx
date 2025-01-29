@@ -1,5 +1,4 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { TitleText } from "../TitleText/TitleText";
 import { AppButton } from "../AppButton/AppButton";
 // import { AppInput } from "../AppInput/AppInput";
 import { useContext, useEffect } from "react";
@@ -7,8 +6,8 @@ import { ModalContext } from "../../../context/ModalContext";
 import { AuthContext } from "../../../context/AuthContext";
 import { Popover } from "../../organims/Popover/Popover";
 import { getProfile } from "../../../services/auth";
-import { IoTicketOutline } from "react-icons/io5";
 import { HiMenu } from "react-icons/hi";
+import logoraffle from '../../../assets/logoraffle.png'
 export const AppNavbar = () => {
   const {
     // handleModal,
@@ -38,11 +37,7 @@ export const AppNavbar = () => {
   return (
     <nav className="p-10 bg-white shadow-md flex flex-wrap gap-5 md:gap-0 items-center justify-between">
       <Link to={"/"} onClick={modalOff} className="flex items-center gap-2">
-      <IoTicketOutline
-              className="cursor-pointer text-primary"
-              size={32}
-            />
-        <TitleText text={"Raffle"} color="primary" />
+      <img src={logoraffle} alt="Raffle" />
       </Link>
       {/* {pathname !== "/login" && pathname !== "/register" && (
         <div className="w-[60%] hidden lg:block">

@@ -37,7 +37,7 @@ export const FormLogin = ({ onSubmit, loading }: Props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 w-[90%] lg:w-1/4"
+      className="flex flex-col gap-5 w-[90%] lg:w-1/2"
     >
       <TitleText text="Bienvenido" />
       <AppInput
