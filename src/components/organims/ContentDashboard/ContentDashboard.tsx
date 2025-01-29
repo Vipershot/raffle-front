@@ -15,7 +15,6 @@ import { celebration } from "../../../utils/celebration";
 export const ContentDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [mostRecent, setMostRecent] = useState<IAward[]>([]);
-  // const [lowestPrice, setLowestPrice] = useState<IAward[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
