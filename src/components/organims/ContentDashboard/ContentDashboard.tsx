@@ -10,6 +10,8 @@ import { AppButton } from "../../atoms/AppButton/AppButton";
 
 import { Loader } from "../../atoms/Loader/Loader";
 import { LayoutContent } from "../../molecules/LayoutContent/LayoutContent";
+import { celebration } from "../../../utils/celebration";
+
 export const ContentDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [mostRecent, setMostRecent] = useState<IAward[]>([]);
@@ -39,13 +41,43 @@ export const ContentDashboard = () => {
     localStorage.removeItem('award')
   }, []);
 
+  const checkCelebrationDate = () => {
+    const today = new Date();
+    const thirtyDaysFromNow = new Date();
+    thirtyDaysFromNow.setDate(today.getDate() + 30);
+  
+    const upcomingCelebrations = celebration.filter((celebration) => {
+      const [day, month] = celebration.date.split("-");
+      const celebrationDate = new Date(today.getFullYear(), parseInt(month) - 1, parseInt(day));
+      return celebrationDate >= today && celebrationDate <= thirtyDaysFromNow;
+    });
+  
+    if (upcomingCelebrations.length > 0) {
+      const closestCelebration = upcomingCelebrations.reduce((prev, curr) => {
+        const prevDate = new Date(today.getFullYear(), parseInt(prev.date.split("-")[1]) - 1, parseInt(prev.date.split("-")[0]));
+        const currDate = new Date(today.getFullYear(), parseInt(curr.date.split("-")[1]) - 1, parseInt(curr.date.split("-")[0]));
+        return currDate < prevDate ? curr : prev;
+      });
+      return closestCelebration;
+    }
+  
+    return null;
+  };
+  
+  const closestCelebration = checkCelebrationDate();
+  
+  const layoutContentTitle = closestCelebration
+    ? `Rifa - ${closestCelebration.name}`
+    : "Raffle Rifa";  
+  
+
   return (
     <div className="flex flex-col gap-y-10 sm:px-0">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <LayoutContent title={"Raffle Rifa"} loading={loading} grid>
+          <LayoutContent title={layoutContentTitle} loading={loading} grid>
             {mostRecent.map(
               ({
                 title,
