@@ -35,7 +35,7 @@ const load = async() =>{
           <TitleText text="Tickets en curso" size="xs" />
         </div>
        
-        <Link to={'/history'}><p className="text-info text-sm cursor-pointer">Ver mas...</p></Link>
+        <Link to={'/history'}><p className="text-primary text-sm cursor-pointer">Ver mas...</p></Link>
       </div>
 
       <div className="flex flex-col h-[40vh] overflow-y-auto custom-scrollbar mb-4 mt-2">

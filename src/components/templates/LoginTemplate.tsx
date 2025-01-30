@@ -1,6 +1,6 @@
 import { Login } from "../organims/Login/Login"
 
-import raffle from '../../assets/banner1.png'
+import raffle from '../../assets/image2.png'
 
 export const LoginTemplate = () => {
   return (
@@ -9,7 +9,13 @@ export const LoginTemplate = () => {
       <Login/>
       </div>
    
-      <div style={{backgroundImage:`url(${raffle})`}} className="border sm:d-none" >
+      <div style={{
+  backgroundImage: `url(${raffle})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  width: '100%',
+}} className=" sm:d-none" >
 
       </div>
     </div>

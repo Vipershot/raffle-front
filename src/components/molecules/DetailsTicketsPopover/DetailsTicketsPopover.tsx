@@ -62,7 +62,7 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
         {data?.tickets.map((item, index) => (
           <b
             key={index}
-            className="text-white bg-info text-center text-sm"
+            className="text-white bg-primary text-center text-sm"
             style={{
               borderRadius: "30px",
               padding: "4px 10px",

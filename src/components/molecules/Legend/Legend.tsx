@@ -15,7 +15,7 @@ export const Legend = () => {
       </li>
       <li className="flex items-center gap-1">
         <span
-          className="w-4 h-4 bg-primary border rounded-full inline-block"
+          className="w-4 h-4 bg-secondary border rounded-full inline-block"
         ></span>
         <span>Seleccionados</span>
       </li>

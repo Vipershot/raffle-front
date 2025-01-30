@@ -7,7 +7,7 @@ export const getAppearance = (disabled: boolean, appearance: IAppearance, border
                 return 'bg-info text-white'
                
             case 'text':
-                return 'text-info   hover:text-primary'
+                return 'text-primary   hover:font-bold'
             
             case 'outline':
                 return `border border-info text-info ${border && 'border-dashed '}   hover:text-primary`

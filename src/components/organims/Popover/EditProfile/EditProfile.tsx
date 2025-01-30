@@ -93,7 +93,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
           />
           <TitleText text="Editar perfil" size="xs" />
         </div>
-        <TfiPencil className="text-info" size={18} />
+        <TfiPencil className="text-primary" size={18} />
       </div>
 
       <div className="grid grid-cols-2 p-1  overflow-y-auto custom-scrollbar  gap-5 mb-4 mt-2">

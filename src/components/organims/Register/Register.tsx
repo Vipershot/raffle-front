@@ -29,7 +29,7 @@ export const Register = () => {
     }
 
   return (
-    <div className=" flex flex-col gap-5 justify-center items-center  h-[700px]   ">
+    <div className=" flex flex-col gap-5 justify-center items-center  h-[900px]   ">
     <FormRegister onSubmit={handleRegister} />
     <div>
     {message && <AppModal

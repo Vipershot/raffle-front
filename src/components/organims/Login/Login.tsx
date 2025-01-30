@@ -40,7 +40,7 @@ export const Login = () => {
  
 }
   return (
-    <div className=" flex flex-col gap-5 justify-center items-center h-[700px]  ">
+    <div className=" flex flex-col gap-5 justify-center items-center h-[900px]  ">
         <FormLogin onSubmit={handleLogin} loading={loading}/>
         {message && <AppModal
           open={isModalOpen}

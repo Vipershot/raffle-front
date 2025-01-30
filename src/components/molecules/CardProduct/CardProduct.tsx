@@ -18,7 +18,7 @@ export const CardProduct = ({
   return (
     <div className="bg-white rounded-lg col-span-1 relative md:p-5 flex flex-col justify-between h-full p-3">
     <div>
-    <h1 className="font-bold text-white md:text-2xl bg-info border border-white border-1 border-dashed rounded-[100%] px-2 py-1  md:px-3 md:py-3 absolute">${ticketPrice}</h1>
+    <h1 className="font-bold text-white md:text-2xl bg-primary border border-white border-1 border-dashed rounded-[100%] px-2 py-1  md:px-3 md:py-3 absolute">${ticketPrice}</h1>
       <Link to={`/award/${id}`}>
         <img
           className="h-[100px] md:h-[200px] w-[100%] mb-2 object-contain"
