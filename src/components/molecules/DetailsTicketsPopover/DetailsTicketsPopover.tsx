@@ -9,9 +9,9 @@ import { getDayComplete, getHour } from "../../../utils/date";
 import { AppButton } from "../../atoms/AppButton/AppButton";
 import { IoTicketOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdOutlineCelebration } from "react-icons/md";
-/* import useCountdown from "../../../hooks/useCountdown"; */
+import useCountdown from "../../../hooks/useCountdown";
 
 interface Props {
   handlePopover: (item: string) => void;
@@ -20,17 +20,22 @@ interface Props {
 export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
+  /* const [isDisabled, setIsDisabled] = useState(true); */
+  const currentDate = new Date();
+  currentDate.setHours(11, 52, 0, 0);
+  const { isCountdownActive } = useCountdown(
+    data ? new Date(data.endDate) : new Date()
+  );
 
   const handleCopy = async () => {
-      if (data) {
-        await navigator.clipboard.writeText(data.id);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Ocultar mensaje después de 2 segundos
-      }
+    if (data) {
+      await navigator.clipboard.writeText(data.id);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Ocultar mensaje después de 2 segundos
+    }
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const lotteryDate = data ? new Date(new Date(data?.endDate).setDate(new Date().getDate() - 1) ): new Date();
     const currentDate = new Date();
     if (lotteryDate.getTime() <= currentDate.getTime()) {
@@ -38,11 +43,13 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
     } else {
       setIsDisabled(true);
     }
-  }, [data?.endDate]);
+  }, [data?.endDate]); */
 
- // const verifyTimer = () => {
-   // useCountdown(data.endDate);
- // };
+  console.log(data);
+
+  // const verifyTimer = () => {
+  // useCountdown(data.endDate);
+  // };
 
   return (
     <div>
@@ -140,21 +147,21 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
           title={
             <div
               className={`flex gap-2 justify-center items-center ${
-                isDisabled
-                  ? " cursor-default text-black"
-                  : "cursor-pointer text-white"
+                isCountdownActive
+                  ? "cursor-pointer text-white"
+                  : "cursor-default text-black"
               }`}
             >
               Ver sorteo!{" "}
               <MdOutlineCelebration
-                className={`cursor-${isDisabled ? "pointer" : "default"} ${
-                  isDisabled ? "text-black" : "text-black"
-                }`}
+                className={`cursor-${
+                  isCountdownActive ? "pointer" : "default"
+                } ${isCountdownActive ? "text-white" : "text-black"}`}
                 size={22}
               />
             </div>
           }
-          disabled={isDisabled}
+          disabled={!isCountdownActive}
         />
       </div>
     </div>
