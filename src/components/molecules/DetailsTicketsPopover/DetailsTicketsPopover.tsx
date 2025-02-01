@@ -45,8 +45,6 @@ export const DetailsTicketsPopover = ({ data, handlePopover }: Props) => {
     }
   }, [data?.endDate]); */
 
-  console.log(data);
-
   // const verifyTimer = () => {
   // useCountdown(data.endDate);
   // };
