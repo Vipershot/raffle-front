@@ -99,7 +99,7 @@ export const FormPayment = ({
             </p>
 
             <p className="text-sm text-muted-foreground mb-4">
-              Numero Celular: <strong>04241781737</strong>
+              Número Celular: <strong>04241781737</strong>
             </p>
 
             <div className="flex space-x-4">
@@ -133,7 +133,7 @@ export const FormPayment = ({
               label="Número de referencia del pago"
               type="text"
               placeholder="Ingresar número de referencia"
-              maxLength={11}
+              maxLength={12}
               value={dataForm.reference}
               onChange={(e) =>
                 setDataForm({

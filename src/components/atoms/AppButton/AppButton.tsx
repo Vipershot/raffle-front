@@ -26,7 +26,7 @@ export const AppButton =({
  
 
         <button  className={`p-0 rounded-md ${getAppearance(disabled, appearance, border)} ${getSizeButton(size)} ${size === 'full' && 'w-full'} ${bold && 'font-bold'}` } disabled={disabled} onClick={onClick}>
-        <div className="rounded-md p-2" style={{ border:border ?'1px dashed white' : 'none'}} >{title}  </div></button>
+        <div className="rounded-md " style={{ border:border ?'1px dashed white' : 'none'}} >{title}  </div></button>
   
     </>
 }

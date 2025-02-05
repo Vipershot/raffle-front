@@ -3,7 +3,7 @@ export const Legend = () => {
   return (
     <div className="w-full pl-2">
     <h4 className="font-bold text-dark text-sm md:text-md">
-      Seleccion de tickets:
+      Selección de tickets:
     </h4>
     <ul className="flex gap-1 mt-1 text-dark text-sm md:text-md">
       <li className="flex items-center gap-1">

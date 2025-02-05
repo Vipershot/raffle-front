@@ -45,7 +45,7 @@ export const Payment = () => {
       setIsModalOpen(true);
 
       setMessage({
-        title: "¡Felicidades! Tu pago sera procesado.",
+        title: "¡Gracias por tu participar! Tu pago sera procesado.",
         icon: (
           <IoCheckmarkCircleOutline
             size={25}
@@ -53,7 +53,7 @@ export const Payment = () => {
           />
         ),
         description:
-          "¡Tu boleto para la rifa ha sido comprado! Gracias por tu compra. ¡Buena suerte en el sorteo!",
+          "Por favor revisa tu correo electrónico (incluyendo la carpeta de spam) donde recibirás la información sobre el proceso de verificación de tu pago.",
         onClick: () => {
           navigate("/");
         },

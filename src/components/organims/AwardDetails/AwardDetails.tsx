@@ -137,7 +137,7 @@ const AwardDetails = () => {
                     <Legend />
                   </div>
                   <div className="mt-2 flex items-center">
-                    <img src={faq} alt="" />
+                    <img src={faq} alt="" onClick={() => setModalRules(true)} className="hover:text-black cursor-pointer"/>
                     <p className="ml-1 text-sm md:text-md">
                       <a
                         onClick={() => setModalRules(true)}

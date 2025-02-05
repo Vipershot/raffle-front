@@ -16,10 +16,15 @@ export const AppFooter = () => {
               className="text-primary"
               href="https://www.instagram.com/raffle.ve/"
             >
-              <IoLogoInstagram
+            <div className="flex justify-center">
+            <IoLogoInstagram
                 className="cursor-pointer hover:text-dark"
                 size={30}
               />
+              <p className=" text-dark">
+              @Raffle.ve
+            </p>
+            </div>
             </a>
           </div>
           <div className="text-dark"></div>

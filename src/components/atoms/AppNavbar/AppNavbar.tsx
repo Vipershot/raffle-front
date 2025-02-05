@@ -62,7 +62,7 @@ export const AppNavbar = () => {
               modalOff();
               navigate("/login");
             }}
-            title="Inicia sesion"
+            title="Inicia sesión"
             size="sm"
             appearance="text"
           />
