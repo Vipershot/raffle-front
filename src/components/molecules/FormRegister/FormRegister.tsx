@@ -8,7 +8,6 @@ import {
   inputValidEmail,
   inputValidName,
   inputValidNumber,
-  inputValidOperator,
   inputValidPassword,
 } from "../../../utils/inputValid";
 
