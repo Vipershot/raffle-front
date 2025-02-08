@@ -10,7 +10,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import {
   inputValidEmail,
   inputValidName,
-  inputValidOperator,
+  inputValidNumber,
   inputValidPassword,
 } from "../../../../utils/inputValid";
 
@@ -48,7 +48,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
 
   useEffect(() => {
     if (
-      fieldChanges.phone?.length >= 11 ||
+      fieldChanges.phone?.length >= 9 ||
       fieldChanges.name?.length > 0 ||
       fieldChanges.lastName?.length > 0 ||
       (fieldChanges.email?.length > 0 &&
@@ -105,7 +105,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
           onChange={(e) =>
             handleChange("name", e.target.value.replace(/[^a-zA-Z\s]/g, ""))
           }
-          error={inputValidName(fieldChanges.name || dataForm.name || "")}
+          error={fieldChanges.name && inputValidName(fieldChanges.name)}
         />
         <AppInput
           label=""
@@ -123,7 +123,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
             placeholder="Correo electrónico"
             value={fieldChanges.email || dataForm.email || ""}
             onChange={(e) => handleChange("email", e.target.value)}
-            error={inputValidEmail(fieldChanges.email || dataForm.email || "")}
+            error={fieldChanges.email && inputValidEmail(fieldChanges.email)}
             textSize="text-[12px] md:text-[14px]"
           />
         </div>
@@ -131,16 +131,14 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
           <AppInput
             label=""
             type="text"
-            maxLength={11}
+            maxLength={12}
             placeholder="Número de teléfono"
             value={fieldChanges.phone || dataForm.phone || ""}
             onChange={(e) => {
               const sanitizedValue = e.target.value.replace(/[^0-9]/g, "");
               handleChange("phone", sanitizedValue);
             }}
-            error={inputValidOperator(
-              fieldChanges.phone || dataForm.phone || ""
-            )}
+            error={fieldChanges.phone && inputValidNumber(fieldChanges.phone)}
             textSize="text-[12px] md:text-[14px]"
           />
         </div>
@@ -162,7 +160,7 @@ export const EditProfile = ({ handlePopover, onClick }: Props) => {
             onChange={(e) => handleChange("newPassword", e.target.value)}
             error={
               (fieldChanges.password || dataForm.password)?.length >= 8  ? 
-              inputValidPassword(fieldChanges.newPassword || dataForm.newPassword || "") : null
+              inputValidPassword(fieldChanges.newPassword) : null
             }
             textSize="text-[12px] md:text-[14px]"
             disabled={!fieldChanges.password && !dataForm.password || (fieldChanges.password || dataForm.password)?.length < 8 }
